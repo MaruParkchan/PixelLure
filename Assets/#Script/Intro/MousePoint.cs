@@ -8,6 +8,12 @@ public class MousePoint : MonoBehaviour
     [SerializeField]
     private GameObject target;
 
+    private void Awake()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
     private void Update()
     {
         Get_MousePos();

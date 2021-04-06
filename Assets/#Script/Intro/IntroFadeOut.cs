@@ -9,7 +9,8 @@ public class IntroFadeOut : MonoBehaviour
     private float fadeTime;
     [SerializeField]
     private float waitTime;
-
+    [SerializeField]
+    private GameObject clone;
     private Image image;
 
     private void Start()
@@ -23,6 +24,7 @@ public class IntroFadeOut : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         yield return StartCoroutine(FadeEffect(1, 0));
         this.gameObject.SetActive(false);
+        clone.SetActive(true);
 
     }
 

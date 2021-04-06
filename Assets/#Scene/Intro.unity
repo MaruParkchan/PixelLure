@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 786270578}
   - component: {fileID: 786270580}
   - component: {fileID: 786270581}
+  - component: {fileID: 786270582}
   m_Layer: 0
   m_Name: Stage1
   m_TagString: Stage1
@@ -718,6 +719,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeTime: 0.3
+--- !u!114 &786270582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786270577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6899edbfa48a54f905e38a8cc757b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1.8
 --- !u!1 &1461275166
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,7 +751,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1461275167
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -778,7 +792,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: db750325989564987a34393247d883b4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 12bba4356c3d2db45a16596f9f5ab9a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -797,8 +811,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1461275166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.51, y: -1.74, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -7.8, y: -4.8, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -815,10 +829,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3e43dbfd3279c345980c20b0497b1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapData: {fileID: 11400000, guid: bc73cac8ccf208342838288e495c24b9, type: 2}
   collider: {fileID: 1461275170}
+  titleNameObject: {fileID: 1536675602}
   stage1Sprite: {fileID: 786270577}
   stage2Sprite: {fileID: 1574009671}
   stage3Sprite: {fileID: 1612064104}
+  introCrossEffect: {fileID: 678782011}
 --- !u!61 &1461275170
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -836,14 +853,14 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.19, y: 0.19}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.19, y: 0.19}
   m_EdgeRadius: 0
 --- !u!50 &1461275171
 Rigidbody2D:
@@ -1115,9 +1132,11 @@ GameObject:
   - component: {fileID: 1574009673}
   - component: {fileID: 1574009672}
   - component: {fileID: 1574009674}
+  - component: {fileID: 1574009675}
+  - component: {fileID: 1574009676}
   m_Layer: 0
   m_Name: Stage2
-  m_TagString: Untagged
+  m_TagString: Stage2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1213,6 +1232,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.69, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1574009675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574009671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e9142532de23e468ffada1e771c732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.3
+--- !u!114 &1574009676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574009671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6899edbfa48a54f905e38a8cc757b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1.8
 --- !u!1 &1612064104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,9 +1269,11 @@ GameObject:
   - component: {fileID: 1612064106}
   - component: {fileID: 1612064105}
   - component: {fileID: 1612064107}
+  - component: {fileID: 1612064108}
+  - component: {fileID: 1612064109}
   m_Layer: 0
   m_Name: Stage3
-  m_TagString: Untagged
+  m_TagString: Stage3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1322,6 +1369,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.69, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1612064108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612064104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e9142532de23e468ffada1e771c732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeTime: 0.3
+--- !u!114 &1612064109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612064104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c6899edbfa48a54f905e38a8cc757b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1.8
 --- !u!1 &1645749719
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c6899edbfa48a54f905e38a8cc757b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waitTime: 0
 --- !u!4 &1645749721
 Transform:
   m_ObjectHideFlags: 0
@@ -1575,6 +1649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeTime: 1
   waitTime: 1
+  clone: {fileID: 1461275166}
 --- !u!1 &1896773987
 GameObject:
   m_ObjectHideFlags: 0

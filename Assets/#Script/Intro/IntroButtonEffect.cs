@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IntroButtonEffect : MonoBehaviour
 {
+    // 클릭 했을시 반짝 거리는 효과를 위한 스크립트 
+
     [SerializeField]
     private float fadeTime = 1.0f;
     private SpriteRenderer render;

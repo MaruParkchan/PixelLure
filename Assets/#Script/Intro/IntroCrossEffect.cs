@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class IntroCrossEffect : MonoBehaviour
 {
+    // 인트로 파티클 시스템 off 스크립트
+
     private ParticleSystem particleSystem;
     private Material crossMaterial;
     [SerializeField]
@@ -15,7 +17,7 @@ public class IntroCrossEffect : MonoBehaviour
         crossMaterial = particleSystem.GetComponent<Renderer>().material;
     }
 
-    public void ParticleSystemFadeOut()
+    public void ParticleSystemFadeOut() // 파티클 페이드아웃
     {
         StartCoroutine("FadeOut");
     }
