@@ -50,5 +50,4 @@ public class CardRadialShapePattern : MonoBehaviour
                                                       cardBoss.CardBossMapData.LimitMin.y, cardBoss.CardBossMapData.LimitMax.y);
         animator.SetTrigger("Appear"); // 등장 애니메이션 재생
     }
-
 }
