@@ -14,9 +14,9 @@ public class CardBullet : MonoBehaviour
     private int colorIndex; // 카드 색깔 인덱스
     private int cardIndex; // 카드 이미지 인덱스
     private float moveSpeed; // 카드 이동 속도 
+    private float cardColorChangeTime; // 카드 색깔 변화는 시간
     private Vector3 moveDirection = Vector3.zero; // 움직이는 방향
 
-    private float cardColorChangeTime; // 카드 색깔 변화는 시간
 
     private void Start()
     {
@@ -30,7 +30,7 @@ public class CardBullet : MonoBehaviour
         spriteRender.sprite = cardSprites[cardIndex];
 
         boxCollider2D.enabled = false;
-        AAA();
+        StartCoroutine("Attack2");
     }
 
     private void Update()
@@ -42,14 +42,6 @@ public class CardBullet : MonoBehaviour
     {
         cardColorChangeTime = colorChangeTime;
         this.moveSpeed = moveSpeed;
-        StartCoroutine("Attack2");
-    }
-
-    private void AAA()
-    {
-        cardColorChangeTime = 1.0f;
-        this.moveSpeed = 5;
-        StartCoroutine("Attack2");
     }
 
     private IEnumerator Attack2()
@@ -61,14 +53,11 @@ public class CardBullet : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             percent = currentTime / cardColorChangeTime;
-
             Color color = spriteRender.color;
             color.a = Mathf.Lerp(0, 1, percent);
             spriteRender.color = color;
-
             yield return null;
         }
-
         boxCollider2D.enabled = true;
         moveDirection = (target.position - transform.position).normalized;
         yield return null;

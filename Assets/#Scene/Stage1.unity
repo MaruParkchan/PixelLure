@@ -313,6 +313,7 @@ GameObject:
   - component: {fileID: 744212750}
   - component: {fileID: 744212754}
   - component: {fileID: 744212753}
+  - component: {fileID: 744212755}
   m_Layer: 0
   m_Name: CardBoss
   m_TagString: Untagged
@@ -419,7 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardRadialShapeEffect: {fileID: 296343306547549897, guid: c3884f48c2cbad845a967a828a7f8154, type: 3}
   waitTime: 2
-  attackCount: 3
+  attackCount: 1
 --- !u!114 &744212754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +435,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
+--- !u!114 &744212755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744212749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e74d23739837e34b8d086449cf46b8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardObject: {fileID: 4772552133590063714, guid: 52e042b9efc57b84d9a58005cbe1f285, type: 3}
+  spawnCardMaxCount: 30
+  waitTime: 1.5
+  moveTime: 1
+  cardSpawnCycleTime: 0.1
+  cardChangeTime: 1.2
+  cardMoveSpeed: 6
 --- !u!1 &750215271
 GameObject:
   m_ObjectHideFlags: 0
@@ -974,7 +994,7 @@ GameObject:
   - component: {fileID: 1674676062}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

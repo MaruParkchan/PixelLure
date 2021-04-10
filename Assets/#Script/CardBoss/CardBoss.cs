@@ -27,15 +27,24 @@ public class CardBoss : MonoBehaviour
         StartCoroutine("CardBossPattern");
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            StopCoroutine("CardBossPattern");
+            animator.SetTrigger("Choice");
+            transform.position = Vector3.zero;
+        }
+    }
+
     private IEnumerator CardBossPattern()
     {
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-      //      yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+            yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
             yield return StartCoroutine(cardSidePattern.ISidePattern());
-        }
-        
+        }   
     }
 
     private bool isInvincibility; //¹«Àû

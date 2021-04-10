@@ -15,7 +15,12 @@ public class CardSidePattern : MonoBehaviour
     private float waitTime; // 대기 시간
     [SerializeField]
     private float moveTime; // 이동 시간
-
+    [SerializeField]
+    private float cardSpawnCycleTime; // 카드 재 생성 속도
+    [SerializeField]
+    private float cardChangeTime; // 카드 알파값 변화 속도
+    [SerializeField]
+    private float cardMoveSpeed; // 카드 이동속도
     private Animator animator;
 
     #region 등장위치 벡터값
@@ -38,7 +43,6 @@ public class CardSidePattern : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         yield return StartCoroutine(SmoothMovement(endPosition));
         yield return StartCoroutine(CardSpawn());
-        yield return new WaitForSeconds(waitTime);
         yield return StartCoroutine(SmoothMovement(startPosition));
         animator.SetTrigger("Hide");
         yield return new WaitForSeconds(waitTime);
@@ -53,12 +57,11 @@ public class CardSidePattern : MonoBehaviour
         {
             percent += Time.deltaTime;
             transform.position = Vector2.Lerp(startPosition, endPosition, percent / moveTime);
-
             yield return null;
         }
     }
 
-    private IEnumerator CardSpawn()
+    private IEnumerator CardSpawn() // 카드 생성 (공격하는 카드)
     {
         animator.SetTrigger("Attack2");
         int count = 0;
@@ -66,7 +69,8 @@ public class CardSidePattern : MonoBehaviour
         {
             GameObject clone = Instantiate(cardObject);
             clone.transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4), 0);
-            yield return new WaitForSeconds(0.1f);
+            clone.GetComponent<CardBullet>().Init(cardChangeTime, cardMoveSpeed);
+            yield return new WaitForSeconds(cardSpawnCycleTime);
             count++;
         }
     }
