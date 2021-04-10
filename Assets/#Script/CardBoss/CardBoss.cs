@@ -13,11 +13,13 @@ public class CardBoss : MonoBehaviour
 
     private Animator animator;
     private CardRadialShapePattern cardRadialShapePattern;
+    private CardSidePattern cardSidePattern;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         cardRadialShapePattern = GetComponent<CardRadialShapePattern>();
+        cardSidePattern = GetComponent<CardSidePattern>();
     }
 
     private void Start()
@@ -30,7 +32,8 @@ public class CardBoss : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-            yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+      //      yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+            yield return StartCoroutine(cardSidePattern.ISidePattern());
         }
         
     }

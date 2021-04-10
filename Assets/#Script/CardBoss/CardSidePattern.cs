@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CardSidePattern : MonoBehaviour
 {
+    // 카드보스 패턴2  좌우 사이드 패턴
     [SerializeField] private GameObject cardObject; // 카드 오브젝트
 
     [Header("카드 생성 수")]
@@ -15,11 +16,33 @@ public class CardSidePattern : MonoBehaviour
     [SerializeField]
     private float moveTime; // 이동 시간
 
-    public IEnumerator ISidePattern()
+    private Animator animator;
+
+    #region 등장위치 벡터값
+    private Vector2 startPosition;
+    private Vector2 endPosition;
+    private Vector3 leftStartPoint = new Vector3(-11, 0, 0); // 왼쪽 나타나는 시작점
+    private Vector3 leftEndPoint = new Vector3(-8, 0, 0);    // 왼쪽에서 나타날시 도착지점
+    private Vector3 rightStartPoint = new Vector3(11, 0, 0); // 오른쪽 나타나는 시작점
+    private Vector3 rightEndPoint = new Vector3(8, 0, 0);    // 오른쪽에서 나타날시 도착지점
+    #endregion
+
+    private void Start()
     {
-        yield return new WaitForSeconds(waitTime);
+        animator = GetComponent<Animator>();
     }
 
+    public IEnumerator ISidePattern()
+    {
+        PlayerAttackPosition();
+        yield return new WaitForSeconds(waitTime);
+        yield return StartCoroutine(SmoothMovement(endPosition));
+        yield return StartCoroutine(CardSpawn());
+        yield return new WaitForSeconds(waitTime);
+        yield return StartCoroutine(SmoothMovement(startPosition));
+        animator.SetTrigger("Hide");
+        yield return new WaitForSeconds(waitTime);
+    }
 
     private IEnumerator SmoothMovement(Vector2 endPosition)
     {
@@ -35,19 +58,37 @@ public class CardSidePattern : MonoBehaviour
         }
     }
 
+    private IEnumerator CardSpawn()
+    {
+        animator.SetTrigger("Attack2");
+        int count = 0;
+        while (spawnCardMaxCount > count)
+        {
+            GameObject clone = Instantiate(cardObject);
+            clone.transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4), 0);
+            yield return new WaitForSeconds(0.1f);
+            count++;
+        }
+    }
+
     private void PlayerAttackPosition() // 좌우 중 위치 랜덤지정
     {
-        int i = Random.Range(0, 2); // 위치 2곳 and 캐릭터 회전 
-
-        if (i == 0) // 왼쪽
+        int appearPoint = Random.Range(0, 2);
+        if (appearPoint == 0) // 왼쪽
         {
-            transform.position = new Vector3(-11, 0, 0);
+            transform.position = leftStartPoint;
             transform.rotation = Quaternion.Euler(0, 180.0f, 0);
+            startPosition = leftStartPoint;
+            endPosition = leftEndPoint;
         }
         else // 오른쪽
         {
-            transform.position = new Vector3(11, 0, 0);
+            transform.position = rightStartPoint;
             transform.rotation = Quaternion.Euler(0, 0, 0);
+            startPosition = rightStartPoint;
+            endPosition = rightEndPoint;
         }
+
+        animator.SetTrigger("Attack2Idle");
     }
 }
