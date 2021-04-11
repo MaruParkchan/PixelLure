@@ -452,7 +452,7 @@ MonoBehaviour:
   waitTime: 1.5
   moveTime: 1
   cardSpawnCycleTime: 0.1
-  cardChangeTime: 1.2
+  cardColorChangeTime: 1.25
   cardMoveSpeed: 6
 --- !u!1 &750215271
 GameObject:

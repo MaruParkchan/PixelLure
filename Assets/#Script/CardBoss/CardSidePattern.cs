@@ -18,7 +18,9 @@ public class CardSidePattern : MonoBehaviour
     [SerializeField]
     private float cardSpawnCycleTime; // 카드 재 생성 속도
     [SerializeField]
-    private float card
+    private float cardColorChangeTime; // 카드 알파값 속도
+    [SerializeField]
+    private float cardMoveSpeed; // 카드 이동 속도
 
     private Animator animator;
 
@@ -57,7 +59,6 @@ public class CardSidePattern : MonoBehaviour
         {
             percent += Time.deltaTime;
             transform.position = Vector2.Lerp(startPosition, endPosition, percent / moveTime);
-
             yield return null;
         }
     }
@@ -69,8 +70,8 @@ public class CardSidePattern : MonoBehaviour
         while (spawnCardMaxCount > count)
         {
             GameObject clone = Instantiate(cardObject);
-            clone.transform.position = new Vector3(Random.Range(-8, 8), Random.Range(-4, 4), 0);
-            clone.GetComponent<CardBullet>().Init(1.25f, 6.0f);
+            clone.transform.position = new Vector3(Random.Range(-8.0f, 8.0f), Random.Range(-4.5f, 4.0f), 0);
+            clone.GetComponent<CardBullet>().Init(cardColorChangeTime, cardMoveSpeed);
             yield return new WaitForSeconds(cardSpawnCycleTime);
             count++;
         }
