@@ -47,7 +47,7 @@ public class CardRadialShapePattern : MonoBehaviour
     {
         // 랜덤 위치 등장
         transform.position = new Vector3(Random.Range(cardBoss.CardBossMapData.LimitMin.x, cardBoss.CardBossMapData.LimitMax.x),
-                                                      cardBoss.CardBossMapData.LimitMin.y, cardBoss.CardBossMapData.LimitMax.y);
+                                               Random.Range(cardBoss.CardBossMapData.LimitMin.y, cardBoss.CardBossMapData.LimitMax.y), 0);
         animator.SetTrigger("Appear"); // 등장 애니메이션 재생
     }
 }

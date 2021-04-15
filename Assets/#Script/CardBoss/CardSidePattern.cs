@@ -7,7 +7,7 @@ public class CardSidePattern : MonoBehaviour
     // 카드보스 패턴2  좌우 사이드 패턴
     [SerializeField] private GameObject cardObject; // 카드 오브젝트
 
-    [Header("카드 생성 수")]
+    [Header("카드 생성 설정")]
     [SerializeField]
     private int spawnCardMaxCount; // 카드 생성할 최대 갯수 
 
@@ -42,10 +42,10 @@ public class CardSidePattern : MonoBehaviour
     {
         PlayerAttackPosition();
         yield return new WaitForSeconds(waitTime);
-        yield return StartCoroutine(SmoothMovement(endPosition));
-        yield return StartCoroutine(CardSpawn());
+        yield return StartCoroutine(SmoothMovement(endPosition)); // 패턴 시작하기위해 도착지점까지 도착
+        yield return StartCoroutine(CardSpawn()); // 카드 스폰
         yield return new WaitForSeconds(waitTime);
-        yield return StartCoroutine(SmoothMovement(startPosition));
+        yield return StartCoroutine(SmoothMovement(startPosition)); // 맵 밖으로 사라지기 위한 시작점 다시 가기
         animator.SetTrigger("Hide");
         yield return new WaitForSeconds(waitTime);
     }
@@ -96,5 +96,10 @@ public class CardSidePattern : MonoBehaviour
         }
 
         animator.SetTrigger("Attack2Idle");
+    }
+
+    public void StopAction()
+    {
+        StopAllCoroutines();
     }
 }

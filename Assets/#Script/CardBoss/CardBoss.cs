@@ -12,14 +12,18 @@ public class CardBoss : MonoBehaviour
     private ParticleSystem auraEffect;
 
     private Animator animator;
-    private CardRadialShapePattern cardRadialShapePattern;
-    private CardSidePattern cardSidePattern;
+    private CardRadialShapePattern cardRadialShapePattern; // 패턴1
+    private CardSidePattern cardSidePattern;               // 패턴2
+    private CardKingCardPattern cardKingCardPattern;       // 패턴3
+    private CardBoomPattern cardBoomPattern;               // 패턴4
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         cardRadialShapePattern = GetComponent<CardRadialShapePattern>();
         cardSidePattern = GetComponent<CardSidePattern>();
+        cardKingCardPattern = GetComponent<CardKingCardPattern>();
+        cardBoomPattern = GetComponent<CardBoomPattern>();
     }
 
     private void Start()
@@ -44,6 +48,8 @@ public class CardBoss : MonoBehaviour
         {
             yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
             yield return StartCoroutine(cardSidePattern.ISidePattern());
+            yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
+            yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
         }   
     }
 
