@@ -8,12 +8,21 @@ public class Player : MonoBehaviour
     private MapData mapData;
     [SerializeField]
     private PlayerData playerData;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private float bulletMoveSpeed; // ÃÑ¾Ë ¼Óµµ 
 
     private void Update()
     {
         Movement();
         LimitPosition();
         Rotate();
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Fire();
+        }
     }
 
     private void Movement()
@@ -37,5 +46,13 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, mapData.LimitMin.x, mapData.LimitMax.x),
                                          Mathf.Clamp(transform.position.y, mapData.LimitMin.y, mapData.LimitMax.y));
+    }
+
+    private void Fire()
+    {
+        GameObject clone = Instantiate(bulletPrefab);
+        clone.GetComponent<PlayerBullet>().BulletMovement(Vector2.up, bulletMoveSpeed);
+        clone.transform.position = transform.position;
+        clone.transform.rotation = transform.rotation;
     }
 }
