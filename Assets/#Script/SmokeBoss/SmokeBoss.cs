@@ -6,33 +6,32 @@ public class SmokeBoss : MonoBehaviour
 {
     [SerializeField]
     private GameObject smokeEffect;
+    private SmokeMovePattern smokeMovePattern;
 
     private Animator animator;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        StartCoroutine(SmokeTest());
+        smokeMovePattern = GetComponent<SmokeMovePattern>();
+        StartCoroutine("SmokeBossPattern");
     }
 
-    IEnumerator SmokeTest()
+    private IEnumerator SmokeBossPattern()
     {
+        yield return new WaitForSeconds(4.0f);
+        HideorAppear();
+        animator.SetTrigger("Hide");
+
         while(true)
         {
-            yield return new WaitForSeconds(2.0f);
-            HideorAppear();
-            animator.SetTrigger("Hide");
-            yield return new WaitForSeconds(2.0f);
-            HideorAppear();
-            animator.SetTrigger("Appear");
+            yield return StartCoroutine(smokeMovePattern.MovePattern());
         }
     }
 
-    private void HideorAppear() // 숨거나 나타날때 이펙트 생성
+    public void HideorAppear() // 숨거나 나타날때 이펙트 생성
     {
         GameObject clone = Instantiate(smokeEffect);
         clone.transform.position = transform.position;
     }
-
-
 }

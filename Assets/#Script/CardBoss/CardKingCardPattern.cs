@@ -10,12 +10,9 @@ public class CardKingCardPattern : MonoBehaviour
     [SerializeField] private float spawnCycleTime; // 재 생성 시간
     [SerializeField] private float waitTime; // 대기 시간
     [Header("킹카드 속도 설정")]
-    [SerializeField]
-    private float accelerationWaitTime; // 가속도 대기 시간
-    [SerializeField]
-    private float initialMoveSpeed; // 처음 이동속도
-    [SerializeField]
-    private float accelerationSpeed; // 가속도
+    [SerializeField] private float accelerationWaitTime; // 가속도 대기 시간
+    [SerializeField] private float initialMoveSpeed; // 처음 이동속도
+    [SerializeField] private float accelerationSpeed; // 가속도
     #region 좌표 데이터값
     private Vector3[] spawnPoints = new Vector3[56];
     private int[] spawnPointIndexs = new int[56];
