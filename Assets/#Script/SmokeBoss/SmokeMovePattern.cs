@@ -5,9 +5,10 @@ using UnityEngine;
 public class SmokeMovePattern : MonoBehaviour
 {
     [SerializeField] private GameObject touchObject;
-    [SerializeField] private float touchDropCycleTime; // 라이터 뿌리는 시간
+    [SerializeField] private float waitTime; // 대기시간 
     [SerializeField] private int cycleCount; // n번 반복 횟수
     [SerializeField] private float moveTime; // 해당 지점까지 도착시간
+    [SerializeField] private int touchCount; // 라이터뿌리는 수
 
     private SmokeBoss smokeBoss;
     private Animator animator;
@@ -29,8 +30,9 @@ public class SmokeMovePattern : MonoBehaviour
     {
         int currentCount = 0;
         int pointIndex = 0;
-        animator.SetTrigger("Appear");
 
+        yield return new WaitForSeconds(waitTime);
+        animator.SetTrigger("Appear");
         while (cycleCount >= currentCount)
         {
             pointIndex = Random.Range(0, 30);
@@ -38,20 +40,32 @@ public class SmokeMovePattern : MonoBehaviour
             yield return StartCoroutine(SmoothMovement(endPoints[pointIndex]));
             currentCount++;
         }
-
-        yield return new WaitForSeconds(2.0f);
+        animator.SetTrigger("Hide");
     }
 
     private IEnumerator SmoothMovement(Vector2 endPosition)
     {
         Vector2 startPosition = transform.position;
         float percent = 0;
-
+        StartCoroutine("TouchDrop");
         while (percent < moveTime) // startPosition 에서 EndPosition까지 moveTime동안 이동
         {
             percent += Time.deltaTime;
             transform.position = Vector2.Lerp(startPosition, endPosition, percent / moveTime);
             yield return null;
+        }
+        StopCoroutine("TouchDrop");
+    }
+
+    private IEnumerator TouchDrop()
+    {
+        int currentCount = 0; // 현재 뿌린 라이터 수      
+        while(currentCount <= touchCount + 1)
+        {
+            yield return new WaitForSeconds(moveTime / (touchCount + 1)); // 이동 시간 / 뿌리는 수 나눠고 대기시간을 갖춰야만 처음등장할때 바로 안뿌린다
+            GameObject clone = Instantiate(touchObject);
+            clone.transform.position = this.transform.position;
+            currentCount++;
         }
     }
 

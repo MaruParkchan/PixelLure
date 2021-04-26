@@ -11,13 +11,14 @@ GameObject:
   - component: {fileID: 1503900196692920332}
   - component: {fileID: 1503900196692920335}
   - component: {fileID: 1503900196692920334}
+  - component: {fileID: 3574244575945717133}
   m_Layer: 0
   m_Name: Smoke_Touch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1503900196692920332
 Transform:
   m_ObjectHideFlags: 0
@@ -96,3 +97,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: -15
+--- !u!114 &3574244575945717133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503900196692920369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8149a3b887c96634085b5e4cf7530f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectObject: {fileID: 1805225307540288062, guid: 52a6119690c89fb42a6c94bd32e80c2f, type: 3}
+  destroyTime: 1
