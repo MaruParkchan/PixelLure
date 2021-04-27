@@ -6,6 +6,7 @@ public class SmokeMini : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject smokeEffect;
+    [SerializeField] private float bombDistance; // Æø¹ß °Å¸®
     [SerializeField] private float bombTimer;
     private GameObject target;
     private Animator animator;
@@ -35,7 +36,7 @@ public class SmokeMini : MonoBehaviour
         Vector2 direction = new Vector2(target.x - this.transform.position.x, target.y - this.transform.position.y);
         transform.up = direction;
 
-        if (distance < 0.125f)
+        if (distance <= bombDistance)
         {
             IsDie();
         }
@@ -61,6 +62,7 @@ public class SmokeMini : MonoBehaviour
     private void IsDie()
     {
         isDie = true;
+        StopCoroutine("TimeBomb");
         animator.SetTrigger("Die");
     }
 

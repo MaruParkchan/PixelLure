@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeTouch : MonoBehaviour
+public class SmokeTorch : MonoBehaviour
 {
     [SerializeField] private GameObject effectObject;
     [SerializeField] private float destroyTime; // 터지는 시간

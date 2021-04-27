@@ -27,7 +27,7 @@ public class SmokeMiniDestructPattern : MonoBehaviour
             SpawnPointsInit(); // 스폰위치 랜덤값
             spawnPointIndex = Random.Range(0, spawnPoints.Length); // 랜덤위치 선정
             SpawnMiniSmokeObject(spawnPoints[spawnPointIndex]); // 생성 
-            spawnCount++;
+            currentCount++;
             yield return new WaitForSeconds(reCycleTime);
         }
     }
