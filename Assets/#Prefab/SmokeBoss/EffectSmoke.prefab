@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1681909322176419922}
   - component: {fileID: 5519713931536484084}
   - component: {fileID: 6505313516185267199}
+  - component: {fileID: 1050264916974053051}
   m_Layer: 0
   m_Name: EffectSmoke
   m_TagString: Untagged
@@ -102,3 +103,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1050264916974053051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018379218307054334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88d8991222347a419eb946517b78b52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 2

@@ -18,4 +18,12 @@ public class PlayerBullet : MonoBehaviour
         direction = dir;
         bulletMoveSpeed = moveSpeed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.CompareTag("Enemy"))
+        {
+
+        }
+    }
 }

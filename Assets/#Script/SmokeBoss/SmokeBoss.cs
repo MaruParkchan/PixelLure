@@ -9,17 +9,17 @@ public class SmokeBoss : MonoBehaviour
     private SmokeMovePattern smokeMovePattern;
     private SmokeMiniDestructPattern smokeMiniDestructPattern;
     private SmokeAshtrayPattern smokeAshtrayPattern;
+    private SmokeSprayingFirePattern smokeSprayingFirePattern;
 
     private Animator animator;
 
-    [SerializeField]
-    private float settting;
     private void Start()
     {
         animator = GetComponent<Animator>();
         smokeMovePattern = GetComponent<SmokeMovePattern>();
         smokeMiniDestructPattern = GetComponent<SmokeMiniDestructPattern>();
         smokeAshtrayPattern = GetComponent<SmokeAshtrayPattern>();
+        smokeSprayingFirePattern = GetComponent<SmokeSprayingFirePattern>();
         StartCoroutine("SmokeBossPattern");
     }
 
@@ -28,19 +28,14 @@ public class SmokeBoss : MonoBehaviour
         yield return new WaitForSeconds(4.0f);
         HideorAppear();
         animator.SetTrigger("Hide");
-
+           
         while (true)
         {
-            yield return StartCoroutine(smokeMovePattern.MovePattern());
-            // yield return StartCoroutine(smokeMiniDestructPattern.SpawnSmokeMini());
+            //yield return StartCoroutine(smokeMovePattern.MovePattern());
+            //yield return StartCoroutine(smokeMiniDestructPattern.SpawnSmokeMini());
             //yield return StartCoroutine(smokeAshtrayPattern.DrapPattern());
-        }
-
-            //yield return new WaitForSeconds(2.0f);
-            //HideorAppear();
-            //yield return new WaitForSeconds(settting);
-            //animator.SetTrigger("Appear");
-            //yield return new WaitForSeconds(2.0f);       
+            yield return StartCoroutine(smokeSprayingFirePattern.SprayingFire());
+        }     
     }
 
     public void HideorAppear() // 숨거나 나타날때 이펙트 생성
