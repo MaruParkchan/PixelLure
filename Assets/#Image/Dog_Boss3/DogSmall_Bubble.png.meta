@@ -1,0 +1,510 @@
+fileFormatVersion: 2
+guid: e8026625a355f304b82a98f8cf17ef89
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2788838289543968643
+    second: Small_Bubble_0
+  - first:
+      213: -6919421988783746655
+    second: Small_Bubble_1
+  - first:
+      213: -3316704297000691698
+    second: Small_Bubble_2
+  - first:
+      213: -7723770634127648408
+    second: Small_Bubble_3
+  - first:
+      213: -1262375289766273305
+    second: Small_Bubble_4
+  - first:
+      213: 7015226129622986093
+    second: Small_Bubble_5
+  - first:
+      213: 5085487049101671283
+    second: Small_Bubble_6
+  - first:
+      213: 2514375957625065539
+    second: Small_Bubble_7
+  - first:
+      213: 4815733654800337075
+    second: Small_Bubble_8
+  - first:
+      213: -1645190553924513074
+    second: Small_Bubble_9
+  - first:
+      213: 5290880484400660886
+    second: Small_Bubble_10
+  - first:
+      213: 8501326477847932092
+    second: Small_Bubble_11
+  - first:
+      213: 5514896683465685255
+    second: Small_Bubble_12
+  - first:
+      213: -6930995565890285123
+    second: DomgSmall_Bubble_0
+  - first:
+      213: 8536808143101731631
+    second: DomgSmall_Bubble_1
+  - first:
+      213: -3463313808117982138
+    second: DomgSmall_Bubble_2
+  - first:
+      213: 1885639658802369670
+    second: DomgSmall_Bubble_3
+  - first:
+      213: -1997914757139107294
+    second: DomgSmall_Bubble_4
+  - first:
+      213: -3900599260932025014
+    second: DomgSmall_Bubble_5
+  - first:
+      213: -7560615187211847216
+    second: DomgSmall_Bubble_6
+  - first:
+      213: -8805144994547001555
+    second: DomgSmall_Bubble_7
+  - first:
+      213: 4908026880207158428
+    second: DomgSmall_Bubble_8
+  - first:
+      213: -596080544407906399
+    second: DomgSmall_Bubble_9
+  - first:
+      213: -3029723432597526409
+    second: DomgSmall_Bubble_10
+  - first:
+      213: 2535588230740949907
+    second: DomgSmall_Bubble_11
+  - first:
+      213: -6432028086204758593
+    second: DomgSmall_Bubble_12
+  - first:
+      213: -2894196828551294871
+    second: DogSmall_Bubble_0
+  - first:
+      213: -9086431073372328869
+    second: DogSmall_Bubble_1
+  - first:
+      213: 1658797934147560448
+    second: DogSmall_Bubble_2
+  - first:
+      213: -7278357359085306341
+    second: DogSmall_Bubble_3
+  - first:
+      213: -5929574686654597890
+    second: DogSmall_Bubble_4
+  - first:
+      213: -3671755650590682194
+    second: DogSmall_Bubble_5
+  - first:
+      213: 105906521634751749
+    second: DogSmall_Bubble_6
+  - first:
+      213: 5199633484340998745
+    second: DogSmall_Bubble_7
+  - first:
+      213: -5756314710409838852
+    second: DogSmall_Bubble_8
+  - first:
+      213: -3006874342367095278
+    second: DogSmall_Bubble_9
+  - first:
+      213: -5362071110306274253
+    second: DogSmall_Bubble_10
+  - first:
+      213: 8412633891777215010
+    second: DogSmall_Bubble_11
+  - first:
+      213: 4915603129111951618
+    second: DogSmall_Bubble_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: DogSmall_Bubble_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 960532c815fb5d7d0800000000000000
+      internalID: -2894196828551294871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_1
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5c229ba41386e180800000000000000
+      internalID: -9086431073372328869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_2
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0046403beeb350710800000000000000
+      internalID: 1658797934147560448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_3
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ebe575b841efa90800000000000000
+      internalID: -7278357359085306341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1000
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef4fdcc1d3be5bda0800000000000000
+      internalID: -5929574686654597890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_5
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1000
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea3528880bd4b0dc0800000000000000
+      internalID: -3671755650590682194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_6
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1000
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 505cf699b61487100800000000000000
+      internalID: 105906521634751749
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_7
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 1000
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9523f5cea1fc82840800000000000000
+      internalID: 5199633484340998745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfe7aa6e4467d10b0800000000000000
+      internalID: -5756314710409838852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_9
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21619fa77bf6546d0800000000000000
+      internalID: -3006874342367095278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_10
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3346fc11cb81695b0800000000000000
+      internalID: -5362071110306274253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_11
+      rect:
+        serializedVersion: 2
+        x: 1500
+        y: 500
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22afac8d3fdafb470800000000000000
+      internalID: 8412633891777215010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DogSmall_Bubble_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 209348f700bb73440800000000000000
+      internalID: 4915603129111951618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
