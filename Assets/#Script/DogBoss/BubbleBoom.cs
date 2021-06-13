@@ -13,17 +13,4 @@ public class BubbleBoom : MonoBehaviour
         particleSystem = GetComponent<ParticleSystem>();
         particleSystem.emission.SetBursts(new ParticleSystem.Burst[] { new ParticleSystem.Burst(0.0f, 30.0f) });
     }
-
-    IEnumerator IBubbleBoom()
-    {
-        float currentTime = 0.0f;
-
-        while(true)
-        {
-            yield return null;
-        }
-    }
-
-
-
 }

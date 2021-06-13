@@ -4,21 +4,28 @@ using UnityEngine;
 
 public class DogBoss : MonoBehaviour
 {
+   
     private Animator animator;
+
+    private DogBubblePattern dogBubblePattern;
+    private DogSmallSojuPattern dogSmallSojuPattern;
+
+
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
-        StartCoroutine("DogSmallBossPattern");
+        dogBubblePattern = GetComponent<DogBubblePattern>();
+        dogSmallSojuPattern = GetComponent<DogSmallSojuPattern>();
+        StartCoroutine(DogSmallPattern());
     }
 
-    private IEnumerator DogSmallBossPattern()
+    private IEnumerator DogSmallPattern()
     {
         yield return new WaitForSeconds(4.0f);
-
         while (true)
         {
-
+            yield return StartCoroutine(dogBubblePattern.IBubbleSpawner());
+            yield return StartCoroutine(dogSmallSojuPattern.ISojuPattern());
         }
     }
 }

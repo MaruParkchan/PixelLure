@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1092752949293311874}
   - component: {fileID: 1092752949293311885}
   - component: {fileID: 1092752949293311884}
-  - component: {fileID: -4033969894997248455}
+  - component: {fileID: -1723350427009684559}
   m_Layer: 0
   m_Name: Bubble_Boom
   m_TagString: Untagged
@@ -43,11 +43,11 @@ ParticleSystem:
   serializedVersion: 7
   lengthInSec: 3
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 2
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4881,7 +4881,7 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &-4033969894997248455
+--- !u!114 &-1723350427009684559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4890,7 +4890,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1092752949293311887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67cb46d3daf37d24ba2861cb0bfd7af6, type: 3}
+  m_Script: {fileID: 11500000, guid: 64bccd8b108c973488018c72fa0b28f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
