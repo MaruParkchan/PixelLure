@@ -29,6 +29,7 @@ public class DogBubblePattern : MonoBehaviour
             currentCount++;
         }
         yield return new WaitForSeconds(waitTime); // 대기
+        animator.SetTrigger("End"); // 애니메이션 전환
     }
 
     private void SpawnBubble()

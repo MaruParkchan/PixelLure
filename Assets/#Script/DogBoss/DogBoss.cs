@@ -9,23 +9,36 @@ public class DogBoss : MonoBehaviour
 
     private DogBubblePattern dogBubblePattern;
     private DogSmallSojuPattern dogSmallSojuPattern;
+    private DogBigTracePattern dogBigTracePattern;
+    private DogBigLaserPattern dogBigLaserPattern;
 
-
+    [SerializeField]
+    private bool isBulkUp; // 벌크업하였는가?
 
     private void Start()
     {
         dogBubblePattern = GetComponent<DogBubblePattern>();
         dogSmallSojuPattern = GetComponent<DogSmallSojuPattern>();
-        StartCoroutine(DogSmallPattern());
+        dogBigTracePattern = GetComponent<DogBigTracePattern>();
+        dogBigLaserPattern = GetComponent<DogBigLaserPattern>();
+        StartCoroutine(DogPattern());
     }
 
-    private IEnumerator DogSmallPattern()
+    private IEnumerator DogPattern()
     {
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-            yield return StartCoroutine(dogBubblePattern.IBubbleSpawner());
-            yield return StartCoroutine(dogSmallSojuPattern.ISojuPattern());
+            if (isBulkUp == false)
+            {
+                yield return StartCoroutine(dogBubblePattern.IBubbleSpawner());
+                yield return StartCoroutine(dogSmallSojuPattern.ISojuPattern());
+            }
+            else
+            {
+             //   yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
+                yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
+            }
         }
     }
 }

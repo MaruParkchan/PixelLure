@@ -16,6 +16,13 @@ public class DogSmallSojuPattern : MonoBehaviour
     [SerializeField]
     private float waitTime; // 패턴 대기시간
 
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public IEnumerator ISojuPattern()
     {
         int randomIndex = Random.Range(0, 2); // 0 = false , 1 = true
@@ -25,13 +32,14 @@ public class DogSmallSojuPattern : MonoBehaviour
             rotateSpeed *= -1;
         }
 
+        animator.SetTrigger("Drink");
         yield return new WaitForSeconds(waitTime);
 
         GameObject clone = Instantiate(dogSmallSojuCirclePrefab);
         clone.GetComponent<DogSmallSojuCircle>().Init(rotateSpeed, rotateTime, fadeTime);
         clone.transform.position = new Vector3(0, 0, 0);
-
         yield return new WaitForSeconds(waitTime + rotateTime); // 대기시간 + 회전 시간 + 페이드 시간
+        animator.SetTrigger("End");
 
     }
 }
