@@ -10,10 +10,11 @@ public class DogBigLaserPattern : MonoBehaviour
     [SerializeField] private int laserSpawnMaxCount; // 레이저 생성수 
     [Header("추가타 레이저 속성")]
     [SerializeField] private GameObject bundleLaserObject; // 추가타 레이저
-    [SerializeField] private float bundleLaserSpawnCycleTime; // 추가타 생성 시간
-    [SerializeField] private int bundleLaserSpawnMaxCount; // 추가타 레이저 생성수 
-    [SerializeField] private DogBundleLaser[] dogBundleLasers;
-    private int bunlaserIndex;
+    [SerializeField] private float bundleLaserAttackTime; // 추가타 총 공격시간
+                                                          //  [SerializeField] private int bundleLaserSpawnMaxCount; // 추가타 레이저 생성수 
+    [SerializeField] private DogBundleLaser[] dogBundleLasers = new DogBundleLaser[8];
+    List<DogBundleLaser> bundleLaser = new List<DogBundleLaser>();
+    private int bunlaserIndex = 0;
 
     [SerializeField] private float waitTime;
     private Animator animator;
@@ -31,14 +32,13 @@ public class DogBigLaserPattern : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        dogBundleLasers = new DogBundleLaser[bundleLaserSpawnMaxCount];
     }
 
     public IEnumerator ILaserPattern()
     {
         int currentCount = 0;
-        animator.SetTrigger("Posing");
         yield return new WaitForSeconds(waitTime);
+        animator.SetTrigger("Posing");
         while (laserSpawnMaxCount > currentCount)
         {
             SpawnLaserInitAndSpawn(laserObject);
@@ -50,18 +50,20 @@ public class DogBigLaserPattern : MonoBehaviour
 
         if (isArousal) // 각성중인가? 추가타를 하는가?
         {
-            while(bundleLaserSpawnMaxCount > currentCount)
-            {
-                yield return new WaitForSeconds(bundleLaserSpawnCycleTime);
-                SpawnLaserInitAndSpawn(bundleLaserObject);
-                currentCount++;
-            }
+            animator.SetTrigger("AddAttack");
+            //while (bundleLaserSpawnMaxCount > currentCount)
+            //{
+            //    yield return new WaitForSeconds(bundleLaserSpawnCycleTime);
+            //    SpawnLaserInitAndSpawn(bundleLaserObject);
+            //    currentCount++;
+            //}
 
-            for(int i = 0; i < dogBundleLasers.Length; i++) // 추가타 공격
-            {
-                dogBundleLasers[i].Attack();
-            }
-            bunlaserIndex = 0;
+            //for(int i = 0; i < dogBundleLasers.Length; i++) // 추가타 공격
+            //{
+            //    dogBundleLasers[i].Attack();
+            //}
+            //bunlaserIndex = 0;
+            yield return new WaitForSeconds(bundleLaserAttackTime);
         }
 
         animator.SetTrigger("End");
@@ -94,9 +96,28 @@ public class DogBigLaserPattern : MonoBehaviour
 
         if (clone.GetComponent<DogBundleLaser>() != null)
         {
-            dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();
-            bunlaserIndex++;
+        //    clone.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
+            bundleLaser.Add(clone.GetComponent<DogBundleLaser>());
+            //dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();
+            //bunlaserIndex += 1;
         }
+    }
+
+    public void AdditionalHits() // 추가타 공격
+    {
+        SpawnLaserInitAndSpawn(bundleLaserObject);
+    }
+
+    public void AdditionalHitsBomb() // 추가타 폭파
+    {
+        for (int i = 0; i < bundleLaser.Count; i++) // 추가타 공격
+        {
+            bundleLaser[i].Attack();
+            Debug.Log("i = " + i);
+        }
+
+        bundleLaser.Clear();
+   //     bunlaserIndex = 0;
     }
 
     //private void BundleLaserSpawn(Vector3 pos, Quaternion euler)
@@ -104,7 +125,7 @@ public class DogBigLaserPattern : MonoBehaviour
     //    GameObject clone = Instantiate(laserObject);
     //    clone.transform.position = pos;
     //    clone.transform.rotation = euler;
-        
+
     //    if(clone.GetComponent<DogBundleLaser>() != null)
     //    {
     //        dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();

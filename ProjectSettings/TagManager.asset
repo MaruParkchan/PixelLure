@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - EnemyBullet
   - PlayerBullet
+  - SojuBreak
+  - DogBoss
   layers:
   - Default
   - TransparentFX

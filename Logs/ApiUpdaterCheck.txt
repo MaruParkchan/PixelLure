@@ -248,3 +248,63 @@ C# parse time         : 619ms
 candidates check time : 42ms
 console write time    : 6ms
 
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:46:48 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 994.9683ms
+moved types parse time: 138ms
+candidates parse time : 4ms
+C# parse time         : 682ms
+candidates check time : 109ms
+console write time    : 10ms
+
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:53:40 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 309.1729ms
+moved types parse time: 81ms
+candidates parse time : 3ms
+C# parse time         : 317ms
+candidates check time : 71ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:53:44 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 136.6325ms
+moved types parse time: 83ms
+candidates parse time : 3ms
+C# parse time         : 375ms
+candidates check time : 88ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:54:03 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 228.5104ms
+moved types parse time: 84ms
+candidates parse time : 5ms
+C# parse time         : 409ms
+candidates check time : 67ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:55:03 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 179.6149ms
+moved types parse time: 79ms
+candidates parse time : 3ms
+C# parse time         : 355ms
+candidates check time : 73ms
+console write time    : 0ms
+
+[api-updater (non-obsolete-error-filter)] 2021-06-19 AM 10:55:05 : Starting D:/Unitys/2020.3.2f1/Editor/Data/Tools/ScriptUpdater/APIUpdater.NonObsoleteApiUpdaterDetector.exe
+[api-updater (non-obsolete-error-filter)] 
+----------------------------------
+jit/startup time      : 158.0891ms
+moved types parse time: 91ms
+candidates parse time : 3ms
+C# parse time         : 438ms
+candidates check time : 84ms
+console write time    : 0ms
+

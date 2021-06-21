@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8720471547441319318}
   - component: {fileID: 127825654002601953}
   - component: {fileID: 2261502749932887555}
-  - component: {fileID: 7412431237989640250}
+  - component: {fileID: 2247020204358134923}
   m_Layer: 0
   m_Name: SoJuBreak
-  m_TagString: Untagged
+  m_TagString: SojuBreak
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72,9 +72,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4879700981173593312, guid: 26925c33af741d249b4f90a39e016589, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.12013221, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -103,7 +103,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7412431237989640250
+--- !u!114 &2247020204358134923
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
