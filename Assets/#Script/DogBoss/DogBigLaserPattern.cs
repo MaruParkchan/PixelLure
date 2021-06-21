@@ -96,7 +96,7 @@ public class DogBigLaserPattern : MonoBehaviour
 
         if (clone.GetComponent<DogBundleLaser>() != null)
         {
-        //    clone.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
+            clone.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
             bundleLaser.Add(clone.GetComponent<DogBundleLaser>());
             //dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();
             //bunlaserIndex += 1;
