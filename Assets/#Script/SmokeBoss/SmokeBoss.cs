@@ -25,7 +25,7 @@ public class SmokeBoss : MonoBehaviour
 
     private IEnumerator SmokeBossPattern()
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(4000.0f);
         HideorAppear();
         animator.SetTrigger("Hide");
            
@@ -42,5 +42,27 @@ public class SmokeBoss : MonoBehaviour
     {
         GameObject clone = Instantiate(smokeEffect);
         clone.transform.position = transform.position + new Vector3(-0.11f,0,0);
+    }
+
+    private bool isHit = false;
+
+    private IEnumerator Hit()
+    {
+        isHit = true;
+        yield return new WaitForSeconds(1.0f);
+        isHit = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.CompareTag("PlayerBullet"))
+        {
+            if (isHit == false)
+            {
+                StartCoroutine("Hit");
+                Debug.Log("담배보스 - 어택");
+            }
+            Destroy(collision.transform.gameObject);
+        }
     }
 }

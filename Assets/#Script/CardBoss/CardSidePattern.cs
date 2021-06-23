@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardSidePattern : MonoBehaviour
+public class CardSidePattern : MonoBehaviour 
 {
     // 카드보스 패턴2  좌우 사이드 패턴
     [SerializeField] private GameObject cardObject; // 카드 오브젝트
@@ -98,8 +98,11 @@ public class CardSidePattern : MonoBehaviour
         animator.SetTrigger("Attack2Idle");
     }
 
-    public void StopAction()
+    public void CoroutineStop()
     {
+        //StopCoroutine("ISidePattern");
+        //StopCoroutine("SmoothMovement");
+        //StopCoroutine("CardSpawn");
         StopAllCoroutines();
     }
 }

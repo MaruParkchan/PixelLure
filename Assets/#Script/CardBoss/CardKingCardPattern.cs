@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardKingCardPattern : MonoBehaviour
+public class CardKingCardPattern : MonoBehaviour 
 {
     [Header("킹 카드 스폰 설정")]
     [SerializeField] private GameObject kingCardBulletPrefab;
@@ -130,5 +130,11 @@ public class CardKingCardPattern : MonoBehaviour
         spawnPoints[54] = new Vector3(10.5f, 3.5f, 0f);
         spawnPoints[55] = new Vector3(10.5f, 4.5f, 0f);
         #endregion
+    }
+
+    public void CoroutineStop()
+    {
+        //StopCoroutine("ICardKingCardPattern");
+        StopAllCoroutines();
     }
 }

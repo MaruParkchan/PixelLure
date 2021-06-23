@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBoss : MonoBehaviour
+public class CardBoss : MonoBehaviour, ICoroutineStop
 {
     [SerializeField]
     private MapData cardBossMapData; // 보스 나타나는 좌표 데이터 
@@ -17,6 +17,13 @@ public class CardBoss : MonoBehaviour
     private CardKingCardPattern cardKingCardPattern;       // 패턴3
     private CardBoomPattern cardBoomPattern;               // 패턴4
 
+    [SerializeField]
+    private int cardBossHp;
+    public int CardBossHp { get { return cardBossHp; } }
+    private int limitBossHp = 50; // 일정피가 된다면 선택지 등장할 hp 수치값
+
+    private bool isInvincibility; //무적
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -24,6 +31,7 @@ public class CardBoss : MonoBehaviour
         cardSidePattern = GetComponent<CardSidePattern>();
         cardKingCardPattern = GetComponent<CardKingCardPattern>();
         cardBoomPattern = GetComponent<CardBoomPattern>();
+        isInvincibility = true; // 등장할때 무적인상태
     }
 
     private void Start()
@@ -33,7 +41,7 @@ public class CardBoss : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             StopCoroutine("CardBossPattern");
             animator.SetTrigger("Choice");
@@ -50,10 +58,9 @@ public class CardBoss : MonoBehaviour
             yield return StartCoroutine(cardSidePattern.ISidePattern());
             yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
             yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
-        }   
+        }
     }
 
-    private bool isInvincibility; //무적
 
     public void AuraEffectOn() // 아우리 이펙트 재생
     {
@@ -73,5 +80,39 @@ public class CardBoss : MonoBehaviour
     public void IsisInvincibilityOff() // 무적 비활성화 
     {
         isInvincibility = false;
+    }
+
+    public void CoroutineStop()
+    {
+        StopAllCoroutines();
+        cardRadialShapePattern.CoroutineStop();
+        cardSidePattern.CoroutineStop();
+        cardKingCardPattern.CoroutineStop();
+        cardBoomPattern.CoroutineStop();
+        //animator.ResetTrigger("Hide");
+        //animator.ResetTrigger("Appear");
+        //animator.ResetTrigger("Attack1");
+        //animator.ResetTrigger("Attack2");
+        animator.SetTrigger("Choice");
+        this.transform.position = Vector3.zero;
+        
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.CompareTag("PlayerBullet"))
+        {
+            Destroy(collision.transform.gameObject);
+
+            if(isInvincibility)
+            {
+                return;
+            }
+
+            if(limitBossHp >= cardBossHp)
+            {
+                Debug.Log("선택지!");
+            }
+        }
     }
 }

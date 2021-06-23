@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBoomPattern : MonoBehaviour
+public class CardBoomPattern : MonoBehaviour 
 {
     [SerializeField] private GameObject boomEffect;
     [SerializeField] private int spawnCount; // 생성할 수
@@ -50,5 +50,11 @@ public class CardBoomPattern : MonoBehaviour
         transform.position = new Vector3(Random.Range(cardBoss.CardBossMapData.LimitMin.x, cardBoss.CardBossMapData.LimitMax.x),
                                                Random.Range(cardBoss.CardBossMapData.LimitMin.y, cardBoss.CardBossMapData.LimitMax.y), 0);
         animator.SetTrigger("Appear"); // 등장 애니메이션 재생
+    }
+
+    public void CoroutineStop()
+    {
+        //StopCoroutine("ICardBoomPattern");
+        StopAllCoroutines();
     }
 }

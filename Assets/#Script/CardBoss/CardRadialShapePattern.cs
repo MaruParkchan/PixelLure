@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardRadialShapePattern : MonoBehaviour
+public class CardRadialShapePattern : MonoBehaviour 
 {
     [SerializeField]
     private GameObject cardRadialShapeEffect; // 방사형 이펙트 
@@ -49,5 +49,11 @@ public class CardRadialShapePattern : MonoBehaviour
         transform.position = new Vector3(Random.Range(cardBoss.CardBossMapData.LimitMin.x, cardBoss.CardBossMapData.LimitMax.x),
                                                Random.Range(cardBoss.CardBossMapData.LimitMin.y, cardBoss.CardBossMapData.LimitMax.y), 0);
         animator.SetTrigger("Appear"); // 등장 애니메이션 재생
+    }
+
+    public void CoroutineStop()
+    {
+       // StopCoroutine("ICardRadialShapePattern");
+        StopAllCoroutines();
     }
 }
