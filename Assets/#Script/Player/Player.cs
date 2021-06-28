@@ -13,16 +13,24 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float bulletMoveSpeed; // 총알 속도 
 
+    private bool isPause; // 선택지 활성화중이면 멈춤
+    private bool isFireLock; // 총알 발사를 잠궜는지?
+    private bool isInvincibility; // 무적중인가?
+
     private void Update()
     {
+        if (isPause)
+            return;
+
         Movement();
         LimitPosition();
         Rotate();
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && isFireLock == false)
         {
             Fire();
         }
+      
     }
 
     private void Movement()
@@ -54,5 +62,35 @@ public class Player : MonoBehaviour
         clone.GetComponent<PlayerBullet>().BulletMovement(Vector2.up, bulletMoveSpeed);
         clone.transform.position = transform.position;
         clone.transform.rotation = transform.rotation;
+    }
+
+    private void PositionReset() // 선택지를 위한 위치 재조정 
+    {
+        transform.position = new Vector3(0, -4.0f, 0);
+    }
+
+    public void Pause() // 선택지 활성화 - 1
+    {
+        isPause = true; // 선택지 활성화
+        isFireLock = true; 
+        isInvincibility = true; // 무적활성화
+        PositionReset();
+    }
+
+    public void Choice() // 선택을 하기 위해 이동, 회전 다시 풀기  - 2
+    {
+        isPause = false;
+    }
+
+    public void Wait() // 선택지 다 차오르면 잠시 멈추기 위한 메소드 - 3
+    {
+        isPause = true;
+    }
+
+    public void Resume() // 선택 완료 게임 재개 - 4
+    {
+        isPause = false;
+        isFireLock = false;
+        isInvincibility = false;
     }
 }

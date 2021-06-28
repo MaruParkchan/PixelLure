@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBoss : MonoBehaviour, ICoroutineStop
+public class CardBoss : Hp, ICoroutineStop
 {
     [SerializeField]
     private MapData cardBossMapData; // 보스 나타나는 좌표 데이터 
@@ -10,7 +10,9 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
     [Header("AuraEffect")]
     [SerializeField]
     private ParticleSystem auraEffect;
-
+    private BoxCollider2D boxCollider2D;
+    [SerializeField]
+    private Stage1System stage1System;
     private Animator animator;
     private CardRadialShapePattern cardRadialShapePattern; // 패턴1
     private CardSidePattern cardSidePattern;               // 패턴2
@@ -18,9 +20,9 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
     private CardBoomPattern cardBoomPattern;               // 패턴4
 
     [SerializeField]
-    private int cardBossHp;
-    public int CardBossHp { get { return cardBossHp; } }
-    private int limitBossHp = 50; // 일정피가 된다면 선택지 등장할 hp 수치값
+    private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
+    private bool isChoice = false;
+    private bool isDie = false;
 
     private bool isInvincibility; //무적
 
@@ -31,7 +33,9 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
         cardSidePattern = GetComponent<CardSidePattern>();
         cardKingCardPattern = GetComponent<CardKingCardPattern>();
         cardBoomPattern = GetComponent<CardBoomPattern>();
-        isInvincibility = true; // 등장할때 무적인상태
+        boxCollider2D = GetComponent<BoxCollider2D>();
+        ColliderEnableOff();
+       // isInvincibility = true; // 등장할때 무적인상태
     }
 
     private void Start()
@@ -39,19 +43,20 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
         StartCoroutine("CardBossPattern");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StopCoroutine("CardBossPattern");
-            animator.SetTrigger("Choice");
-            transform.position = Vector3.zero;
-        }
-    }
-
     private IEnumerator CardBossPattern()
     {
         yield return new WaitForSeconds(4.0f);
+        while (true)
+        {
+            yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+            yield return StartCoroutine(cardSidePattern.ISidePattern());
+            yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
+            yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+        }
+    }
+
+    private IEnumerator CardBossPatternTwo()
+    {
         while (true)
         {
             yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
@@ -82,8 +87,21 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
         isInvincibility = false;
     }
 
+    public void ColliderEnableOn()
+    {
+        boxCollider2D.enabled = true;
+    }
+
+    public void ColliderEnableOff()
+    {
+        boxCollider2D.enabled = false;
+    }
+
     public void CoroutineStop()
     {
+        isChoice = true;
+        isInvincibility = true; // 무적 활성화
+
         StopAllCoroutines();
         cardRadialShapePattern.CoroutineStop();
         cardSidePattern.CoroutineStop();
@@ -94,25 +112,54 @@ public class CardBoss : MonoBehaviour, ICoroutineStop
         //animator.ResetTrigger("Attack1");
         //animator.ResetTrigger("Attack2");
         animator.SetTrigger("Choice");
-        this.transform.position = Vector3.zero;
-        
+        IsisInvincibilityOn();
+        AuraEffectOn();
+        this.transform.position = Vector3.zero;        
+    }
+
+    public void Resume()
+    {
+        StartCoroutine("CardBossPatternTwo");
+        IsisInvincibilityOff();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.CompareTag("PlayerBullet"))
+        if(collision.transform.CompareTag("PlayerBullet") && isDie == false)
         {
             Destroy(collision.transform.gameObject);
 
-            if(isInvincibility)
-            {
+            if (isInvincibility)
                 return;
-            }
 
-            if(limitBossHp >= cardBossHp)
+            TakeDamage();
+
+            if (isChoice == false)
             {
-                Debug.Log("선택지!");
+                if (limitBossHp >= hp) // 일정피 이하 되는순간 선택지창 활성화
+                {
+                    ChoiceOn();
+                }
+            }
+            else if(hp <= 0)
+            {
+                isDie = true;
             }
         }
+    }
+
+    private void ChoiceOn()
+    {
+        CoroutineStop();
+        stage1System.PauseAndTalk();
+    }
+
+    protected override void TakeDamage()
+    {
+        if (isInvincibility)
+        {
+            return;
+        }
+        hp--;
     }
 }

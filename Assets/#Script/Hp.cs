@@ -2,8 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hp : MonoBehaviour
+public abstract class Hp : MonoBehaviour
 {
     [SerializeField]
-    private int hp;
+    protected int hp;
+    
+    public int GetHp()
+    {
+        return hp;
+    }
+
+    protected abstract void TakeDamage();
+
 }
