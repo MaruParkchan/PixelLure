@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Stage1System : MonoBehaviour
 {
-    [SerializeField]
-    private CardBoss cardBoss;
+    [SerializeField] private CardBoss cardBoss;
 
-    [SerializeField]
-    private Player player;
+    [SerializeField] private Player player;
 
     private GameObject[] enemyObjects; // 적 오브젝트들 담기
     private GameObject[] playerObjects; // 플레이어 오브젝트들담기
+
+    [SerializeField] private GameObject blinkObject;
 
     private bool isChoice; // 선택지 중인지? (선택지중이면 멈추기)
 
@@ -23,8 +23,7 @@ public class Stage1System : MonoBehaviour
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
     {
-        player.Pause();
-        GameObjectAllFind();
+        StartCoroutine("Choice");
     }
 
     public void PlayerChoice() // 두번째 - 플레이어 선택
@@ -56,5 +55,13 @@ public class Stage1System : MonoBehaviour
         {
             Destroy(playerObjects[i]);
         }
+    }
+
+    private IEnumerator Choice()
+    {
+        player.Pause();
+        blinkObject.SetActive(true);
+        GameObjectAllFind();
+        yield return new WaitForSeconds(2.0f);
     }
 }

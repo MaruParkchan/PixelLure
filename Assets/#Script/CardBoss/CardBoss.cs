@@ -77,6 +77,11 @@ public class CardBoss : Hp, ICoroutineStop
         auraEffect.Stop();
     }
 
+    public void AuraEffectClear()
+    {
+        auraEffect.Clear();
+    }
+
     public void IsisInvincibilityOn() // 무적 활성화
     {
         isInvincibility = true;
@@ -113,6 +118,7 @@ public class CardBoss : Hp, ICoroutineStop
         //animator.ResetTrigger("Attack2");
         animator.SetTrigger("Choice");
         IsisInvincibilityOn();
+        AuraEffectClear();
         AuraEffectOn();
         this.transform.position = Vector3.zero;        
     }
