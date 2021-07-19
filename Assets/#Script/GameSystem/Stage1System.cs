@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Stage1System : MonoBehaviour
 {
@@ -15,19 +16,32 @@ public class Stage1System : MonoBehaviour
 
     private bool isChoice; // 선택지 중인지? (선택지중이면 멈추기)
 
+    #region 대화창 
+    [SerializeField] private GameObject diglogObject; // 대화창 오브젝트 
+    [SerializeField] private TextMeshProUGUI diglogText; // 대화창 TextMeshPro
+    [SerializeField] private GameObject leftChoiceObject;
+    [SerializeField] private GameObject rightChoiceObject;
+
+    private string[] diglogData = new string[3]; // 대화창 데이터 string
+    private int diglogIndex = 0; // 대화창 인덱스
+    private bool isDiglogNext = false; 
+    #endregion
+
     private void Start()
     {
-
+        DiglogDataGet();
     }
-
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
     {
-        StartCoroutine("Choice");
+        StartCoroutine("Choice"); // 대화창 오브젝트 켜기
     }
 
     public void PlayerChoice() // 두번째 - 플레이어 선택
     {
+        leftChoiceObject.SetActive(true);
+        rightChoiceObject.SetActive(true);
+        diglogObject.SetActive(false); // 대화창 오브젝트 끄기
         player.Choice();
     }
 
@@ -63,5 +77,43 @@ public class Stage1System : MonoBehaviour
         blinkObject.SetActive(true);
         GameObjectAllFind();
         yield return new WaitForSeconds(2.0f);
+        diglogObject.SetActive(true);
+        StartCoroutine(TextUpdate(diglogIndex));
     }
+
+    private void DiglogDataGet()
+    {
+        for(int i = 0; i < DiglogData.Instance.cardBossDiglogs.Length; i++)
+        {
+            diglogData[i] = DiglogData.Instance.cardBossDiglogs[i];
+        }
+    }
+
+    private IEnumerator TextUpdate(int index)
+    {
+        isDiglogNext = false;
+        diglogText.text = "";
+        for (int i = 0; i < diglogData[index].Length; i++)
+        {
+            diglogText.text += diglogData[index][i];
+            yield return new WaitForSeconds(0.1f);
+        }
+         
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                if (diglogData.Length <= diglogIndex)
+                {
+                    PlayerChoice(); 
+                    yield break;
+                }
+                diglogIndex++;
+                StartCoroutine(TextUpdate(diglogIndex));
+            }
+
+            yield return null;
+        }
+    }
+
 }

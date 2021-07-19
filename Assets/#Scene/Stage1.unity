@@ -274,8 +274,9 @@ GameObject:
   m_Component:
   - component: {fileID: 228384624}
   - component: {fileID: 228384623}
+  - component: {fileID: 228384625}
   m_Layer: 0
-  m_Name: Square
+  m_Name: ChoiceLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -346,6 +347,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &228384625
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228384622}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccc9371349541af4581fda8b9938e449, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &291947308
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +378,7 @@ GameObject:
   - component: {fileID: 291947311}
   - component: {fileID: 291947310}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DiglogSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +393,7 @@ RectTransform:
   m_GameObject: {fileID: 291947308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 1.8, z: 1}
   m_Children:
   - {fileID: 1800925380}
   m_Father: {fileID: 1050591297}
@@ -382,7 +402,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 189}
-  m_SizeDelta: {x: 1000, y: 200}
+  m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &291947310
 MonoBehaviour:
@@ -557,7 +577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &642992802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1091,8 +1111,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1326602736}
   - component: {fileID: 1326602735}
+  - component: {fileID: 1326602737}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: ChoiceRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,6 +1184,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1326602737
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326602734}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ccc9371349541af4581fda8b9938e449, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1480991757
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,17 +1820,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'That''s a lot of power to come all the way here. '
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cdab9efe404fda3488916121b0dfeaa1, type: 2}
+  m_sharedMaterial: {fileID: -1932066844642377437, guid: cdab9efe404fda3488916121b0dfeaa1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294941671
-  m_fontColor: {r: 0.906871, g: 0.6084906, b: 1, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1813,7 +1853,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2102,6 +2142,10 @@ MonoBehaviour:
   cardBoss: {fileID: 744212754}
   player: {fileID: 1674676062}
   blinkObject: {fileID: 1842556790}
+  diglogObject: {fileID: 291947308}
+  diglogText: {fileID: 1800925381}
+  leftChoiceObject: {fileID: 228384622}
+  rightChoiceObject: {fileID: 1326602734}
 --- !u!114 &2050683035
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - DungGeunMo
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b1df387635f634a42aa04ee7cdd4cfec, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1
