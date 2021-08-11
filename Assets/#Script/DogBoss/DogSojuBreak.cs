@@ -8,7 +8,7 @@ public class DogSojuBreak : MonoBehaviour
     private GameObject sojuEffect;
     private float moveSpeed;
     private bool isBreak = false;
-    private bool isBoom = false;
+    //private bool isBoom = false;
     private DogBigPoundingPattern dogBigPoundingPattern;
     private Animator animator;
 
@@ -26,11 +26,11 @@ public class DogSojuBreak : MonoBehaviour
             transform.position += Vector3.down * moveSpeed * Time.deltaTime;
         }
 
-        if (transform.position.y < -2.5f && isBoom == false)
-        {
-            dogBigPoundingPattern.AnimationPounding();
-            isBoom = true;
-        }
+        //if (transform.position.y < -2.5f && isBoom == false)
+        //{
+        //    dogBigPoundingPattern.AnimationPounding();
+        //    isBoom = true;
+        //}
     }
 
     public void Init(float moveSpeed)

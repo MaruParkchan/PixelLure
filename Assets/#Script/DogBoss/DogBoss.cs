@@ -38,9 +38,9 @@ public class DogBoss : MonoBehaviour
             }
             else
             {
-             //   yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
-                yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
-              //  yield return StartCoroutine(dogBigPoundingPattern.ISojuRain());
+               //yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
+               //yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
+                yield return StartCoroutine(dogBigPoundingPattern.ISojuRain());
             }
         }
     }

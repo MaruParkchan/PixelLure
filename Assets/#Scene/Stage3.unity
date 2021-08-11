@@ -581,9 +581,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sojuObject: {fileID: 3822982882702495101, guid: 3ff5761fafb7f92458ca1e2724751871, type: 3}
-  spawnCount: 6
-  spawnCycleTime: 0.4
-  sojuObjectMoveSpeed: 4
+  sojuSpawnCount: 6
+  spawnCycleTime: 0.25
+  sojuObjectMoveSpeed: 5
+  sojuCycleWaitTime: 1
+  spawnCount: 3
   waitTime: 2
 --- !u!1 &1050591293
 GameObject:

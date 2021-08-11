@@ -6,9 +6,11 @@ public class DogBigPoundingPattern : MonoBehaviour
 {
     [SerializeField] private GameObject sojuObject;
 
-    [SerializeField] private int spawnCount; // 생성 수 
+    [SerializeField] private int sojuSpawnCount; // 생성 수 
     [SerializeField] private float spawnCycleTime; // 재 생성 시간
     [SerializeField] private float sojuObjectMoveSpeed; // 소주 오브젝트 스피드
+    [SerializeField] private float sojuCycleWaitTime; // 소주 패턴 6개 터진후 대기시간
+    [SerializeField] private int spawnCount; // 패턴 횟수 
     [SerializeField] private float waitTime; // 대기시간
 
     private float[] xPosData = new float[8];
@@ -20,22 +22,34 @@ public class DogBigPoundingPattern : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        randomIndexs = new int[spawnCount];
+        randomIndexs = new int[6];
         XposDataInit();
     }
 
     public IEnumerator ISojuRain()
     {
-        int currentCount = 0;
-        RandomNumber();
+        int currentSojuSpawnCount = 0; // 소주 생성 수
+        int currentSpawnCount = 0; // 패턴 횟수
+
         yield return new WaitForSeconds(waitTime);
 
-        while(spawnCount > currentCount)
+        while (spawnCount > currentSpawnCount)
         {
-            SpawnObject(xPosData[randomIndexs[currentCount]]);
-            currentCount++;
-            yield return new WaitForSeconds(spawnCycleTime);
+            RandomNumber();
+            while (sojuSpawnCount > currentSojuSpawnCount)
+            {
+                SpawnObject(xPosData[randomIndexs[currentSojuSpawnCount]]);
+                currentSojuSpawnCount++;
+                yield return new WaitForSeconds(spawnCycleTime);
+            }
+
+            AnimationPounding();
+            yield return new WaitForSeconds(sojuCycleWaitTime);
+            currentSojuSpawnCount = 0;
+            currentSpawnCount++;            
         }
+
+        Debug.Log("패턴 재시작");
     }
 
     private void SpawnObject(float xPos)
@@ -61,9 +75,9 @@ public class DogBigPoundingPattern : MonoBehaviour
 
     private void RandomNumber() // 중복없는 난수 출력
     {
-        for (int i = 0; i < spawnCount; i++) 
+        for (int i = 0; i < sojuSpawnCount; i++) 
         {
-            randomIndexs[i] = Random.Range(0, spawnCount);
+            randomIndexs[i] = Random.Range(0, sojuSpawnCount);
             for (int j = 0; j < i; j++)
             {
                 if (randomIndexs[i] == randomIndexs[j])
