@@ -24,7 +24,6 @@ public class Stage1System : MonoBehaviour
 
     private string[] diglogData = new string[3]; // 대화창 데이터 string
     private int diglogIndex = 0; // 대화창 인덱스
-    private bool isDiglogNext = false; 
     #endregion
 
     private void Start()
@@ -69,7 +68,7 @@ public class Stage1System : MonoBehaviour
         {
             Destroy(playerObjects[i]);
         }
-    }
+    } // 오브젝트 다 삭제 (총알)
 
     private IEnumerator Choice()
     {
@@ -83,16 +82,22 @@ public class Stage1System : MonoBehaviour
 
     private void DiglogDataGet()
     {
-        for(int i = 0; i < DiglogData.Instance.cardBossDiglogs.Length; i++)
+        for(int i = 0; i < DiglogData.Instance.cardBossFitstDiglogs.Length; i++)
         {
-            diglogData[i] = DiglogData.Instance.cardBossDiglogs[i];
+            diglogData[i] = DiglogData.Instance.cardBossFitstDiglogs[i];
         }
     }
 
     private IEnumerator TextUpdate(int index)
     {
-        isDiglogNext = false;
         diglogText.text = "";
+
+        if(diglogData.Length -1 <= index) // 첫번째 멘트 마지막 문구일때 선택지 뜨기 
+        {
+            leftChoiceObject.SetActive(true);
+            rightChoiceObject.SetActive(true);
+        }
+
         for (int i = 0; i < diglogData[index].Length; i++)
         {
             diglogText.text += diglogData[index][i];
@@ -103,15 +108,15 @@ public class Stage1System : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (diglogData.Length <= diglogIndex)
+                if (diglogData.Length -1 <= diglogIndex)
                 {
                     PlayerChoice(); 
                     yield break;
                 }
                 diglogIndex++;
                 StartCoroutine(TextUpdate(diglogIndex));
+                yield break;
             }
-
             yield return null;
         }
     }

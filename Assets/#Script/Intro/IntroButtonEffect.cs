@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroButtonEffect : MonoBehaviour
 {
@@ -8,11 +9,11 @@ public class IntroButtonEffect : MonoBehaviour
 
     [SerializeField]
     private float fadeTime = 1.0f;
-    private SpriteRenderer render;
+    private Image buttonImage;
 
     private void Start()
     {
-        render = GetComponent<SpriteRenderer>();
+        buttonImage = GetComponent<Image>();
     }
 
     public void StartTwinkle()
@@ -39,9 +40,9 @@ public class IntroButtonEffect : MonoBehaviour
             currentTime += Time.deltaTime;
             percent = currentTime / fadeTime;
 
-            Color color = render.color;
+            Color color = buttonImage.color;
             color.a = Mathf.Lerp(start, end, percent);
-            render.color = color;
+            buttonImage.color = color;
 
             yield return null;
         }
