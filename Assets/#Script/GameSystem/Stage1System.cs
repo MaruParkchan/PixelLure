@@ -28,7 +28,7 @@ public class Stage1System : MonoBehaviour
 
     private void Start()
     {
-        DiglogDataGet();
+       // DiglogDataGet();
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
