@@ -5,18 +5,11 @@ using TMPro;
 
 public class DialogSystem : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI diglogText;
+    private string[] cardBossDiglog;
+    private DiglogData diglogData;
 
-    private string[] diglogDatas;
-    private int diglogIndex;
-
-    private void Start()
+    private void Awake()
     {
-
-    }
-
-    private void Update()
-    {
-
+        cardBossDiglog = diglogData.cardBossFitstDiglogs;
     }
 }

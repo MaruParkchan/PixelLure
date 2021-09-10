@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBoss : Hp, ICoroutineStop
+public class CardBoss : Hp, ICoroutineStop, IPause
 {
     [SerializeField]
     private MapData cardBossMapData; // 보스 나타나는 좌표 데이터 
@@ -112,10 +112,6 @@ public class CardBoss : Hp, ICoroutineStop
         cardSidePattern.CoroutineStop();
         cardKingCardPattern.CoroutineStop();
         cardBoomPattern.CoroutineStop();
-        //animator.ResetTrigger("Hide");
-        //animator.ResetTrigger("Appear");
-        //animator.ResetTrigger("Attack1");
-        //animator.ResetTrigger("Attack2");
         animator.SetTrigger("Choice");
         IsisInvincibilityOn();
         AuraEffectClear();

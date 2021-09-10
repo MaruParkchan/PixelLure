@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour , IPause
 {
     [SerializeField]
     private MapData mapData;
@@ -67,12 +67,13 @@ public class Player : MonoBehaviour
     private void PositionReset() // 선택지를 위한 위치 재조정 
     {
         transform.position = new Vector3(0, -4.0f, 0);
+        transform.rotation = Quaternion.identity;
     }
 
     public void Pause() // 선택지 활성화 - 1
     {
         isPause = true; // 선택지 활성화
-        isFireLock = true; 
+        isFireLock = true; // 공격 중지 
         isInvincibility = true; // 무적활성화
         PositionReset();
     }

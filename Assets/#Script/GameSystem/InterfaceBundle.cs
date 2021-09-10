@@ -1,4 +1,7 @@
-
+interface IPause
+{
+    public void Resume();
+}
 
 interface ICoroutineStop 
 {

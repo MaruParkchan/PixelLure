@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Stage1System : MonoBehaviour
+public class GameSystem : MonoBehaviour
 {
-    [SerializeField] private CardBoss cardBoss;
-
+    [SerializeField] private GameObject boss;
     [SerializeField] private Player player;
 
     private GameObject[] enemyObjects; // 적 오브젝트들 담기
@@ -28,7 +27,7 @@ public class Stage1System : MonoBehaviour
 
     private void Start()
     {
-       // DiglogDataGet();
+
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
@@ -49,10 +48,10 @@ public class Stage1System : MonoBehaviour
         player.Wait();
     }
 
-    public void ResumeGame()
+    public void ResumeGame() // 네번째 - 선택완료 및 게임 재시작 
     {
         player.Resume();
-        cardBoss.Resume();
+        boss.GetComponent<IPause>().Resume();
     }
 
     private void GameObjectAllFind()
@@ -60,7 +59,7 @@ public class Stage1System : MonoBehaviour
         enemyObjects = GameObject.FindGameObjectsWithTag("EnemyBullet");
         playerObjects = GameObject.FindGameObjectsWithTag("PlayerBullet");
 
-        for(int i = 0; i < enemyObjects.Length; i++)
+        for (int i = 0; i < enemyObjects.Length; i++)
         {
             Destroy(enemyObjects[i]);
         }
@@ -80,19 +79,11 @@ public class Stage1System : MonoBehaviour
         StartCoroutine(TextUpdate(diglogIndex));
     }
 
-    private void DiglogDataGet()
-    {
-        for(int i = 0; i < DiglogData.Instance.cardBossFitstDiglogs.Length; i++)
-        {
-            diglogData[i] = DiglogData.Instance.cardBossFitstDiglogs[i];
-        }
-    }
-
     private IEnumerator TextUpdate(int index)
     {
         diglogText.text = "";
 
-        if(diglogData.Length -1 <= index) // 첫번째 멘트 마지막 문구일때 선택지 뜨기 
+        if (diglogData.Length - 1 <= index) // 첫번째 멘트 마지막 문구일때 선택지 뜨기 
         {
             leftChoiceObject.SetActive(true);
             rightChoiceObject.SetActive(true);
@@ -103,14 +94,14 @@ public class Stage1System : MonoBehaviour
             diglogText.text += diglogData[index][i];
             yield return new WaitForSeconds(0.1f);
         }
-         
+
         while (true)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (diglogData.Length -1 <= diglogIndex)
+                if (diglogData.Length - 1 <= diglogIndex)
                 {
-                    PlayerChoice(); 
+                    PlayerChoice();
                     yield break;
                 }
                 diglogIndex++;
