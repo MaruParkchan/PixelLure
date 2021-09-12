@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ChoiceEvent : MonoBehaviour
 {
+    [SerializeField]
+    private GameSystem gameSystem;
+    [SerializeField]
+    private int choiceValue;
+
     private Animator animator;
     [SerializeField]
     private GameObject chainEffect;
@@ -27,6 +32,11 @@ public class ChoiceEvent : MonoBehaviour
         {
             animator.SetBool("Choice", false);
         }
+    }
+
+    public void ChoiceComplete() // 선택완료
+    {
+        gameSystem.ChoiceSelect(choiceValue);
     }
 
     public void Effect()

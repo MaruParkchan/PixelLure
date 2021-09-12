@@ -13,21 +13,23 @@ public class GameSystem : MonoBehaviour
 
     [SerializeField] private GameObject blinkObject;
 
-    private bool isChoice; // 선택지 중인지? (선택지중이면 멈추기)
 
     #region 대화창 
     [SerializeField] private GameObject diglogObject; // 대화창 오브젝트 
     [SerializeField] private TextMeshProUGUI diglogText; // 대화창 TextMeshPro
     [SerializeField] private GameObject leftChoiceObject;
     [SerializeField] private GameObject rightChoiceObject;
+    [SerializeField] private DiglogData diglogData;
+    private bool isChoice; // 선택을 했는지?
 
-    private string[] diglogData = new string[3]; // 대화창 데이터 string
+    private string[] diglogDatas; // 대화창 데이터 string
     private int diglogIndex = 0; // 대화창 인덱스
+    private int choiceValue = 0; // 왼쪽, 오른쪽 선택값 
     #endregion
 
     private void Start()
     {
-
+        diglogText.text = "";
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
@@ -39,12 +41,13 @@ public class GameSystem : MonoBehaviour
     {
         leftChoiceObject.SetActive(true);
         rightChoiceObject.SetActive(true);
-        diglogObject.SetActive(false); // 대화창 오브젝트 끄기
+        // diglogObject.SetActive(false); // 대화창 오브젝트 끄기
         player.Choice();
     }
 
     public void PlayerFreezeAndLastTalk() // 세번째 - 마지막 문구 출력 및 플레이어 이동 잠금
     {
+        isChoice = true;
         player.Wait();
     }
 
@@ -52,6 +55,7 @@ public class GameSystem : MonoBehaviour
     {
         player.Resume();
         boss.GetComponent<IPause>().Resume();
+        diglogObject.SetActive(false);
     }
 
     private void GameObjectAllFind()
@@ -76,22 +80,16 @@ public class GameSystem : MonoBehaviour
         GameObjectAllFind();
         yield return new WaitForSeconds(2.0f);
         diglogObject.SetActive(true);
-        StartCoroutine(TextUpdate(diglogIndex));
+        StartCoroutine(TextUpdate());
     }
 
-    private IEnumerator TextUpdate(int index)
+    private IEnumerator TextUpdate()
     {
         diglogText.text = "";
 
-        if (diglogData.Length - 1 <= index) // 첫번째 멘트 마지막 문구일때 선택지 뜨기 
+        for (int i = 0; i < diglogDatas[diglogIndex].Length; i++)
         {
-            leftChoiceObject.SetActive(true);
-            rightChoiceObject.SetActive(true);
-        }
-
-        for (int i = 0; i < diglogData[index].Length; i++)
-        {
-            diglogText.text += diglogData[index][i];
+            diglogText.text += diglogDatas[diglogIndex][i];
             yield return new WaitForSeconds(0.1f);
         }
 
@@ -99,17 +97,58 @@ public class GameSystem : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (diglogData.Length - 1 <= diglogIndex)
+                if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
                 {
-                    PlayerChoice();
+                    if(choiceValue == 0)
+                        leftChoiceObject.GetComponent<ChoiceEvent>().Effect();
+                    else
+                        rightChoiceObject.GetComponent<ChoiceEvent>().Effect();
+                }
+
+                if (diglogDatas.Length - 1 <= diglogIndex)
+                {
+                    if (isChoice == false)
+                        PlayerChoice();
+                    else
+                        ResumeGame();
+
                     yield break;
                 }
+
                 diglogIndex++;
-                StartCoroutine(TextUpdate(diglogIndex));
+                StartCoroutine(TextUpdate());
                 yield break;
             }
             yield return null;
         }
+    }
+
+    public void TextDataSetUpdate(string[] textDatas) // 선택한것에 따라 텍스트 데이터 변경하기 
+    {
+        diglogDatas = new string[textDatas.Length]; // 받아온 string의 배열 크기만큼 바꾸기
+        
+        for(int i = 0; i < textDatas.Length; i++) // 텍스트데이터 넣기 
+        {
+            diglogDatas[i] = textDatas[i];
+        }
+    }
+
+    public void ChoiceSelect(int value) // Yes or No 선택했으면 받아오기 
+    {
+        choiceValue = value;
+
+        if (choiceValue == 0)
+        {
+            rightChoiceObject.SetActive(false);
+        }
+        else
+        {
+            leftChoiceObject.SetActive(false);
+        }
+        diglogIndex = 0; // 텍스트 데이터 0으로 초기화
+        diglogData.TextDataUpdate(choiceValue);
+        PlayerFreezeAndLastTalk();
+        StartCoroutine(TextUpdate());
     }
 
 }

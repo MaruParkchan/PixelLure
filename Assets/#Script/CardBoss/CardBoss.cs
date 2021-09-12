@@ -12,7 +12,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
     private ParticleSystem auraEffect;
     private BoxCollider2D boxCollider2D;
     [SerializeField]
-    private Stage1System stage1System;
+    private GameSystem gameSystem;
     private Animator animator;
     private CardRadialShapePattern cardRadialShapePattern; // 패턴1
     private CardSidePattern cardSidePattern;               // 패턴2
@@ -57,6 +57,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
     private IEnumerator CardBossPatternTwo()
     {
+        
         while (true)
         {
             yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
@@ -153,7 +154,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
     private void ChoiceOn()
     {
         CoroutineStop();
-        stage1System.PauseAndTalk();
+        gameSystem.PauseAndTalk();
     }
 
     protected override void TakeDamage()

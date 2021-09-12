@@ -4,25 +4,20 @@ using UnityEngine;
 
 public enum LauguageSystem { English, Korean}
 
-public class DiglogData : MonoBehaviour
+public abstract class DiglogData : MonoBehaviour
 {
 
-    private string[] cardBossFirstDiglogs_Korean         = new string[3];
-    private string[] cardBossLeftChoiceDiglogs_Korean    = new string[3];
-    private string[] cardBossRightChoiceDiglogs_Korean   = new string[3];
+    protected string[] cardBossFirstDiglogs_Korean         = new string[3];
+    protected string[] cardBossLeftChoiceDiglogs_Korean    = new string[3];
+    protected string[] cardBossRightChoiceDiglogs_Korean   = new string[3];
 
     //private string[] smokeBossDiglogs_Korean;
-
     //private string[] dogBossDiglogs_Korean;
-
-    public string[] cardBossFitstDiglogs;
 
     private void Awake()
     {
         DogDiglogInit();
     }
-
-
 
     private void DogDiglogInit() // 대화 데이터 초기화
     {
@@ -34,11 +29,15 @@ public class DiglogData : MonoBehaviour
         cardBossLeftChoiceDiglogs_Korean[1]  = "인간이란 어쩔수 없는 존재이지";
         cardBossLeftChoiceDiglogs_Korean[2]  = "보스의 변화가 이루워졌습니다.";
 
-        cardBossRightChoiceDiglogs_Korean[0]  = "나와 함께 도박을 하고 싶지 않다니.";
+        cardBossRightChoiceDiglogs_Korean[0]  = "도박을 하고 싶지 않다니???";
         cardBossRightChoiceDiglogs_Korean[1] = "그 선택 후회하게 해주겠다.";
         cardBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
 
     }
+
+
+    public abstract void TextDataUpdate(int value);
+
 
     //public void LanguageChange(int index)// 언어 변경
     //{
