@@ -90,7 +90,7 @@ public class GameSystem : MonoBehaviour
         for (int i = 0; i < diglogDatas[diglogIndex].Length; i++)
         {
             diglogText.text += diglogDatas[diglogIndex][i];
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.08f);
         }
 
         while (true)
@@ -99,10 +99,16 @@ public class GameSystem : MonoBehaviour
             {
                 if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
                 {
-                    if(choiceValue == 0)
-                        leftChoiceObject.GetComponent<ChoiceEvent>().Effect();
+                    if (choiceValue == 0) // value값이 0 이면 왼쪽 
+                    {
+                        leftChoiceObject.GetComponent<ChoiceEvent>().Effect(); // 마지막 텍스트가 나올때 카드 터지는 이펙트 생성
+                        diglogText.color = Color.red;
+                    }
                     else
+                    {
                         rightChoiceObject.GetComponent<ChoiceEvent>().Effect();
+                        diglogText.color = Color.blue;
+                    }
                 }
 
                 if (diglogDatas.Length - 1 <= diglogIndex)
@@ -147,8 +153,8 @@ public class GameSystem : MonoBehaviour
         }
         diglogIndex = 0; // 텍스트 데이터 0으로 초기화
         diglogData.TextDataUpdate(choiceValue);
-        PlayerFreezeAndLastTalk();
         StartCoroutine(TextUpdate());
+        PlayerFreezeAndLastTalk();
     }
 
 }

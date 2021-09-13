@@ -18,7 +18,8 @@ public class CardBoss : Hp, ICoroutineStop, IPause
     private CardSidePattern cardSidePattern;               // 패턴2
     private CardKingCardPattern cardKingCardPattern;       // 패턴3
     private CardBoomPattern cardBoomPattern;               // 패턴4
-
+    private int[] patternRandomValue = new int[4]; // 선택지 선택후에 랜덤 패턴을 위한 값
+   
     [SerializeField]
     private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
     private bool isChoice = false;
@@ -57,13 +58,25 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
     private IEnumerator CardBossPatternTwo()
     {
-        
-        while (true)
+        ColliderEnableOff();
+        animator.SetTrigger("Hide");
+        yield return new WaitForSeconds(3.0f);
+       
+        int patternIndex = 0;
+        while (patternIndex > 3)
         {
-            yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
-            yield return StartCoroutine(cardSidePattern.ISidePattern());
-            yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
-            yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+            RandomPatternValue();
+
+            if (patternRandomValue[patternIndex] == 0)
+                yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+            if (patternRandomValue[patternIndex] == 1)
+                yield return StartCoroutine(cardSidePattern.ISidePattern());
+            if (patternRandomValue[patternIndex] == 2)
+                yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
+            if (patternRandomValue[patternIndex] == 3)
+                yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+
+            patternIndex++;
         }
     }
 
@@ -120,7 +133,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         this.transform.position = Vector3.zero;        
     }
 
-    public void Resume()
+    public void Resume() // 선택을 다했으면 패턴 랜덤으로 재시작
     {
         StartCoroutine("CardBossPatternTwo");
         IsisInvincibilityOff();
@@ -151,7 +164,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         }
     }
 
-    private void ChoiceOn()
+    private void ChoiceOn() // 일정피 닳으면 선택하기 위해 패턴 및 시스템 멈추고 다이얼로그 활성화
     {
         CoroutineStop();
         gameSystem.PauseAndTalk();
@@ -164,5 +177,21 @@ public class CardBoss : Hp, ICoroutineStop, IPause
             return;
         }
         hp--;
+    }
+
+    private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
+    {
+        for (int i = 0; i < patternRandomValue.Length; i++) // 중복없는 난수 출력
+        {
+            patternRandomValue[i] = Random.Range(0, patternRandomValue.Length);
+            for (int j = 0; j < i; j++)
+            {
+                if (patternRandomValue[i] == patternRandomValue[j])
+                {
+                    i--;
+                    break;
+                }
+            }
+        }
     }
 }
