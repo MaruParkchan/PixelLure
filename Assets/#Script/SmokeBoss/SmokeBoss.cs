@@ -46,7 +46,7 @@ public class SmokeBoss : MonoBehaviour
 
     private bool isHit = false;
 
-    private IEnumerator Hit()
+    private IEnumerator Hit() 
     {
         isHit = true;
         yield return new WaitForSeconds(1.0f);

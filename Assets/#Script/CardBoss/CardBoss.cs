@@ -19,6 +19,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
     private CardKingCardPattern cardKingCardPattern;       // 패턴3
     private CardBoomPattern cardBoomPattern;               // 패턴4
     private int[] patternRandomValue = new int[4]; // 선택지 선택후에 랜덤 패턴을 위한 값
+                                                   // 크기는 패턴의 수 만큼 조정해야함
    
     [SerializeField]
     private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
@@ -56,27 +57,32 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         }
     }
 
-    private IEnumerator CardBossPatternTwo()
+    private IEnumerator CardBossPatternTwo() // 선택지 선택후 패턴 재시작 코루틴 
     {
+        // 재시작되는 패턴의 값들을 여기서 부여하고 시작해야할듯 
         ColliderEnableOff();
         animator.SetTrigger("Hide");
         yield return new WaitForSeconds(3.0f);
-       
-        int patternIndex = 0;
-        while (patternIndex > 3)
+
+        while (true) // ** 중첩 while문으로써 뭔가 맘에 안듬 **
         {
-            RandomPatternValue();
+            int patternIndex = 0;
+            while (patternIndex < 4)
+            {
+                RandomPatternValue();
 
-            if (patternRandomValue[patternIndex] == 0)
-                yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
-            if (patternRandomValue[patternIndex] == 1)
-                yield return StartCoroutine(cardSidePattern.ISidePattern());
-            if (patternRandomValue[patternIndex] == 2)
-                yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
-            if (patternRandomValue[patternIndex] == 3)
-                yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+                if (patternRandomValue[patternIndex] == 0)
+                    yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+                if (patternRandomValue[patternIndex] == 1)
+                    yield return StartCoroutine(cardSidePattern.ISidePattern());
+                if (patternRandomValue[patternIndex] == 2)
+                    yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
+                if (patternRandomValue[patternIndex] == 3)
+                    yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
 
-            patternIndex++;
+                patternIndex++;
+                Debug.Log("선택지 선택후 패턴 재시작 " + patternIndex);
+            }
         }
     }
 

@@ -13,7 +13,6 @@ public class GameSystem : MonoBehaviour
 
     [SerializeField] private GameObject blinkObject;
 
-
     #region 대화창 
     [SerializeField] private GameObject diglogObject; // 대화창 오브젝트 
     [SerializeField] private TextMeshProUGUI diglogText; // 대화창 TextMeshPro
