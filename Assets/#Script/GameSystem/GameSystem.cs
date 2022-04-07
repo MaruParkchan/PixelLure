@@ -94,7 +94,7 @@ public class GameSystem : MonoBehaviour
 
         while (true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
                 if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
                 {
