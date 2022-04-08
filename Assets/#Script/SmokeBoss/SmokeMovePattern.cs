@@ -69,6 +69,12 @@ public class SmokeMovePattern : MonoBehaviour
         }
     }
 
+    public void CoroutineStop()
+    {
+        //StopCoroutine(""); 
+        StopAllCoroutines();
+    }
+
     private void PositionInit()
     {
         #region 시작지점

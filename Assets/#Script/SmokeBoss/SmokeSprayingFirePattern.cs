@@ -49,4 +49,10 @@ public class SmokeSprayingFirePattern : MonoBehaviour
         animator.SetTrigger("Hide");
     }
 
+    public void CoroutineStop()
+    {
+        //StopCoroutine("ICardKingCardPattern");
+        StopAllCoroutines();
+    }
+
 }

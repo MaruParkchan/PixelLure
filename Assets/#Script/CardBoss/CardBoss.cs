@@ -138,6 +138,14 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         AuraEffectOn();
         this.transform.position = Vector3.zero;        
     }
+    private bool isHit = false;
+
+    private IEnumerator Hit()
+    {
+        isHit = true;
+        yield return new WaitForSeconds(1.0f);
+        isHit = false;
+    }
 
     public void Resume() // 선택을 다했으면 패턴 랜덤으로 재시작
     {
@@ -151,7 +159,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         {
             Destroy(collision.transform.gameObject);
 
-            if (isInvincibility)
+            if (isHit == true || isInvincibility == true)
                 return;
 
             TakeDamage();
@@ -178,10 +186,6 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
     protected override void TakeDamage()
     {
-        if (isInvincibility)
-        {
-            return;
-        }
         hp--;
     }
 

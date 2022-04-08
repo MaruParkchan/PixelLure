@@ -57,7 +57,7 @@ public class GameSystem : MonoBehaviour
         diglogObject.SetActive(false);
     }
 
-    private void GameObjectAllFind()
+    private void GameObjectAllFind() // 플레이어, 적의 총알 오브젝트 다찾아서 삭제시킴
     {
         enemyObjects = GameObject.FindGameObjectsWithTag("EnemyBullet");
         playerObjects = GameObject.FindGameObjectsWithTag("PlayerBullet");
@@ -76,7 +76,7 @@ public class GameSystem : MonoBehaviour
     {
         player.Pause();
         blinkObject.SetActive(true);
-        GameObjectAllFind();
+        //GameObjectAllFind(); // 애를 비활성화하면 선택시 총알이 안사라짐
         yield return new WaitForSeconds(2.0f);
         diglogObject.SetActive(true);
         StartCoroutine(TextUpdate());

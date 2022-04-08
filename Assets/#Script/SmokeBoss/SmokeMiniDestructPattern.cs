@@ -52,4 +52,10 @@ public class SmokeMiniDestructPattern : MonoBehaviour
         spawnPoints[3] = new Vector3(mapData.LimitMin.x,
                                              Random.Range(mapData.LimitMin.y, mapData.LimitMax.y)); // 오른쪽 방향 위치 랜덤 생성 
     }
+
+    public void CoroutineStop()
+    {
+        //StopCoroutine("ICardKingCardPattern");
+        StopAllCoroutines();
+    }
 }

@@ -44,4 +44,10 @@ public class SmokeAshtrayPattern : MonoBehaviour
         GameObject clone = Instantiate(obj);
         clone.transform.position = spawnPoint;
     }
+
+    public void CoroutineStop()
+    {
+        //StopCoroutine("ICardKingCardPattern");
+        StopAllCoroutines();
+    }
 }
