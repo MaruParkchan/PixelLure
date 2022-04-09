@@ -4106,6 +4106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 2112931717}
   player: {fileID: 1674676062}
+  hpUIsystem: {fileID: 2063757054}
   blinkObject: {fileID: 1457390965}
   diglogObject: {fileID: 1156162121}
   diglogText: {fileID: 1998210537}
@@ -4176,7 +4177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc903971880b147ab006659986cc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  firstHp: 100
+  secondHp: 200
   smokeEffect: {fileID: 9018379218307054334, guid: e56faea5150b7824ba499f4abed16697, type: 3}
   gameSystem: {fileID: 2063757053}
   limitBossHp: 95

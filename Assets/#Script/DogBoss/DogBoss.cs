@@ -68,6 +68,18 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
         isHit = false;
     }
 
+    public void CoroutineStop()
+    {
+        isChoice = true;
+        isInvincibility = true;
+
+        StopAllCoroutines();
+        dogBubblePattern.CoroutineStop();
+        dogSmallSojuPattern.CoroutineStop();
+        animator.SetTrigger("Choice");
+        IsisInvincibilityOn();
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.CompareTag("PlayerBullet"))
@@ -81,7 +93,7 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
 
             if (isChoice == false)
             {
-                if (currentHp <= 0)
+                if (limitBossHp >= currentHp)
                 {
                     ChoiceOn();
                 }
@@ -124,17 +136,11 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
         currentHp--;
     }
 
-    public void CoroutineStop()
-    {
-        isChoice = true;
-        isInvincibility = true;
-
-        StopAllCoroutines();
-    }
 
     public void Resume()
     {
-
+        StartCoroutine("DogBossBulkUpPattern");
+        HpRecharging(); // 피 재생성     
     }
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
@@ -153,8 +159,8 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
         }
     }
 
-    protected override void HpRecharging(int PhaseValue)
+    protected override void HpRecharging()
     {
-        
+        currentHp = GetSecondHp();
     }
 }

@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 1036927126}
   player: {fileID: 1674676062}
+  hpUIsystem: {fileID: 119712734}
   blinkObject: {fileID: 511694174}
   diglogObject: {fileID: 1271739556}
   diglogText: {fileID: 398982159}
@@ -240,7 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHpBar: {fileID: 1735321296}
-  bossHp: {fileID: 0}
+  bossHp: {fileID: 1036927131}
 --- !u!4 &119712735
 Transform:
   m_ObjectHideFlags: 0
@@ -899,12 +900,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHp: 0
-  firstHp: 0
-  secondHp: 0
-  isBulkUp: 1
+  firstHp: 100
+  secondHp: 200
+  isBulkUp: 0
   gameSystem: {fileID: 119712733}
-  limitBossHp: 0
+  limitBossHp: 90
 --- !u!114 &1036927132
 MonoBehaviour:
   m_ObjectHideFlags: 0

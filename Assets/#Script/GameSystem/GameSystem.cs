@@ -11,6 +11,7 @@ public class GameSystem : MonoBehaviour
     private GameObject[] enemyObjects; // 적 오브젝트들 담기
     private GameObject[] playerObjects; // 플레이어 오브젝트들담기
 
+    [SerializeField] private HpUIsystem hpUIsystem;
     [SerializeField] private GameObject blinkObject;
 
     #region 대화창 
@@ -54,6 +55,7 @@ public class GameSystem : MonoBehaviour
     {
         player.Resume();
         boss.GetComponent<IPause>().Resume();
+        hpUIsystem.SliderMaxValueUpdate(boss.GetComponent<BossHp>().GetSecondHp()); // 보스 페이즈2 HP 교환 
         diglogObject.SetActive(false);
     }
 

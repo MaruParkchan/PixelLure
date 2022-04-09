@@ -786,7 +786,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
+  firstHp: 100
+  secondHp: 200
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
   gameSystem: {fileID: 2050683032}
@@ -2334,6 +2335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 744212749}
   player: {fileID: 1674676062}
+  hpUIsystem: {fileID: 2050683035}
   blinkObject: {fileID: 1842556790}
   diglogObject: {fileID: 291947308}
   diglogText: {fileID: 1800925381}

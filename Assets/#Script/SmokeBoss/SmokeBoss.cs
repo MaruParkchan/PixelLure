@@ -26,7 +26,7 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
     private int[] patternRandomValue = new int[4]; // 선택지 선택후에 랜덤 패턴을 위한 값
                                                    // 크기는 패턴의 수 만큼 조정해야함
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
         smokeMovePattern = GetComponent<SmokeMovePattern>();
@@ -34,6 +34,7 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
         smokeAshtrayPattern = GetComponent<SmokeAshtrayPattern>();
         smokeSprayingFirePattern = GetComponent<SmokeSprayingFirePattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        currentHp = GetFirstHp();
         StartCoroutine("SmokeBossPattern");
     }
 
@@ -53,12 +54,12 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
 
     private IEnumerator SmokeBossPatternTwo()
     {
-        ColliderEnableOff();
         HideorAppear();
         animator.SetTrigger("Hide");
         yield return new WaitForSeconds(3.0f);
-
-        while(true)
+        ColliderEnableOn();
+        IsisInvincibilityOff();
+        while (true)
         {
             RandomPatternValue();
             int patternIndex = 0;
@@ -164,13 +165,19 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
     public void Resume() // 미구현
     {
         StartCoroutine("SmokeBossPatternTwo");
-        IsisInvincibilityOff();
+        HpRecharging(); // 피 재생성      
     }
 
     protected override void TakeDamage()
     {
         currentHp--;
     }
+
+    protected override void HpRecharging()
+    {
+        currentHp = GetSecondHp();
+    }
+
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
     {
@@ -186,10 +193,5 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
                 }
             }
         }
-    }
-
-    protected override void HpRecharging(int PhaseCount)
-    {
-
     }
 }

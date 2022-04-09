@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class BossHp : MonoBehaviour
 {
-    [SerializeField]
     protected int currentHp;
 
     [SerializeField]
@@ -28,7 +27,7 @@ public abstract class BossHp : MonoBehaviour
         return secondHp;
     }
 
-    protected abstract void HpRecharging(int PhaseCount); // HP 재회복 
+    protected abstract void HpRecharging(); // HP 재회복 
 
 
     protected abstract void TakeDamage();

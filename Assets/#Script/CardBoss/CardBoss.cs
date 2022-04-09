@@ -37,8 +37,7 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
         cardKingCardPattern = GetComponent<CardKingCardPattern>();
         cardBoomPattern = GetComponent<CardBoomPattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        ColliderEnableOff();
-        HpRecharging(0);
+        currentHp = GetFirstHp();
        // isInvincibility = true; // 등장할때 무적인상태
     }
 
@@ -64,7 +63,7 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
         // 재시작되는 패턴의 값들을 여기서 부여하고 시작해야할듯 
         animator.SetTrigger("Hide");
         yield return new WaitForSeconds(2.0f);
-        ColliderEnableOff();
+        ColliderEnableOn();
         IsisInvincibilityOff();
         while (true) // ** 중첩 while문으로써 뭔가 맘에 안듬 **
         {
@@ -150,7 +149,7 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
 
     public void Resume() // 선택을 다했으면 패턴 랜덤으로 재시작
     {
-        HpRecharging(0);
+        HpRecharging(); // 피 재생성
         StartCoroutine("CardBossPatternTwo");
     }
 
@@ -190,17 +189,9 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
         currentHp--;
     }
 
-    protected override void HpRecharging(int PhaseValue)
+    protected override void HpRecharging()
     {
-        if(PhaseValue == 0)
-        {
-            currentHp = GetFirstHp();
-        }
-
-        if(PhaseValue == 1)
-        {
-            currentHp = GetSecondHp();
-        }
+        currentHp = GetSecondHp();
     }
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
