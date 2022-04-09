@@ -100,4 +100,9 @@ public class DogBigPoundingPattern : MonoBehaviour
         xPosData[6] =  5.0f;
         xPosData[7] =  7.0f;
     }
+
+    public void CoroutineStop()
+    {
+        StopAllCoroutines();
+    }
 }

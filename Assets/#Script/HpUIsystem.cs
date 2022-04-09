@@ -9,7 +9,9 @@ public class HpUIsystem : MonoBehaviour
     private Slider bossHpBar;
 
     [SerializeField]
-    private Hp bossHp;
+    private BossHp bossHp;
+
+    private int currentHp;
 
     private void Start()
     {
@@ -21,6 +23,4 @@ public class HpUIsystem : MonoBehaviour
     {
         bossHpBar.value = bossHp.GetHp();
     }
-
-
 }

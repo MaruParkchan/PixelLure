@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardBoss : Hp, ICoroutineStop, IPause
+public class CardBoss : BossHp, ICoroutineStop, IPause
 {
     [SerializeField]
     private MapData cardBossMapData; // 보스 나타나는 좌표 데이터 
@@ -23,6 +23,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
    
     [SerializeField]
     private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
+    private int phaseCount = 0;
     private bool isChoice = false;
     private bool isDie = false;
 
@@ -37,6 +38,7 @@ public class CardBoss : Hp, ICoroutineStop, IPause
         cardBoomPattern = GetComponent<CardBoomPattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         ColliderEnableOff();
+        HpRecharging(0);
        // isInvincibility = true; // 등장할때 무적인상태
     }
 
@@ -60,10 +62,10 @@ public class CardBoss : Hp, ICoroutineStop, IPause
     private IEnumerator CardBossPatternTwo() // 선택지 선택후 패턴 재시작 코루틴 
     {
         // 재시작되는 패턴의 값들을 여기서 부여하고 시작해야할듯 
-        ColliderEnableOff();
         animator.SetTrigger("Hide");
-        yield return new WaitForSeconds(3.0f);
-
+        yield return new WaitForSeconds(2.0f);
+        ColliderEnableOff();
+        IsisInvincibilityOff();
         while (true) // ** 중첩 while문으로써 뭔가 맘에 안듬 **
         {
             int patternIndex = 0;
@@ -85,7 +87,6 @@ public class CardBoss : Hp, ICoroutineStop, IPause
             }
         }
     }
-
 
     public void AuraEffectOn() // 아우리 이펙트 재생
     {
@@ -149,8 +150,8 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
     public void Resume() // 선택을 다했으면 패턴 랜덤으로 재시작
     {
+        HpRecharging(0);
         StartCoroutine("CardBossPatternTwo");
-        IsisInvincibilityOff();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -166,12 +167,12 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
             if (isChoice == false)
             {
-                if (limitBossHp >= hp) // 일정피 이하 되는순간 선택지창 활성화
+                if (limitBossHp >= currentHp) // 일정피 이하 되는순간 선택지창 활성화
                 {
                     ChoiceOn();
                 }
             }
-            else if(hp <= 0)
+            else if(currentHp <= 0)
             {
                 isDie = true;
             }
@@ -186,7 +187,20 @@ public class CardBoss : Hp, ICoroutineStop, IPause
 
     protected override void TakeDamage()
     {
-        hp--;
+        currentHp--;
+    }
+
+    protected override void HpRecharging(int PhaseValue)
+    {
+        if(PhaseValue == 0)
+        {
+            currentHp = GetFirstHp();
+        }
+
+        if(PhaseValue == 1)
+        {
+            currentHp = GetSecondHp();
+        }
     }
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤

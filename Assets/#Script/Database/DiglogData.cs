@@ -55,8 +55,6 @@ public abstract class DiglogData : MonoBehaviour
         smokeBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
     }
 
-
-
     public abstract void TextDataUpdate(int value);
 
 

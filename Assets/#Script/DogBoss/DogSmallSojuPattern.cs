@@ -40,6 +40,10 @@ public class DogSmallSojuPattern : MonoBehaviour
         clone.transform.position = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(waitTime + rotateTime); // 대기시간 + 회전 시간 + 페이드 시간
         animator.SetTrigger("End");
+    }
 
+    public void CoroutineStop()
+    {
+        StopAllCoroutines();
     }
 }

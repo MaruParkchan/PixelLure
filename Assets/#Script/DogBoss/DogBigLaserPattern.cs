@@ -117,7 +117,7 @@ public class DogBigLaserPattern : MonoBehaviour
         }
 
         bundleLaser.Clear();
-   //     bunlaserIndex = 0;
+        //     bunlaserIndex = 0;
     }
 
     //private void BundleLaserSpawn(Vector3 pos, Quaternion euler)
@@ -132,4 +132,9 @@ public class DogBigLaserPattern : MonoBehaviour
     //        bunlaserIndex++;
     //    }
     //}
+
+    public void CoroutineStop()
+    {
+        StopAllCoroutines();
+    }
 }

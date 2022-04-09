@@ -219,11 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3bcdbc9cba1b642b387e634bf865ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 0}
-  player: {fileID: 0}
-  blinkObject: {fileID: 0}
-  diglogObject: {fileID: 0}
-  diglogText: {fileID: 0}
+  boss: {fileID: 1036927126}
+  player: {fileID: 1674676062}
+  blinkObject: {fileID: 511694174}
+  diglogObject: {fileID: 1271739556}
+  diglogText: {fileID: 398982159}
   leftChoiceObject: {fileID: 1840296383}
   rightChoiceObject: {fileID: 873507667}
   diglogData: {fileID: 328473487}
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d120245bb017b7408ba0a42779e5357, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bossHpBar: {fileID: 0}
+  bossHpBar: {fileID: 1735321296}
   bossHp: {fileID: 0}
 --- !u!4 &119712735
 Transform:
@@ -899,7 +899,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHp: 0
+  firstHp: 0
+  secondHp: 0
   isBulkUp: 1
+  gameSystem: {fileID: 119712733}
+  limitBossHp: 0
 --- !u!114 &1036927132
 MonoBehaviour:
   m_ObjectHideFlags: 0

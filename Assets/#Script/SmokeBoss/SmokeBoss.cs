@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeBoss : Hp, ICoroutineStop, IPause
+public class SmokeBoss : BossHp, ICoroutineStop, IPause
 {
     [SerializeField]
     private GameObject smokeEffect;
@@ -19,6 +19,7 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
     [SerializeField]
     private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
     private bool isChoice = false;
+    private bool isHit = false;
     private bool isDie = false;
     private bool isInvincibility; // 무적인가?
     private BoxCollider2D boxCollider2D;
@@ -36,12 +37,11 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
         StartCoroutine("SmokeBossPattern");
     }
 
-    private IEnumerator SmokeBossPattern()
+    private IEnumerator SmokeBossPattern() // 첫번째 패턴 < 선택지 전 >
     {
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(3.0f);
         HideorAppear();
-        animator.SetTrigger("Hide");
-           
+        animator.SetTrigger("Hide");         
         while (true)
         {
             yield return StartCoroutine(smokeMovePattern.MovePattern());
@@ -106,7 +106,6 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
         boxCollider2D.enabled = false;
     }
 
-    private bool isHit = false;
 
     private IEnumerator Hit() 
     {
@@ -135,7 +134,6 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
         if(collision.transform.CompareTag("PlayerBullet"))
         {
             Destroy(collision.transform.gameObject);
-
             if (isHit == true || isInvincibility == true)
                 return;
 
@@ -144,12 +142,12 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
 
             if(isChoice == false)
             {
-                if(limitBossHp >= hp)
+                if(limitBossHp >= currentHp)
                 {
                     ChoiceOn();
                 }
             }
-            else if(hp <= 0)
+            else if(currentHp <= 0)
             {
                 isDie = true;
             }
@@ -171,7 +169,7 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
 
     protected override void TakeDamage()
     {
-        hp--;
+        currentHp--;
     }
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
@@ -188,5 +186,10 @@ public class SmokeBoss : Hp, ICoroutineStop, IPause
                 }
             }
         }
+    }
+
+    protected override void HpRecharging(int PhaseCount)
+    {
+
     }
 }

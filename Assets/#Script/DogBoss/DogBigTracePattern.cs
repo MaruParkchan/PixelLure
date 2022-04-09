@@ -16,7 +16,7 @@ public class DogBigTracePattern : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();    
+        animator = GetComponent<Animator>();
     }
 
     public IEnumerator ISpawnSoju()
@@ -39,5 +39,10 @@ public class DogBigTracePattern : MonoBehaviour
         GameObject clone = Instantiate(sojuObject);
         clone.GetComponent<DogSojuTrace>().Init(rotateSpeed, moveSpeed, attackTime);
         clone.transform.position = new Vector3(Random.Range(-7, 7), Random.Range(-4, 4));
+    }
+
+    public void CoroutineStop()
+    {
+        StopAllCoroutines();
     }
 }

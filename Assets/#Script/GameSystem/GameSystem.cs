@@ -89,7 +89,7 @@ public class GameSystem : MonoBehaviour
         for (int i = 0; i < diglogDatas[diglogIndex].Length; i++)
         {
             diglogText.text += diglogDatas[diglogIndex][i];
-            yield return new WaitForSeconds(0.08f);
+            yield return new WaitForSeconds(0.07f);
         }
 
         while (true)
