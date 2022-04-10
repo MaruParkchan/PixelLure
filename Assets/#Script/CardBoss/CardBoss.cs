@@ -126,7 +126,7 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
     {
         isChoice = true;
         isInvincibility = true; // 무적 활성화
-
+        isHit = false;
         StopAllCoroutines();
         cardRadialShapePattern.CoroutineStop();
         cardSidePattern.CoroutineStop();
@@ -157,24 +157,8 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
     {
         if(collision.transform.CompareTag("PlayerBullet") && isDie == false)
         {
-            Destroy(collision.transform.gameObject);
-
-            if (isHit == true || isInvincibility == true)
-                return;
-
+            Destroy(collision.transform.gameObject);;
             TakeDamage();
-
-            if (isChoice == false)
-            {
-                if (limitBossHp >= currentHp) // 일정피 이하 되는순간 선택지창 활성화
-                {
-                    ChoiceOn();
-                }
-            }
-            else if(currentHp <= 0)
-            {
-                isDie = true;
-            }
         }
     }
 
@@ -186,7 +170,22 @@ public class CardBoss : BossHp, ICoroutineStop, IPause
 
     protected override void TakeDamage()
     {
-        currentHp--;
+        if (isHit == true || isInvincibility == true)
+            return;
+
+        currentHp--; // 보스 체력 감소 
+
+        if (isChoice == false)
+        {
+            if (limitBossHp >= currentHp) // 일정피 이하 되는순간 선택지창 활성화
+            {
+                ChoiceOn();
+            }
+        }
+        else if (currentHp <= 0)
+        {
+            isDie = true;
+        }
     }
 
     protected override void HpRecharging()

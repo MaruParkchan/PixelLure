@@ -12,6 +12,9 @@ TagManager:
   - PlayerBullet
   - SojuBreak
   - DogBoss
+  - BulletPenetrationPossible
+  - BulletPenetrationImpossible
+  - Boss
   layers:
   - Default
   - TransparentFX

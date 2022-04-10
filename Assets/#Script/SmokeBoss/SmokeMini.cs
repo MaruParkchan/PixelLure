@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SmokeMini : MonoBehaviour
 {
+    [SerializeField] private int smokeMiniHp;
     [SerializeField] private float moveSpeed;
     [SerializeField] private GameObject smokeEffect;
     [SerializeField] private float bombDistance; // Æø¹ß °Å¸®
@@ -44,7 +45,24 @@ public class SmokeMini : MonoBehaviour
 
     public void TakeDamage()
     {
+        if (isDie == true)
+            return;
 
+        smokeMiniHp--;
+
+        if(smokeMiniHp <= 0)
+        {
+            IsDie();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.transform.CompareTag("PlayerBullet"))
+        {
+            TakeDamage();
+            Destroy(collision.gameObject);
+        }
     }
 
     public void SpawnSmokeEffect() // Á×À»½Ã ¿¬±â ÀÌÆåÆ® »ý¼º

@@ -3220,6 +3220,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: f08b0b6cc2f3c2c4c929e931cd361215, type: 2}
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   bulletMoveSpeed: 15
+  playerHp: 0
 --- !u!50 &1674676063
 Rigidbody2D:
   serializedVersion: 4

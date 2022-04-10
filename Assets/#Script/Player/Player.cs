@@ -13,9 +13,12 @@ public class Player : MonoBehaviour , IPause
     [SerializeField]
     private float bulletMoveSpeed; // 총알 속도 
 
+    private bool isHit = false; // 타격 당했는가?
     private bool isPause; // 선택지 활성화중이면 멈춤
     private bool isFireLock; // 총알 발사를 잠궜는지?
     private bool isInvincibility; // 무적중인가?
+
+    [SerializeField] private int playerHp;
 
     private void Update()
     {
@@ -29,8 +32,7 @@ public class Player : MonoBehaviour , IPause
         if (Input.GetMouseButtonDown(0) && isFireLock == false)
         {
             Fire();
-        }
-      
+        }    
     }
 
     private void Movement()
@@ -93,5 +95,46 @@ public class Player : MonoBehaviour , IPause
         isPause = false;
         isFireLock = false;
         isInvincibility = false;
+    }
+
+    private IEnumerator Hit()
+    {
+        isHit = true;
+        yield return new WaitForSeconds(1.0f);
+        isHit = false;
+    }
+
+    private void TakeDamage()
+    {
+        playerHp--;
+        StartCoroutine(Hit());
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) // 관통 , 비관통 , 파티클 구분 해야함 
+    {
+        if(collision.transform.CompareTag("BulletPenetrationPossible")) // 관통가능 
+        {
+            TakeDamage();
+        }
+
+        if(collision.transform.CompareTag("BulletPenetrationImpossible")) // 관통 불가능 
+        {
+            Destroy(collision.gameObject);
+            TakeDamage();
+        }
+
+        if(collision.transform.CompareTag("Boss"))
+        {
+            TakeDamage();
+        }
+
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if(other.transform.CompareTag("BulletPenetrationImpossible"))
+        {
+            TakeDamage();
+        }
     }
 }

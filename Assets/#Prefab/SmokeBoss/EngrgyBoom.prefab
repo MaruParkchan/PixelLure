@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8084566579928246598}
   m_Layer: 0
   m_Name: EngrgyBoom
-  m_TagString: Untagged
+  m_TagString: BulletPenetrationImpossible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

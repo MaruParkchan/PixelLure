@@ -114,7 +114,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 394ef20e571efb243a861f1c20617953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smokeMiniHp: 3
   moveSpeed: 3
   smokeEffect: {fileID: 3983046023638738548, guid: 37c4245bfb9cd424fbd5cf715a847a77, type: 3}
   bombDistance: 0.5

@@ -853,7 +853,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744212749}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -1606,9 +1606,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1674676061}
   - component: {fileID: 1674676060}
-  - component: {fileID: 1674676059}
   - component: {fileID: 1674676062}
   - component: {fileID: 1674676063}
+  - component: {fileID: 1674676059}
   - component: {fileID: 1674676064}
   m_Layer: 0
   m_Name: Player
@@ -1714,6 +1714,7 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: f08b0b6cc2f3c2c4c929e931cd361215, type: 2}
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   bulletMoveSpeed: 15
+  playerHp: 0
 --- !u!114 &1674676063
 MonoBehaviour:
   m_ObjectHideFlags: 0

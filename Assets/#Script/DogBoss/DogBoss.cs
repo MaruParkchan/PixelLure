@@ -25,18 +25,36 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
     private bool isHit = false;
     private bool isDie = false;
     private bool isInvincibility; // 무적인가?
-    private BoxCollider2D boxCollider2D;
+    private CircleCollider2D circleCollider2D;
+    private float bigDogBosscirCleColliderOffsetY;
+    private float bigDogBosscirCleColliderRadius;
     private int[] patternRandomValue = new int[3]; // 선택지 선택후에 랜덤 패턴을 위한 값
                                                    // 크기는 패턴의 수 만큼 조정해야함
 
-    private void Start()
+    private void BigBossCircleColliderPositionAndSizeData() // 개 보스 벌크업하면 콜라이더 변화값 
     {
+        bigDogBosscirCleColliderOffsetY = 1.05f;
+        bigDogBosscirCleColliderRadius = 0.33f;
+    }
+
+    private void CircleColliderInit() // 콜라이더 크기, 위치 변화
+    {
+        BigBossCircleColliderPositionAndSizeData();
+        circleCollider2D.offset = new Vector2(0, bigDogBosscirCleColliderOffsetY);
+        circleCollider2D.radius = bigDogBosscirCleColliderRadius;
+
+    }
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
         dogBubblePattern = GetComponent<DogBubblePattern>();
         dogSmallSojuPattern = GetComponent<DogSmallSojuPattern>();
         dogBigTracePattern = GetComponent<DogBigTracePattern>();
         dogBigLaserPattern = GetComponent<DogBigLaserPattern>();
         dogBigPoundingPattern = GetComponent<DogBigPoundingPattern>();
-        boxCollider2D = GetComponent<BoxCollider2D>();
+        circleCollider2D = GetComponent<CircleCollider2D>();
+        currentHp = GetFirstHp();
         StartCoroutine(DogBossSmallPattern());
     }
 
@@ -52,7 +70,9 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
 
     private IEnumerator DogBossBulkUpPattern()
     {
-        yield return new WaitForSeconds(2.0f);
+        animator.SetTrigger("BulkUp");
+        CircleColliderInit();;
+        yield return new WaitForSeconds(4.0f);
         while (true)
         {
             yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
@@ -72,7 +92,7 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
     {
         isChoice = true;
         isInvincibility = true;
-
+        isHit = false;
         StopAllCoroutines();
         dogBubblePattern.CoroutineStop();
         dogSmallSojuPattern.CoroutineStop();
@@ -82,27 +102,31 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.CompareTag("PlayerBullet"))
+        if (collision.transform.CompareTag("PlayerBullet") && isDie == false)
         {
             Destroy(collision.transform.gameObject);
-            if (isHit == true || isInvincibility == true)
-                return;
-
-            StartCoroutine("Hit");
             TakeDamage();
+        }
+    }
+    protected override void TakeDamage()
+    {
+        if (isHit == true || isInvincibility == true)
+            return;
 
-            if (isChoice == false)
+        currentHp--;
+
+        if (isChoice == false)
+        {
+            if (limitBossHp >= currentHp)
             {
-                if (limitBossHp >= currentHp)
-                {
-                    ChoiceOn();
-                }
-            }
-            else if (currentHp <= 0)
-            {
-                isDie = true;
+                ChoiceOn();
             }
         }
+        else if (currentHp <= 0)
+        {
+            isDie = true;
+        }
+        StartCoroutine("Hit");
     }
 
     private void ChoiceOn()
@@ -123,19 +147,13 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
 
     public void ColliderEnableOn()
     {
-        boxCollider2D.enabled = true;
+        circleCollider2D.enabled = true;
     }
 
     public void ColliderEnableOff()
     {
-        boxCollider2D.enabled = false;
+        circleCollider2D.enabled = false;
     }
-
-    protected override void TakeDamage()
-    {
-        currentHp--;
-    }
-
 
     public void Resume()
     {

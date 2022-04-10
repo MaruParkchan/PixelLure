@@ -282,7 +282,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 328473486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f7abdd0f22c6c4aa25297aa45dee52, type: 3}
+  m_Script: {fileID: 11500000, guid: 103b63cf756a22e4f8c243bd81062e96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameSystem: {fileID: 119712733}
@@ -470,7 +470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511694176
@@ -781,6 +781,8 @@ GameObject:
   - component: {fileID: 1036927133}
   - component: {fileID: 1036927134}
   - component: {fileID: 1036927135}
+  - component: {fileID: 1036927137}
+  - component: {fileID: 1036927136}
   m_Layer: 0
   m_Name: DogBoss
   m_TagString: DogBoss
@@ -828,7 +830,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 4915603129111951618, guid: e8026625a355f304b82a98f8cf17ef89, type: 3}
+  m_Sprite: {fileID: -6326972836006008797, guid: 684a77ae9a94a20418123223c317a2c7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -904,7 +906,7 @@ MonoBehaviour:
   secondHp: 200
   isBulkUp: 0
   gameSystem: {fileID: 119712733}
-  limitBossHp: 90
+  limitBossHp: 95
 --- !u!114 &1036927132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -980,6 +982,43 @@ MonoBehaviour:
   sojuCycleWaitTime: 1
   spawnCount: 3
   waitTime: 2
+--- !u!58 &1036927136
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036927126}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.25}
+  serializedVersion: 2
+  m_Radius: 0.3
+--- !u!50 &1036927137
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036927126}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1050591293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1458,6 +1497,7 @@ GameObject:
   - component: {fileID: 1674676060}
   - component: {fileID: 1674676059}
   - component: {fileID: 1674676062}
+  - component: {fileID: 1674676063}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1562,6 +1602,28 @@ MonoBehaviour:
   playerData: {fileID: 11400000, guid: f08b0b6cc2f3c2c4c929e931cd361215, type: 2}
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   bulletMoveSpeed: 15
+  playerHp: 0
+--- !u!50 &1674676063
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1674676058}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1735321294
 GameObject:
   m_ObjectHideFlags: 0

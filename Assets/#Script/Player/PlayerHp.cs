@@ -6,7 +6,6 @@ public class PlayerHp : MonoBehaviour
 {
     [SerializeField] private int playerHp;
 
-
     public void TakeDamage()
     {
         Debug.Log("µ¥¹ÌÁö!");

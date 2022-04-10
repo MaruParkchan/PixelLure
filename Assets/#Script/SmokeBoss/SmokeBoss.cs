@@ -65,7 +65,6 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
             int patternIndex = 0;
             while(patternIndex < 4)
             {
-
                 if (patternRandomValue[patternIndex] == 0)
                     yield return StartCoroutine(smokeMovePattern.MovePattern());
                 if (patternRandomValue[patternIndex] == 1)
@@ -79,7 +78,6 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
             }
         }
     }
-
 
     public void HideorAppear() // 숨거나 나타날때 이펙트 생성
     {
@@ -107,7 +105,6 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
         boxCollider2D.enabled = false;
     }
 
-
     private IEnumerator Hit() 
     {
         isHit = true;
@@ -119,7 +116,7 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
     {
         isChoice = true;
         isInvincibility = true; // 무적 활성화
-
+        isHit = false;
         StopAllCoroutines();
         smokeMovePattern.CoroutineStop();
         smokeMiniDestructPattern.CoroutineStop();
@@ -132,29 +129,12 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.CompareTag("PlayerBullet"))
+        if (collision.transform.CompareTag("PlayerBullet") && isDie == false)
         {
             Destroy(collision.transform.gameObject);
-            if (isHit == true || isInvincibility == true)
-                return;
-
-            StartCoroutine("Hit");
             TakeDamage();
-
-            if(isChoice == false)
-            {
-                if(limitBossHp >= currentHp)
-                {
-                    ChoiceOn();
-                }
-            }
-            else if(currentHp <= 0)
-            {
-                isDie = true;
-            }
         }
     }
-
 
     private void ChoiceOn() // 일정피 닳으면 선택하기 위해 패턴 및 시스템 멈추고 다이얼로그 활성화
     {
@@ -170,14 +150,28 @@ public class SmokeBoss : BossHp, ICoroutineStop, IPause
 
     protected override void TakeDamage()
     {
+        if (isHit == true || isInvincibility == true)
+            return;
+
         currentHp--;
+        if (isChoice == false)
+        {
+            if (limitBossHp >= currentHp)
+            {
+                ChoiceOn();
+            }
+        }
+        else if (currentHp <= 0)
+        {
+            isDie = true;
+        }
+        StartCoroutine("Hit");
     }
 
     protected override void HpRecharging()
     {
         currentHp = GetSecondHp();
     }
-
 
     private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
     {
