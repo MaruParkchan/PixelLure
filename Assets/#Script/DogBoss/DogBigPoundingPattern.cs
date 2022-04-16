@@ -71,6 +71,7 @@ public class DogBigPoundingPattern : MonoBehaviour
         {
             clones[i].GetComponent<DogSojuBreak>().Break();
         }
+        CameraShake.cameraShake();
     }
 
     private void RandomNumber() // 중복없는 난수 출력

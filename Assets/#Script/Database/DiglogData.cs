@@ -37,11 +37,11 @@ public abstract class DiglogData : MonoBehaviour
 
         cardBossLeftChoiceDiglogs_Korean[0]  = "나와 함께 도박을 하고 싶다니";
         cardBossLeftChoiceDiglogs_Korean[1]  = "인간이란 어쩔수 없는 존재이지";
-        cardBossLeftChoiceDiglogs_Korean[2]  = "보스의 변화가 이루워졌습니다.";
+        cardBossLeftChoiceDiglogs_Korean[2]  = "플레이어의 변화가 이루워졌습니다.";
 
         cardBossRightChoiceDiglogs_Korean[0]  = "도박을 하고 싶지 않다니???";
         cardBossRightChoiceDiglogs_Korean[1] = "그 선택 후회하게 해주겠다.";
-        cardBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
+        cardBossRightChoiceDiglogs_Korean[2] = "보스의 변화가 이루워졌습니다.";
     }
 
     private void SmokeBossDiglogInit()
@@ -76,25 +76,6 @@ public abstract class DiglogData : MonoBehaviour
         dogBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
     }
 
-
     public abstract void TextDataUpdate(int value);
-
-
-    //public void LanguageChange(int index)// 언어 변경
-    //{
-    //    PlayerPrefs.SetInt("LanguageData", index);
-
-    //    for(int i = 0; i < cardBossFitstDiglogs.Length; i++)
-    //    {
-    //        if(index == 0)
-    //        {
-    //            cardBossFitstDiglogs[i] = cardBossFirstDiglogs_English[i];
-    //        }
-    //        else if (index == 1)
-    //        {
-    //            cardBossFitstDiglogs[i] = cardBossFirstDiglogs_Korean[i];
-    //        }
-    //    }
-    //}
 
 }

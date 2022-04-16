@@ -21,7 +21,7 @@ public class DogSojuTrace : MonoBehaviour
     private void Update()
     {
         if (isRotate == true)
-            transform.Rotate(0, 0, 5 * rotateSpeed);
+            transform.Rotate(0, 0, 5 * rotateSpeed * Time.deltaTime);
 
         else
         {

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class CameraShake : MonoBehaviour
 {
     [SerializeField] private float amount;
@@ -9,36 +9,49 @@ public class CameraShake : MonoBehaviour
 
     private float timer;
     private Vector3 originPos;
+    private bool isShaking = false;
+
+    public static Action cameraShake;
 
     private void Awake()
     {
         originPos = transform.localPosition;
+        cameraShake = () => { Shake(); };
     }
 
-    private void Start()
+    //private void Shake()
+    //{
+    //    if (timer <= duration)
+    //    {
+    //        transform.localPosition = (Vector3)Random.insideUnitCircle * amount + originPos;
+
+    //        timer += Time.deltaTime;
+    //    }
+    //    else
+    //        transform.localPosition = originPos;
+    //}
+
+    public void Shake()
     {
-        timer = duration;
+        StartCoroutine(IShake());
     }
 
-    private void Update()
+    IEnumerator IShake()
     {
-        Shake();
-    }
+        if (isShaking)
+            yield break;
 
-    private void Shake()
-    {
-        if (timer <= duration)
+        while(timer <= duration)
         {
-            transform.localPosition = (Vector3)Random.insideUnitCircle * amount + originPos;
-
+            isShaking = true;
+            transform.localPosition = (Vector3)UnityEngine.Random.insideUnitCircle * amount + originPos;
             timer += Time.deltaTime;
-        }
-        else
-            transform.localPosition = originPos;
-    }
+            yield return null;
 
-    public void ShakeStart()
-    {
+        }
+        transform.localPosition = originPos;
         timer = 0;
+        isShaking = false;
+        yield return null;
     }
 }

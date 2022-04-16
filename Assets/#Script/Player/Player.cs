@@ -11,6 +11,8 @@ public class Player : MonoBehaviour , IPause
     [SerializeField]
     private GameObject bulletPrefab;
     [SerializeField]
+    private GameObject playerHitEffectObject;
+    [SerializeField]
     private float bulletMoveSpeed; // 총알 속도 
 
     private bool isHit = false; // 타격 당했는가?
@@ -19,6 +21,12 @@ public class Player : MonoBehaviour , IPause
     private bool isInvincibility; // 무적중인가?
 
     [SerializeField] private int playerHp;
+    private Animator playerAnimator;
+
+    private void Awake()
+    {
+        playerAnimator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -100,15 +108,23 @@ public class Player : MonoBehaviour , IPause
     private IEnumerator Hit()
     {
         isHit = true;
-        yield return new WaitForSeconds(1.0f);
+        Instantiate(playerHitEffectObject, transform.position, Quaternion.identity);
+        playerHp--;
+        PlayerHpUISystem.playerUISystem(); // Action PlayerUI Event
+        playerAnimator.SetTrigger("Hit");
+        yield return new WaitForSeconds(2.0f);
+        playerAnimator.SetTrigger("BaseState");
         isHit = false;
     }
 
     private void TakeDamage()
     {
-        playerHp--;
+        if (isHit == true)
+            return;
+
         StartCoroutine(Hit());
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision) // 관통 , 비관통 , 파티클 구분 해야함 
     {
@@ -127,7 +143,6 @@ public class Player : MonoBehaviour , IPause
         {
             TakeDamage();
         }
-
     }
 
     private void OnParticleCollision(GameObject other)
