@@ -16,9 +16,9 @@ public class DiglogSmokeBossStage : DiglogData
         gameSystem.TextDataSetUpdate(smokeBossFirstDiglogs_Korean);
     }
 
-    public override void TextDataUpdate(int value)
+    public override void TextDataUpdate(bool isAccept)
     {
-        if (value == 0)
+        if (isAccept == true)
         {
             gameSystem.TextDataSetUpdate(smokeBossLeftChoiceDiglogs_Korean);
         }

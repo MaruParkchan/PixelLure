@@ -2365,7 +2365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSystem: {fileID: 2063757053}
-  choiceValue: 0
+  isAccept: 1
   chainEffect: {fileID: 3441021816248954569, guid: b6c32e878e545aa45923a0b0fd32dae5, type: 3}
 --- !u!61 &1153432276
 BoxCollider2D:
@@ -4786,7 +4786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSystem: {fileID: 2063757053}
-  choiceValue: 1
+  isAccept: 0
   chainEffect: {fileID: 3918579176710540583, guid: 27e719b72fa72754ebc87f297c6274c8, type: 3}
 --- !u!61 &2134893079
 BoxCollider2D:

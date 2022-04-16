@@ -7,7 +7,7 @@ public class ChoiceEvent : MonoBehaviour
     [SerializeField]
     private GameSystem gameSystem;
     [SerializeField]
-    private int choiceValue;
+    private bool isAccept;
 
     private Animator animator;
     [SerializeField]
@@ -36,7 +36,7 @@ public class ChoiceEvent : MonoBehaviour
 
     public void ChoiceComplete() // 선택완료
     {
-        gameSystem.ChoiceSelect(choiceValue);
+        gameSystem.ChoiceSelect(isAccept);
     }
 
     public void Effect()

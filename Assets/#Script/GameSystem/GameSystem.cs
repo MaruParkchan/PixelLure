@@ -24,7 +24,7 @@ public class GameSystem : MonoBehaviour
 
     private string[] diglogDatas; // 대화창 데이터 string
     private int diglogIndex = 0; // 대화창 인덱스
-    private int choiceValue = 0; // 왼쪽, 오른쪽 선택값 
+    private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
     #endregion
 
     private void Start()
@@ -100,15 +100,13 @@ public class GameSystem : MonoBehaviour
             {
                 if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
                 {
-                    if (choiceValue == 0) // value값이 0 이면 왼쪽 
+                    if (isAccept == true) 
                     {
-                        leftChoiceObject.GetComponent<ChoiceEvent>().Effect(); // 마지막 텍스트가 나올때 카드 터지는 이펙트 생성
-                        diglogText.color = Color.red;
+                        ChoiceCard(leftChoiceObject, Color.red);
                     }
                     else
                     {
-                        rightChoiceObject.GetComponent<ChoiceEvent>().Effect();
-                        diglogText.color = Color.blue;
+                        ChoiceCard(rightChoiceObject, Color.blue);
                     }
                 }
 
@@ -130,6 +128,12 @@ public class GameSystem : MonoBehaviour
         }
     }
 
+    private void ChoiceCard(GameObject choiceObject, Color color)
+    {
+        choiceObject.GetComponent<ChoiceEvent>().Effect();
+        diglogText.color = color;
+    }
+
     public void TextDataSetUpdate(string[] textDatas) // 선택한것에 따라 텍스트 데이터 변경하기 
     {
         diglogDatas = new string[textDatas.Length]; // 받아온 string의 배열 크기만큼 바꾸기
@@ -140,20 +144,19 @@ public class GameSystem : MonoBehaviour
         }
     }
 
-    public void ChoiceSelect(int value) // Yes or No 선택했으면 받아오기 
+    public void ChoiceSelect(bool isAccept) // Yes or No 선택했으면 받아오기 
     {
-        choiceValue = value;
-
-        if (choiceValue == 0)
+        this.isAccept = isAccept;
+        if (isAccept == true)
         {
-            rightChoiceObject.SetActive(false);
+            rightChoiceObject.SetActive(false); // Yes이기때문에 왼쪽 남기고 오른쪽 삭제
         }
         else
         {
             leftChoiceObject.SetActive(false);
         }
         diglogIndex = 0; // 텍스트 데이터 0으로 초기화
-        diglogData.TextDataUpdate(choiceValue);
+        diglogData.TextDataUpdate(isAccept);
         StartCoroutine(TextUpdate());
         PlayerFreezeAndLastTalk();
     }
