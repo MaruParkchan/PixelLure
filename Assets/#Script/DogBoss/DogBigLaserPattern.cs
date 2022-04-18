@@ -113,7 +113,6 @@ public class DogBigLaserPattern : MonoBehaviour
         for (int i = 0; i < bundleLaser.Count; i++) // 추가타 공격
         {
             bundleLaser[i].Attack();
-            Debug.Log("i = " + i);
         }
 
         bundleLaser.Clear();

@@ -8,13 +8,13 @@ public class DogSojuBreak : MonoBehaviour
     private GameObject sojuEffect;
     private float moveSpeed;
     private bool isBreak = false;
-    //private bool isBoom = false;
-    private DogBigPoundingPattern dogBigPoundingPattern;
+    //private DogBigPoundingPattern dogBigPoundingPattern;
     private Animator animator;
+
 
     private void Start()
     {
-        dogBigPoundingPattern = GameObject.FindWithTag("DogBoss").GetComponent<DogBigPoundingPattern>();
+        // dogBigPoundingPattern = GameObject.FindWithTag("DogBoss").GetComponent<DogBigPoundingPattern>();
         animator = GetComponent<Animator>();
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class DogBigPoundingPattern : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class DogBigPoundingPattern : MonoBehaviour
     private int[] randomIndexs; // 난수 저장 배열
 
     private Animator animator;
-
+    private List<GameObject> sojuGameObjects = new List<GameObject>();
 
     private void Start()
     {
@@ -57,6 +58,7 @@ public class DogBigPoundingPattern : MonoBehaviour
         GameObject clone = Instantiate(sojuObject);
         clone.GetComponent<DogSojuBreak>().Init(sojuObjectMoveSpeed);
         clone.transform.position = new Vector3(xPos, 6.0f, 0);
+        SojuCountPlus(clone);
     }
 
     public void AnimationPounding()
@@ -64,13 +66,28 @@ public class DogBigPoundingPattern : MonoBehaviour
         animator.SetTrigger("Pounding");
     }
 
+    public void SojuCountPlus(GameObject sojuObject)
+    {
+        sojuGameObjects.Add(sojuObject);
+    }
+
+    private void SojuCountClear()
+    {
+        sojuGameObjects.Clear();
+    }
+
     public void Pounding()
     {
-        GameObject[] clones = GameObject.FindGameObjectsWithTag("SojuBreak");
-        for(int i = 0; i < clones.Length; i++)
+        //GameObject[] clones = GameObject.FindGameObjectsWithTag("SojuBreak");
+        //for(int i = 0; i < clones.Length; i++)
+        //{
+        //    clones[i].GetComponent<DogSojuBreak>().Break();
+        //}
+        for(int i = 0; i < sojuGameObjects.Count; i++)
         {
-            clones[i].GetComponent<DogSojuBreak>().Break();
+            sojuGameObjects[i].GetComponent<DogSojuBreak>().Break();
         }
+        SojuCountClear();
         CameraShake.cameraShake();
     }
 
@@ -78,7 +95,7 @@ public class DogBigPoundingPattern : MonoBehaviour
     {
         for (int i = 0; i < sojuSpawnCount; i++) 
         {
-            randomIndexs[i] = Random.Range(0, sojuSpawnCount);
+            randomIndexs[i] = UnityEngine.Random.Range(0, sojuSpawnCount);
             for (int j = 0; j < i; j++)
             {
                 if (randomIndexs[i] == randomIndexs[j])

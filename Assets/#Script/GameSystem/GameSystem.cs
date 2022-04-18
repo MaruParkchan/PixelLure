@@ -24,6 +24,7 @@ public class GameSystem : MonoBehaviour
 
     private string[] diglogDatas; // 대화창 데이터 string
     private int diglogIndex = 0; // 대화창 인덱스
+    private bool isTyping = false; // 타이핑중인지
     private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
     #endregion
 
@@ -82,6 +83,11 @@ public class GameSystem : MonoBehaviour
         yield return new WaitForSeconds(2.0f);
         diglogObject.SetActive(true);
         StartCoroutine(TextUpdate());
+    }
+
+    private bool DiglogTyping()
+    {
+        return true;
     }
 
     private IEnumerator TextUpdate()

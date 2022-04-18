@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum LauguageSystem { English, Korean}
+public class Diglog
+{
+    public string[] bossDiglog;
+}
 
 public abstract class DiglogData : MonoBehaviour
 {
+    protected Diglog cardBossDiglog = new Diglog();
 
     protected string[] cardBossFirstDiglogs_Korean         = new string[3];
     protected string[] cardBossLeftChoiceDiglogs_Korean    = new string[3];
@@ -27,6 +32,7 @@ public abstract class DiglogData : MonoBehaviour
         CardBossDiglogInit();
         SmokeBossDiglogInit();
         DogBossDiglogInit();
+        cardBossDiglog.bossDiglog = new string[4];
     }
 
     private void CardBossDiglogInit() // 대화 데이터 초기화
