@@ -23,6 +23,7 @@ public class GameSystem : MonoBehaviour
     private bool isChoice; // 선택을 했는지?
 
     private string[] diglogDatas; // 대화창 데이터 string
+    private string diglog; // 대화창출력할 string
     private int diglogIndex = 0; // 대화창 인덱스
     private bool isTyping = false; // 타이핑중인지
     private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
@@ -93,10 +94,11 @@ public class GameSystem : MonoBehaviour
     private IEnumerator TextUpdate()
     {
         diglogText.text = "";
+        diglog = diglogDatas[diglogIndex];
 
-        for (int i = 0; i < diglogDatas[diglogIndex].Length; i++)
+        for (int i = 0; i < diglogDatas.Length; i++)
         {
-            diglogText.text += diglogDatas[diglogIndex][i];
+            diglogText.text += diglog[i];
             yield return new WaitForSeconds(0.07f);
         }
 
@@ -104,7 +106,7 @@ public class GameSystem : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
             {
-                if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
+                if ((diglogDatas.Length - 1 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
                 {
                     if (isAccept == true) 
                     {

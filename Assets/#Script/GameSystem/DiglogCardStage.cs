@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class DiglogCardStage : DiglogData
 {
-    [SerializeField] private GameSystem gameSystem;
-
     private void Start()
     {
-        FirstDiglogUpdate();
+        TextFistInitUpdate();
     }
 
-    private void FirstDiglogUpdate() // 카드 보스 첫 대화 데이터 GameSystem에 넣기
+    protected override void TextFistInitUpdate()
     {
-        gameSystem.TextDataSetUpdate(cardBossFirstDiglogs_Korean);
+        DiglogGameSystemTextUpdate(cardBossFirstDiglog);
     }
 
     public override void TextDataUpdate(bool isAccept)
     {
         if(isAccept == true)
         {
-            gameSystem.TextDataSetUpdate(cardBossLeftChoiceDiglogs_Korean);
+            DiglogGameSystemTextUpdate(cardBossLeftChoiceDiglog);
         }
         else
         {
-            gameSystem.TextDataSetUpdate(cardBossRightChoiceDiglogs_Korean);
+            DiglogGameSystemTextUpdate(cardBossRightChoiceDiglog);
         }
     }
 }

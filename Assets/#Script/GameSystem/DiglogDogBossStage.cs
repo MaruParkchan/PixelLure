@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DiglogDogBossStage : DiglogData
 {
-    [SerializeField] private GameSystem gameSystem;
-
     private void Start()
     {
         FirstDiglogUpdate();
@@ -13,18 +11,23 @@ public class DiglogDogBossStage : DiglogData
 
     private void FirstDiglogUpdate() // 카드 보스 첫 대화 데이터 GameSystem에 넣기
     {
-        gameSystem.TextDataSetUpdate(dogBossFirstDiglogs_Korean);
+        //gameSystem.TextDataSetUpdate(dogBossFirstDiglogs_Korean);
+    }
+
+    protected override void TextFistInitUpdate()
+    {
+
     }
 
     public override void TextDataUpdate(bool isAccept)
     {
         if(isAccept == true)
         {
-            gameSystem.TextDataSetUpdate(dogBossLeftChoiceDiglogs_Korean);
+            //gameSystem.TextDataSetUpdate(dogBossLeftChoiceDiglogs_Korean);
         }
         else
         {
-            gameSystem.TextDataSetUpdate(dogBossRightChoiceDiglogs_Korean);
+            //gameSystem.TextDataSetUpdate(dogBossRightChoiceDiglogs_Korean);
         }
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DiglogSmokeBossStage : DiglogData
 {
-    [SerializeField] private GameSystem gameSystem;
-
     private void Start()
     {
         FirstDiglogUpdate();
@@ -13,18 +11,23 @@ public class DiglogSmokeBossStage : DiglogData
 
     private void FirstDiglogUpdate() // 카드 보스 첫 대화 데이터 GameSystem에 넣기
     {
-        gameSystem.TextDataSetUpdate(smokeBossFirstDiglogs_Korean);
+       // gameSystem.TextDataSetUpdate(smokeBossFirstDiglogs_Korean);
+    }
+
+    protected override void TextFistInitUpdate()
+    {
+
     }
 
     public override void TextDataUpdate(bool isAccept)
     {
         if (isAccept == true)
         {
-            gameSystem.TextDataSetUpdate(smokeBossLeftChoiceDiglogs_Korean);
+            //gameSystem.TextDataSetUpdate(smokeBossLeftChoiceDiglogs_Korean);
         }
         else
         {
-            gameSystem.TextDataSetUpdate(smokeBossRightChoiceDiglogs_Korean);
+            //gameSystem.TextDataSetUpdate(smokeBossRightChoiceDiglogs_Korean);
         }
     }
 }

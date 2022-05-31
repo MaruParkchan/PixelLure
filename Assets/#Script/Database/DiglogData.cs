@@ -2,27 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum LauguageSystem { English, Korean}
-public class Diglog
-{
-    public string[] bossDiglog;
-}
+public enum Language { English, Korean}
 
 public abstract class DiglogData : MonoBehaviour
 {
-    protected Diglog cardBossDiglog = new Diglog();
+    [SerializeField] private GameSystem gameSystem;
+    protected string[] bossDiglog;
+    protected Language lauguage;
 
+    protected string[] cardBossFirstDiglog          = new string[3];
+    protected string[] cardBossLeftChoiceDiglog     = new string[3];
+    protected string[] cardBossRightChoiceDiglog    = new string[3];
+
+    protected string[] smokeBossFirstDiglog         = new string[4];
+    protected string[] smokeBossLeftChoiceDiglog    = new string[3];
+    protected string[] smokeBossRightChoiceDiglog   = new string[3];
+
+    protected string[] dogBossFirstDiglog           = new string[4];
+    protected string[] dogBossLeftChoiceDiglog      = new string[3];
+    protected string[] dogBossRightChoiceDiglog     = new string[3];
+
+    //CardBoss English
+    protected string[] cardBossFirstDiglogs_English        = new string[3];
+    protected string[] cardBossLeftChoiceDiglogs_English   = new string[3];
+    protected string[] cardBossRightChoiceDiglogs_English  = new string[3];
+    //CardBoss Korean
     protected string[] cardBossFirstDiglogs_Korean         = new string[3];
     protected string[] cardBossLeftChoiceDiglogs_Korean    = new string[3];
     protected string[] cardBossRightChoiceDiglogs_Korean   = new string[3];
 
+    //SmokeBoss English
     protected string[] smokeBossFirstDiglogs_Korean        = new string[4];
     protected string[] smokeBossLeftChoiceDiglogs_Korean   = new string[3];
     protected string[] smokeBossRightChoiceDiglogs_Korean  = new string[3];
+    //SmokeBoss Korean
+    protected string[] smokeBossFirstDiglogs_English       = new string[4];
+    protected string[] smokeBossLeftChoiceDiglogs_English  = new string[3];
+    protected string[] smokeBossRightChoiceDiglogs_English = new string[3];
 
-    protected string[] dogBossFirstDiglogs_Korean = new string[4];
-    protected string[] dogBossLeftChoiceDiglogs_Korean = new string[3];
-    protected string[] dogBossRightChoiceDiglogs_Korean = new string[3];
+    //DogBoss English
+    protected string[] dogBossFirstDiglogs_Korean          = new string[4];
+    protected string[] dogBossLeftChoiceDiglogs_Korean     = new string[3];
+    protected string[] dogBossRightChoiceDiglogs_Korean    = new string[3];
+    //DogBoss Korean
+    protected string[] dogBossFirstDiglogs_English         = new string[4];
+    protected string[] dogBossLeftChoiceDiglogs_English    = new string[3];
+    protected string[] dogBossRightChoiceDiglogs_English   = new string[3];
 
     //private string[] smokeBossDiglogs_Korean;
     //private string[] dogBossDiglogs_Korean;
@@ -32,7 +57,55 @@ public abstract class DiglogData : MonoBehaviour
         CardBossDiglogInit();
         SmokeBossDiglogInit();
         DogBossDiglogInit();
-        cardBossDiglog.bossDiglog = new string[4];
+        ChanageLauguage();
+    }
+
+    public void ChanageLauguage()
+    {
+        int languageIndex = PlayerPrefs.GetInt("LanguageIndex");
+
+        if(languageIndex == 0)
+        {
+            DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_English);
+            DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_English);
+            DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_English);
+
+            //DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_Korean);
+            //DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_Korean);
+            //DiglogChange(dogBossFirstDiglog,  cardBossRightChoiceDiglogs_Korean);
+
+            //DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_English);
+            //DiglogChange(smokeBossFirstDiglog, smokeBossFirstDiglogs_English);
+            //DiglogChange(dogBossFirstDiglog, dogBossFirstDiglogs_English);
+            ////
+            //DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_English);
+            //DiglogChange(smokeBossFirstDiglog, smokeBossFirstDiglogs_English);
+            //DiglogChange(dogBossFirstDiglog, dogBossFirstDiglogs_English);
+        }
+        else if(languageIndex == 1)
+        {
+            DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_Korean);
+            DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_Korean);
+            DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_Korean);
+        }
+    }
+
+    private void DiglogChange(string[] bossDiglogs, string[] diglogsData) // 대화 데이터 바꿔주기
+    {
+        bossDiglogs = new string[diglogsData.Length];
+
+        for (int i = 0; i < diglogsData.Length; i++)
+            bossDiglogs[i] = diglogsData[i];
+    }
+
+    protected void DiglogGameSystemTextUpdate(string[] diglogs)
+    {
+        //bossDiglog = new string[diglogs.Length];
+
+        //for (int i = 0; i < diglogs.Length; i++)
+        //    bossDiglog[i] = diglogs[i];
+
+        gameSystem.TextDataSetUpdate(diglogs);
     }
 
     private void CardBossDiglogInit() // 대화 데이터 초기화
@@ -40,14 +113,23 @@ public abstract class DiglogData : MonoBehaviour
         cardBossFirstDiglogs_Korean[0]  = "훌륭하구나...";
         cardBossFirstDiglogs_Korean[1]  = "너의 능력을 시험한다.";
         cardBossFirstDiglogs_Korean[2]  = "인간이여, 나와 함께 도박을 하겠는가?";
+        cardBossFirstDiglogs_English[0] = "That's fantastic...";
+        cardBossFirstDiglogs_English[1] = "I put you to the test.";
+        cardBossFirstDiglogs_English[2] = "Would you gamble with me, man?";
 
-        cardBossLeftChoiceDiglogs_Korean[0]  = "나와 함께 도박을 하고 싶다니";
-        cardBossLeftChoiceDiglogs_Korean[1]  = "인간이란 어쩔수 없는 존재이지";
-        cardBossLeftChoiceDiglogs_Korean[2]  = "플레이어의 변화가 이루워졌습니다.";
+        cardBossLeftChoiceDiglogs_Korean[0]  = "나와 함께 도박을 하고 싶구나";
+        cardBossLeftChoiceDiglogs_Korean[1]  = "인간이란 어쩔수 없는 존재이지!";
+        cardBossLeftChoiceDiglogs_Korean[2]  = "플레이어의 상태가 변경되었습니다.";
+        cardBossLeftChoiceDiglogs_English[0] = "You want to gamble with me!";
+        cardBossLeftChoiceDiglogs_English[1] = "Humans are powerless to stop themselves!";
+        cardBossLeftChoiceDiglogs_English[2] = "The status of the player has changed.";
 
         cardBossRightChoiceDiglogs_Korean[0]  = "도박을 하고 싶지 않다니???";
         cardBossRightChoiceDiglogs_Korean[1] = "그 선택 후회하게 해주겠다.";
         cardBossRightChoiceDiglogs_Korean[2] = "보스의 변화가 이루워졌습니다.";
+        cardBossRightChoiceDiglogs_English[0] = "Don't you want to gamble???";
+        cardBossRightChoiceDiglogs_English[1] = "I'll make you regret your decision.";
+        cardBossRightChoiceDiglogs_English[2] = "The status of Boss has been changed.";
     }
 
     private void SmokeBossDiglogInit()
@@ -82,6 +164,8 @@ public abstract class DiglogData : MonoBehaviour
         dogBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
     }
 
+
+    protected abstract void TextFistInitUpdate();
     public abstract void TextDataUpdate(bool isAccept);
 
 }
