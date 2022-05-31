@@ -66,9 +66,9 @@ public abstract class DiglogData : MonoBehaviour
 
         if(languageIndex == 0)
         {
-            DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_English);
-            DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_English);
-            DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_English);
+            cardBossFirstDiglog       = DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_English);
+            cardBossLeftChoiceDiglog  = DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_English);
+            cardBossRightChoiceDiglog = DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_English);
 
             //DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_Korean);
             //DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_Korean);
@@ -84,27 +84,24 @@ public abstract class DiglogData : MonoBehaviour
         }
         else if(languageIndex == 1)
         {
-            DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_Korean);
-            DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_Korean);
-            DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_Korean);
+           cardBossFirstDiglog = DiglogChange(cardBossFirstDiglog, cardBossFirstDiglogs_Korean);
+           cardBossLeftChoiceDiglog = DiglogChange(cardBossLeftChoiceDiglog, cardBossLeftChoiceDiglogs_Korean);
+           cardBossRightChoiceDiglog = DiglogChange(cardBossRightChoiceDiglog, cardBossRightChoiceDiglogs_Korean);
         }
     }
 
-    private void DiglogChange(string[] bossDiglogs, string[] diglogsData) // 대화 데이터 바꿔주기
+    private string[] DiglogChange(string[] bossDiglogs, string[] diglogsData) // 대화 데이터 바꿔주기
     {
         bossDiglogs = new string[diglogsData.Length];
 
         for (int i = 0; i < diglogsData.Length; i++)
             bossDiglogs[i] = diglogsData[i];
+
+        return bossDiglogs;
     }
 
     protected void DiglogGameSystemTextUpdate(string[] diglogs)
     {
-        //bossDiglog = new string[diglogs.Length];
-
-        //for (int i = 0; i < diglogs.Length; i++)
-        //    bossDiglog[i] = diglogs[i];
-
         gameSystem.TextDataSetUpdate(diglogs);
     }
 
@@ -165,7 +162,7 @@ public abstract class DiglogData : MonoBehaviour
     }
 
 
-    protected abstract void TextFistInitUpdate();
+    public abstract void TextFistInitUpdate();
     public abstract void TextDataUpdate(bool isAccept);
 
 }

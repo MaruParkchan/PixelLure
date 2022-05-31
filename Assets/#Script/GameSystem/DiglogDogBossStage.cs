@@ -14,7 +14,7 @@ public class DiglogDogBossStage : DiglogData
         //gameSystem.TextDataSetUpdate(dogBossFirstDiglogs_Korean);
     }
 
-    protected override void TextFistInitUpdate()
+    public override void TextFistInitUpdate()
     {
 
     }

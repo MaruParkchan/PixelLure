@@ -14,7 +14,7 @@ public class DiglogSmokeBossStage : DiglogData
        // gameSystem.TextDataSetUpdate(smokeBossFirstDiglogs_Korean);
     }
 
-    protected override void TextFistInitUpdate()
+    public override void TextFistInitUpdate()
     {
 
     }

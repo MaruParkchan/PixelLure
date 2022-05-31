@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class DiglogCardStage : DiglogData
 {
-    private void Start()
-    {
-        TextFistInitUpdate();
-    }
-
-    protected override void TextFistInitUpdate()
+    public override void TextFistInitUpdate()
     {
         DiglogGameSystemTextUpdate(cardBossFirstDiglog);
     }
