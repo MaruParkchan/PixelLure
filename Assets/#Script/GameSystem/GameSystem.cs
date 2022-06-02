@@ -20,13 +20,17 @@ public class GameSystem : MonoBehaviour
     [SerializeField] private GameObject leftChoiceObject;
     [SerializeField] private GameObject rightChoiceObject;
     [SerializeField] private DiglogData diglogData;
+    [SerializeField] private GameObject cursorArrowObject;
     private bool isChoice; // 선택을 했는지?
+    private bool isSeceleted = false; // 선택하였다
 
     [SerializeField]
     private string[] diglogDatas; // 대화창 데이터 string
     [SerializeField]
     private string diglog = ""; // 대화창출력할 string
     private int diglogIndex = 0; // 대화창 인덱스
+    private float typingSpeed = 0.11f;
+    private bool isFirst = true; 
     private bool isTyping = false; // 타이핑중인지
     private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
     #endregion
@@ -46,13 +50,14 @@ public class GameSystem : MonoBehaviour
     {
         leftChoiceObject.SetActive(true);
         rightChoiceObject.SetActive(true);
-        // diglogObject.SetActive(false); // 대화창 오브젝트 끄기
+        //diglogObject.SetActive(false); // 대화창 오브젝트 끄기
         player.Choice();
     }
 
     public void PlayerFreezeAndLastTalk() // 세번째 - 마지막 문구 출력 및 플레이어 이동 잠금
     {
         isChoice = true;
+        isSeceleted = true;
         player.Wait();
     }
 
@@ -86,61 +91,219 @@ public class GameSystem : MonoBehaviour
         //GameObjectAllFind(); // 애를 비활성화하면 선택시 총알이 안사라짐
         yield return new WaitForSeconds(2.0f);
         diglogObject.SetActive(true);
-        StartCoroutine(TextUpdate());
+        StartCoroutine(DiglogUpdate());
     }
 
-    private bool DiglogTyping()
+    //private IEnumerator TextUpdate()
+    //{
+    //    StartCoroutine("TypingText");
+    //    while (true)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+    //        {
+    //            if (isTyping == true) // 현재 타이핑중이면 모든 문구 다뜨게 하기 
+    //            {
+    //                isTyping = false;
+    //                StopCoroutine("TypingText");
+    //                diglogText.text = diglog;                 
+    //                continue;
+    //            }
+    //            else if (isTyping == false && diglogDatas.Length - 1 > diglogIndex)
+    //            {
+    //                SetNextDiglog();
+    //            }
+
+    //            if ((diglogDatas.Length - 1 == diglogIndex) && isChoice == true && isSeceleted == false) // 맨 마지막 2번째 문구가 출력될 떄 카드를 없애기 위한 if문 설계
+    //            {
+    //                if (isAccept == true)
+    //                {
+    //                    ChoiceCard(leftChoiceObject, Color.red);
+    //                }
+    //                else
+    //                {
+    //                    ChoiceCard(rightChoiceObject, Color.blue);
+    //                }
+    //                isSeceleted = true;
+    //            }
+
+    //            if (diglogDatas.Length - 1 <= diglogIndex && isTyping == true && isChoice == false) // 대화창일때 나타나는 효과 
+    //            {
+    //                PlayerChoice();
+    //            }
+
+    //            if (diglogDatas.Length - 1 <= diglogIndex && isTyping == false && isChoice == true)
+    //            {
+    //                ResumeGame();
+    //                yield break;
+    //            }
+
+    //            yield return null;
+    //        }
+    //        yield return null;
+    //    }
+    //}
+
+    //private IEnumerator TextUpdate()
+    //{
+    //    diglogText.text = "";
+    //    diglog = diglogDatas[diglogIndex];
+
+
+    //    for (int i = 0; i < diglog.Length; i++)
+    //    {
+    //        diglogText.text += diglog[i];
+    //        yield return new WaitForSeconds(0.07f);
+    //    }
+
+    //    while (true)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+    //        {
+    //            if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
+    //            {
+    //                if (isAccept == true)
+    //                {
+    //                    ChoiceCard(leftChoiceObject, Color.red);
+    //                }
+    //                else
+    //                {
+    //                    ChoiceCard(rightChoiceObject, Color.blue);
+    //                }
+    //            }
+
+    //            if (diglogDatas.Length - 1 <= diglogIndex)
+    //            {
+    //                if (isChoice == false)
+    //                    PlayerChoice();
+    //                else
+    //                    ResumeGame();
+
+    //                yield break;
+    //            }
+
+    //            diglogIndex++;
+    //            StartCoroutine(TextUpdate());
+    //            yield break;
+    //        }
+    //        yield return null;
+    //    }
+    //}
+
+    private IEnumerator DiglogUpdate()
     {
-        return true;
+        yield return new WaitUntil(() => FirstBossDiglogUpdate());
+        yield return new WaitUntil(() => isChoice);
+        yield return new WaitUntil(() => SecondBossDiglogUpdate());
+        Debug.Log("끝");
     }
 
-    private IEnumerator TextUpdate()
+    private bool FirstBossDiglogUpdate()
     {
+        if( isFirst == true) // 최초 대사 시작
+        {
+            diglogIndex = 0; // 텍스트 데이터 0으로 초기화
+            StartCoroutine("TypingText");
+            isFirst = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            if(isTyping == true)
+            {
+                isTyping = false;
+
+                StopCoroutine("TypingText");
+                cursorArrowObject.SetActive(true);
+                diglogText.text = diglog;
+
+                return false;
+            }
+
+
+            if(diglogDatas.Length - 1 > diglogIndex)
+            {
+                SetNextDiglog();
+            }
+            else
+            {
+                PlayerChoice();
+                isFirst = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private bool SecondBossDiglogUpdate()
+    {
+        if (isFirst == true) // 최초 대사 시작
+        {
+            StartCoroutine("TypingText");
+            isFirst = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        {
+            if (isTyping == true)
+            {
+                isTyping = false;
+
+                StopCoroutine("TypingText");
+                diglogText.text = diglog;
+                cursorArrowObject.SetActive(true);
+                return false;
+            }
+
+            if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
+            {
+                if (isAccept == true)
+                {
+                    ChoiceCard(leftChoiceObject, Color.red);
+                }
+                else
+                {
+                    ChoiceCard(rightChoiceObject, Color.blue);
+                }
+            }
+
+            if (diglogDatas.Length - 1 > diglogIndex)
+            {
+                SetNextDiglog();
+            }
+            else
+            {
+                ResumeGame();
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    private void SetNextDiglog()
+    {
+        diglogIndex++; // 다음 대사 진행 
+        cursorArrowObject.SetActive(false);
+        StartCoroutine("TypingText");
+    }
+
+    private IEnumerator TypingText()
+    {
+        int index = 0;
         diglogText.text = "";
         diglog = diglogDatas[diglogIndex];
-        
-
-        Debug.Log("초기화2");
-        for (int i = 0; i < diglog.Length; i++)
+        isTyping = true;
+        while(index < diglog.Length)
         {
-            Debug.Log("초기화3");
-            diglogText.text += diglog[i];
-            yield return new WaitForSeconds(0.07f);
-            Debug.Log("초기화4");
+            diglogText.text += diglog[index];
+            index++;
+            yield return new WaitForSeconds(typingSpeed);
         }
 
-        while (true)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-            {
-                if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
-                {
-                    if (isAccept == true) 
-                    {
-                        ChoiceCard(leftChoiceObject, Color.red);
-                    }
-                    else
-                    {
-                        ChoiceCard(rightChoiceObject, Color.blue);
-                    }
-                }
-
-                if (diglogDatas.Length - 1 <= diglogIndex)
-                {
-                    if (isChoice == false)
-                        PlayerChoice();
-                    else
-                        ResumeGame();
-
-                    yield break;
-                }
-
-                diglogIndex++;
-                StartCoroutine(TextUpdate());
-                yield break;
-            }
-            yield return null;
-        }
+        isTyping = false;
+        cursorArrowObject.SetActive(true);
+        yield return null;
     }
 
     private void ChoiceCard(GameObject choiceObject, Color color)
@@ -157,8 +320,6 @@ public class GameSystem : MonoBehaviour
         {
             diglogDatas[i] = textDatas[i];
         }
-
-        Debug.Log("초기화1");
     }
 
     public void ChoiceSelect(bool isAccept) // Yes or No 선택했으면 받아오기 
@@ -172,10 +333,10 @@ public class GameSystem : MonoBehaviour
         {
             leftChoiceObject.SetActive(false);
         }
-        diglogIndex = 0; // 텍스트 데이터 0으로 초기화
-        diglogData.TextDataUpdate(isAccept);
-        StartCoroutine(TextUpdate());
-        PlayerFreezeAndLastTalk();
-    }
 
+        diglogData.TextDataUpdate(isAccept);
+        diglogIndex = 0;
+        PlayerFreezeAndLastTalk();
+       // StartCoroutine(TextUpdate());
+    }
 }

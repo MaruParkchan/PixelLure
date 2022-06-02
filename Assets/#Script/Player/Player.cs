@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour , IPause
+public class Player : MonoBehaviour, IPause
 {
     [SerializeField]
     private MapData mapData;
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour , IPause
         if (Input.GetMouseButtonDown(0) && isFireLock == false)
         {
             Fire();
-        }    
+        }
     }
 
     private void Movement()
@@ -119,12 +119,11 @@ public class Player : MonoBehaviour , IPause
 
     private void TakeDamage()
     {
-        if (isHit == true)
+        if (isHit == true || isInvincibility == true)
             return;
 
         StartCoroutine(Hit());
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision) // 관통 , 비관통 , 파티클 구분 해야함 
     {

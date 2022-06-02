@@ -161,7 +161,6 @@ public abstract class DiglogData : MonoBehaviour
         dogBossRightChoiceDiglogs_Korean[2] = "플레이어의 변화가 이루워졌습니다.";
     }
 
-
     public abstract void TextFistInitUpdate();
     public abstract void TextDataUpdate(bool isAccept);
 
