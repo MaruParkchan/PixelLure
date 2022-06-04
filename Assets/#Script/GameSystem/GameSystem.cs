@@ -24,9 +24,7 @@ public class GameSystem : MonoBehaviour
     private bool isChoice; // 선택을 했는지?
     private bool isSeceleted = false; // 선택하였다
 
-    [SerializeField]
     private string[] diglogDatas; // 대화창 데이터 string
-    [SerializeField]
     private string diglog = ""; // 대화창출력할 string
     private int diglogIndex = 0; // 대화창 인덱스
     private float typingSpeed = 0.11f;
@@ -94,107 +92,11 @@ public class GameSystem : MonoBehaviour
         StartCoroutine(DiglogUpdate());
     }
 
-    //private IEnumerator TextUpdate()
-    //{
-    //    StartCoroutine("TypingText");
-    //    while (true)
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-    //        {
-    //            if (isTyping == true) // 현재 타이핑중이면 모든 문구 다뜨게 하기 
-    //            {
-    //                isTyping = false;
-    //                StopCoroutine("TypingText");
-    //                diglogText.text = diglog;                 
-    //                continue;
-    //            }
-    //            else if (isTyping == false && diglogDatas.Length - 1 > diglogIndex)
-    //            {
-    //                SetNextDiglog();
-    //            }
-
-    //            if ((diglogDatas.Length - 1 == diglogIndex) && isChoice == true && isSeceleted == false) // 맨 마지막 2번째 문구가 출력될 떄 카드를 없애기 위한 if문 설계
-    //            {
-    //                if (isAccept == true)
-    //                {
-    //                    ChoiceCard(leftChoiceObject, Color.red);
-    //                }
-    //                else
-    //                {
-    //                    ChoiceCard(rightChoiceObject, Color.blue);
-    //                }
-    //                isSeceleted = true;
-    //            }
-
-    //            if (diglogDatas.Length - 1 <= diglogIndex && isTyping == true && isChoice == false) // 대화창일때 나타나는 효과 
-    //            {
-    //                PlayerChoice();
-    //            }
-
-    //            if (diglogDatas.Length - 1 <= diglogIndex && isTyping == false && isChoice == true)
-    //            {
-    //                ResumeGame();
-    //                yield break;
-    //            }
-
-    //            yield return null;
-    //        }
-    //        yield return null;
-    //    }
-    //}
-
-    //private IEnumerator TextUpdate()
-    //{
-    //    diglogText.text = "";
-    //    diglog = diglogDatas[diglogIndex];
-
-
-    //    for (int i = 0; i < diglog.Length; i++)
-    //    {
-    //        diglogText.text += diglog[i];
-    //        yield return new WaitForSeconds(0.07f);
-    //    }
-
-    //    while (true)
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-    //        {
-    //            if ((diglogDatas.Length - 2 == diglogIndex) && isChoice == true) // 마지막 문구 전에 카드를 없애기 위해 if문 설계
-    //            {
-    //                if (isAccept == true)
-    //                {
-    //                    ChoiceCard(leftChoiceObject, Color.red);
-    //                }
-    //                else
-    //                {
-    //                    ChoiceCard(rightChoiceObject, Color.blue);
-    //                }
-    //            }
-
-    //            if (diglogDatas.Length - 1 <= diglogIndex)
-    //            {
-    //                if (isChoice == false)
-    //                    PlayerChoice();
-    //                else
-    //                    ResumeGame();
-
-    //                yield break;
-    //            }
-
-    //            diglogIndex++;
-    //            StartCoroutine(TextUpdate());
-    //            yield break;
-    //        }
-    //        yield return null;
-    //    }
-    //}
-
     private IEnumerator DiglogUpdate()
     {
         yield return new WaitUntil(() => FirstBossDiglogUpdate());
         yield return new WaitUntil(() => isChoice);
         yield return new WaitUntil(() => SecondBossDiglogUpdate());
-        Debug.Log("끝");
     }
 
     private bool FirstBossDiglogUpdate()
@@ -238,7 +140,9 @@ public class GameSystem : MonoBehaviour
     {
         if (isFirst == true) // 최초 대사 시작
         {
+            diglogIndex = 0; // 텍스트 데이터 0으로 초기화
             StartCoroutine("TypingText");
+            cursorArrowObject.SetActive(false);
             isFirst = false;
         }
 
@@ -278,7 +182,6 @@ public class GameSystem : MonoBehaviour
         }
         return false;
     }
-
 
 
     private void SetNextDiglog()
@@ -335,7 +238,6 @@ public class GameSystem : MonoBehaviour
         }
 
         diglogData.TextDataUpdate(isAccept);
-        diglogIndex = 0;
         PlayerFreezeAndLastTalk();
        // StartCoroutine(TextUpdate());
     }

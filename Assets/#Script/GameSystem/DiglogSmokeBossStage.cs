@@ -4,30 +4,20 @@ using UnityEngine;
 
 public class DiglogSmokeBossStage : DiglogData
 {
-    private void Start()
-    {
-        FirstDiglogUpdate();
-    }
-
-    private void FirstDiglogUpdate() // 카드 보스 첫 대화 데이터 GameSystem에 넣기
-    {
-       // gameSystem.TextDataSetUpdate(smokeBossFirstDiglogs_Korean);
-    }
-
     public override void TextFistInitUpdate()
     {
-
+        DiglogGameSystemTextUpdate(smokeBossFirstDiglog);
     }
 
     public override void TextDataUpdate(bool isAccept)
     {
         if (isAccept == true)
         {
-            //gameSystem.TextDataSetUpdate(smokeBossLeftChoiceDiglogs_Korean);
+            DiglogGameSystemTextUpdate(smokeBossLeftChoiceDiglog);
         }
         else
         {
-            //gameSystem.TextDataSetUpdate(smokeBossRightChoiceDiglogs_Korean);
+            DiglogGameSystemTextUpdate(smokeBossRightChoiceDiglog);
         }
     }
 }

@@ -75,8 +75,8 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-            //yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
-            //yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
+            yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
+            yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
             yield return StartCoroutine(dogBigPoundingPattern.ISojuRain());
         }
     }
