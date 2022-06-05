@@ -100,9 +100,6 @@ public class CardSidePattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-        //StopCoroutine("ISidePattern");
-        //StopCoroutine("SmoothMovement");
-        //StopCoroutine("CardSpawn");
         StopAllCoroutines();
     }
 }

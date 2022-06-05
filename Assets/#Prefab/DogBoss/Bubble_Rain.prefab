@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 941822183099388263}
   m_Layer: 0
   m_Name: Bubble_Rain
-  m_TagString: Untagged
+  m_TagString: BulletPenetrationImpossible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3846,7 +3846,7 @@ ParticleSystem:
     quality: 0
     voxelSize: 0.5
     collisionMessages: 1
-    collidesWithDynamic: 0
+    collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
     enabled: 0

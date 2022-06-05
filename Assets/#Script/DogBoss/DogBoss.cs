@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogBoss : BossHp, ICoroutineStop, IPause
+public class DogBoss : Boss
 {
-    private Animator animator;
-
     private DogBubblePattern dogBubblePattern;
     private DogSmallSojuPattern dogSmallSojuPattern;
 
@@ -16,51 +14,47 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
     [SerializeField]
     private bool isBulkUp; // 벌크업하였는가?
 
-    [SerializeField]
-    private GameSystem gameSystem;
+    private float smallDogBossCircleColliderOffsetY;
+    private float smallDogBossCircleColliderRadius;
 
-    [SerializeField]
-    private int limitBossHp; // 일정피가 된다면 선택지 등장할 hp 수치값
-    private bool isChoice = false;
-    private bool isHit = false;
-    private bool isDie = false;
-    private bool isInvincibility; // 무적인가?
+    private float bigDogBossCirCleColliderOffsetY;
+    private float bigDogBossCirCleColliderRadius;
     private CircleCollider2D circleCollider2D;
-    private float bigDogBosscirCleColliderOffsetY;
-    private float bigDogBosscirCleColliderRadius;
-    private int[] patternRandomValue = new int[3]; // 선택지 선택후에 랜덤 패턴을 위한 값
-                                                   // 크기는 패턴의 수 만큼 조정해야함
 
-    private void BigBossCircleColliderPositionAndSizeData() // 개 보스 벌크업하면 콜라이더 변화값 
+
+    private void Start()
     {
-        bigDogBosscirCleColliderOffsetY = 1.05f;
-        bigDogBosscirCleColliderRadius = 0.33f;
-    }
-
-    private void CircleColliderInit() // 콜라이더 크기, 위치 변화
-    {
-        BigBossCircleColliderPositionAndSizeData();
-        circleCollider2D.offset = new Vector2(0, bigDogBosscirCleColliderOffsetY);
-        circleCollider2D.radius = bigDogBosscirCleColliderRadius;
-
-    }
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
         dogBubblePattern = GetComponent<DogBubblePattern>();
         dogSmallSojuPattern = GetComponent<DogSmallSojuPattern>();
         dogBigTracePattern = GetComponent<DogBigTracePattern>();
         dogBigLaserPattern = GetComponent<DogBigLaserPattern>();
         dogBigPoundingPattern = GetComponent<DogBigPoundingPattern>();
         circleCollider2D = GetComponent<CircleCollider2D>();
-        currentHp = GetFirstHp();
-        StartCoroutine(DogBossSmallPattern());
+        BigBossCircleColliderPositionAndSizeData();
+        CircleColliderInit(smallDogBossCircleColliderOffsetY, smallDogBossCircleColliderRadius);
+        patternRandomValue = new int[3]; // 선택지 선택후에 랜덤 패턴을 위한 값 크기는 패턴의 수 만큼 조정해야함       
     }
 
-    private IEnumerator DogBossSmallPattern()
+    private void BigBossCircleColliderPositionAndSizeData() // 개 보스 벌크업하면 콜라이더 변화값 
     {
-        yield return new WaitForSeconds(4.0f);
+        smallDogBossCircleColliderOffsetY = 0.2f;
+        smallDogBossCircleColliderRadius = 0.27f;
+        bigDogBossCirCleColliderOffsetY = 1.0f;
+        bigDogBossCirCleColliderRadius = 0.3f;
+
+    }
+
+    private void CircleColliderInit(float offsetY, float radius) // 콜라이더 크기, 위치 변화
+    {
+        circleCollider2D.offset = new Vector2(0, offsetY);
+        circleCollider2D.radius = radius;
+    }
+
+    protected override IEnumerator Phase1()
+    {
+        yield return new WaitForSeconds(3.0f);
+        ColliderEnableOn();
+        IsisInvincibilityOff();
         while (true)
         {
             yield return StartCoroutine(dogBubblePattern.IBubbleSpawner());
@@ -68,117 +62,45 @@ public class DogBoss : BossHp, ICoroutineStop, IPause
         }
     }
 
-    private IEnumerator DogBossBulkUpPattern()
+    protected override IEnumerator Phase2()
     {
         animator.SetTrigger("BulkUp");
-        CircleColliderInit();;
-        yield return new WaitForSeconds(4.0f);
+        CircleColliderInit(bigDogBossCirCleColliderOffsetY, bigDogBossCirCleColliderRadius); ;
+        yield return new WaitForSeconds(4.4f);
+        ColliderEnableOn();
+        IsisInvincibilityOff();
         while (true)
         {
-            yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
-            yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
-            yield return StartCoroutine(dogBigPoundingPattern.ISojuRain());
-        }
-    }
+            RandomPatternValue();
+            int patternIndex = 0;
 
-    private IEnumerator Hit()
-    {
-        isHit = true;
-        yield return new WaitForSeconds(0.1f);
-        isHit = false;
-    }
-
-    public void CoroutineStop()
-    {
-        isChoice = true;
-        isInvincibility = true;
-        isHit = false;
-        StopAllCoroutines();
-        dogBubblePattern.CoroutineStop();
-        dogSmallSojuPattern.CoroutineStop();
-        animator.SetTrigger("Choice");
-        IsisInvincibilityOn();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.transform.CompareTag("PlayerBullet") && isDie == false)
-        {
-            Destroy(collision.transform.gameObject);
-            TakeDamage();
-        }
-    }
-    protected override void TakeDamage()
-    {
-        if (isHit == true || isInvincibility == true)
-            return;
-
-        currentHp--;
-
-        if (isChoice == false)
-        {
-            if (limitBossHp >= currentHp)
+            while (patternIndex < 3)
             {
-                ChoiceOn();
+                if (patternRandomValue[patternIndex] == 0)
+                    yield return StartCoroutine(dogBigTracePattern.ISpawnSoju());
+                if (patternRandomValue[patternIndex] == 1)
+                    yield return StartCoroutine(dogBigLaserPattern.ILaserPattern());
+                if (patternRandomValue[patternIndex] == 2)
+                    yield return StartCoroutine(dogBigPoundingPattern.ISojuRain());
+
+                patternIndex++;
             }
         }
-        else if (currentHp <= 0)
-        {
-            isDie = true;
-        }
-        StartCoroutine("Hit");
     }
 
-    private void ChoiceOn()
+    protected override void SelectionEventTime()
     {
-        CoroutineStop();
-        gameSystem.PauseAndTalk();
+        dogBubblePattern.CoroutineStop();
+        dogSmallSojuPattern.CoroutineStop();
     }
 
-    public void IsisInvincibilityOn() // 무적 활성화
-    {
-        isInvincibility = true;
-    }
-
-    public void IsisInvincibilityOff() // 무적 비활성화 
-    {
-        isInvincibility = false;
-    }
-
-    public void ColliderEnableOn()
+    protected override void ColliderEnableOn()
     {
         circleCollider2D.enabled = true;
     }
 
-    public void ColliderEnableOff()
+    protected override void ColliderEnableOff()
     {
         circleCollider2D.enabled = false;
-    }
-
-    public void Resume()
-    {
-        StartCoroutine("DogBossBulkUpPattern");
-        HpRecharging(); // 피 재생성     
-    }
-
-    private void RandomPatternValue() // 중복없는 난수 출력 and 패턴 랜덤
-    {
-        for (int i = 0; i < patternRandomValue.Length; i++) // 중복없는 난수 출력
-        {
-            patternRandomValue[i] = Random.Range(0, patternRandomValue.Length);
-            for (int j = 0; j < i; j++)
-            {
-                if (patternRandomValue[i] == patternRandomValue[j])
-                {
-                    i--;
-                    break;
-                }
-            }
-        }
-    }
-
-    protected override void HpRecharging()
-    {
-        currentHp = GetSecondHp();
     }
 }

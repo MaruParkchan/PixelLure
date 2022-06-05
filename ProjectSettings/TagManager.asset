@@ -15,6 +15,7 @@ TagManager:
   - BulletPenetrationPossible
   - BulletPenetrationImpossible
   - Boss
+  - GameSystem
   layers:
   - Default
   - TransparentFX

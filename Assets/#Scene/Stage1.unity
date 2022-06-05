@@ -5775,12 +5775,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstHp: 100
-  secondHp: 200
+  phase1BossHp: 100
+  phase2BossHp: 150
+  limitPhaseHp: 98
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
-  gameSystem: {fileID: 2050683032}
-  limitBossHp: 95
 --- !u!114 &744212755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7641,7 +7640,7 @@ GameObject:
   - component: {fileID: 2050683034}
   m_Layer: 0
   m_Name: GameSystem
-  m_TagString: Untagged
+  m_TagString: GameSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7658,7 +7657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3bcdbc9cba1b642b387e634bf865ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 744212749}
+  boss: {fileID: 744212754}
   player: {fileID: 1674676062}
   hpUIsystem: {fileID: 2050683035}
   blinkObject: {fileID: 1842556790}
@@ -7668,8 +7667,6 @@ MonoBehaviour:
   rightChoiceObject: {fileID: 1326602734}
   diglogData: {fileID: 1798345314}
   cursorArrowObject: {fileID: 534380825}
-  diglogDatas: []
-  diglog: 
 --- !u!4 &2050683033
 Transform:
   m_ObjectHideFlags: 0
@@ -7713,7 +7710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHpBar: {fileID: 2060795810}
-  bossHp: {fileID: 744212754}
+  boss: {fileID: 744212754}
 --- !u!1 &2060795808
 GameObject:
   m_ObjectHideFlags: 0

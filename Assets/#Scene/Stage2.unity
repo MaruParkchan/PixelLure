@@ -4435,7 +4435,7 @@ GameObject:
   - component: {fileID: 2063757056}
   m_Layer: 0
   m_Name: GameSystem
-  m_TagString: Untagged
+  m_TagString: GameSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4452,7 +4452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3bcdbc9cba1b642b387e634bf865ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 2112931717}
+  boss: {fileID: 2112931718}
   player: {fileID: 1674676062}
   hpUIsystem: {fileID: 2063757054}
   blinkObject: {fileID: 1457390965}
@@ -4462,8 +4462,6 @@ MonoBehaviour:
   rightChoiceObject: {fileID: 2134893077}
   diglogData: {fileID: 578394885}
   cursorArrowObject: {fileID: 2129577656}
-  diglogDatas: []
-  diglog: 
 --- !u!114 &2063757054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4477,7 +4475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHpBar: {fileID: 1928821293}
-  bossHp: {fileID: 2112931718}
+  boss: {fileID: 2112931718}
 --- !u!4 &2063757055
 Transform:
   m_ObjectHideFlags: 0
@@ -4544,11 +4542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc903971880b147ab006659986cc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstHp: 100
-  secondHp: 200
+  phase1BossHp: 100
+  phase2BossHp: 200
+  limitPhaseHp: 95
   smokeEffect: {fileID: 9018379218307054334, guid: e56faea5150b7824ba499f4abed16697, type: 3}
-  gameSystem: {fileID: 2063757053}
-  limitBossHp: 95
 --- !u!95 &2112931719
 Animator:
   serializedVersion: 3

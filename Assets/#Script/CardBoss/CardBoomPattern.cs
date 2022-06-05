@@ -54,7 +54,6 @@ public class CardBoomPattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-        //StopCoroutine("ICardBoomPattern");
         StopAllCoroutines();
     }
 }

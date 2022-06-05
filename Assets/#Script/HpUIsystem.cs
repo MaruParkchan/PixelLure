@@ -9,21 +9,22 @@ public class HpUIsystem : MonoBehaviour
     private Slider bossHpBar;
 
     [SerializeField]
-    private BossHp bossHp;
+    private Boss boss;
 
     private void Start()
     {
-        bossHpBar.maxValue = bossHp.GetHp();
-        bossHpBar.value = bossHp.GetHp();
+        bossHpBar.maxValue = boss.Phase1BossHp;
+        bossHpBar.value = boss.Phase1BossHp;
     }
 
     private void Update()
     {
-        bossHpBar.value = bossHp.GetHp();
+        bossHpBar.value = boss.CurrentBossHp;
     }
 
-    public void SliderMaxValueUpdate(int hpValue) // Hp bar의 MaxValue 업데이트
+    public void SliderMaxValueUpdate() // Hp bar의 MaxValue 업데이트
     {
-        bossHpBar.maxValue = hpValue;
+        bossHpBar.maxValue = boss.Phase2BossHp;
+        bossHpBar.value = boss.Phase2BossHp;
     }
 }

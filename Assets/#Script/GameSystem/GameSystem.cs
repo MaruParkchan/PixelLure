@@ -5,7 +5,7 @@ using TMPro;
 
 public class GameSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject boss;
+    [SerializeField] private Boss boss;
     [SerializeField] private Player player;
 
     private GameObject[] enemyObjects; // 적 오브젝트들 담기
@@ -62,8 +62,8 @@ public class GameSystem : MonoBehaviour
     public void ResumeGame() // 네번째 - 선택완료 및 게임 재시작 
     {
         player.Resume();
-        boss.GetComponent<IPause>().Resume();
-        hpUIsystem.SliderMaxValueUpdate(boss.GetComponent<BossHp>().GetSecondHp()); // 보스 페이즈2 HP 교환 
+        boss.Resume();
+        hpUIsystem.SliderMaxValueUpdate();
         diglogObject.SetActive(false);
     }
 

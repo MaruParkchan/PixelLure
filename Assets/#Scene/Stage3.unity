@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 119712736}
   m_Layer: 0
   m_Name: GameSystem
-  m_TagString: Untagged
+  m_TagString: GameSystem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -258,7 +258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b3bcdbc9cba1b642b387e634bf865ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 1036927126}
+  boss: {fileID: 1036927131}
   player: {fileID: 1674676062}
   hpUIsystem: {fileID: 119712734}
   blinkObject: {fileID: 511694174}
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossHpBar: {fileID: 1735321296}
-  bossHp: {fileID: 1036927131}
+  boss: {fileID: 1036927131}
 --- !u!4 &119712735
 Transform:
   m_ObjectHideFlags: 0
@@ -1148,11 +1148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstHp: 100
-  secondHp: 200
+  phase1BossHp: 200
+  phase2BossHp: 400
+  limitPhaseHp: 195
   isBulkUp: 0
-  gameSystem: {fileID: 119712733}
-  limitBossHp: 95
 --- !u!114 &1036927132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1241,7 +1240,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.25}
+  m_Offset: {x: 0, y: 1}
   serializedVersion: 2
   m_Radius: 0.3
 --- !u!50 &1036927137

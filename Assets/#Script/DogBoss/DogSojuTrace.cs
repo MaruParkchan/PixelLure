@@ -10,11 +10,13 @@ public class DogSojuTrace : MonoBehaviour
     private Transform target;
     private bool isRotate = true; // 회전하는지? 
     private bool isAttack; // 타겟한테 공격
+    private BoxCollider2D boxCollider2D;
     Vector3 dir;
 
     private void Start()
     {
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();
+        boxCollider2D = GetComponent<BoxCollider2D>();
         StartCoroutine(TargetAttack());
     }
 
@@ -31,7 +33,9 @@ public class DogSojuTrace : MonoBehaviour
 
         // 타겟 방향으로 다가감
         if (isAttack == true)
+        {
             transform.Translate(Vector3.right * moveSpeed * Time.deltaTime);
+        }
     }
 
     public void Init(float rotateSpeed, float moveSpeed,float attackTime)
@@ -47,5 +51,6 @@ public class DogSojuTrace : MonoBehaviour
         isRotate = false;
         dir = target.position - transform.position;
         isAttack = true;
+        boxCollider2D.enabled = true;
     }
 }

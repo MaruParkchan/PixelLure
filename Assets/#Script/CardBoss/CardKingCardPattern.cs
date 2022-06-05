@@ -134,7 +134,6 @@ public class CardKingCardPattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-        //StopCoroutine("ICardKingCardPattern");
         StopAllCoroutines();
     }
 }

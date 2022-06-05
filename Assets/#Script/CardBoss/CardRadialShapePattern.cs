@@ -53,7 +53,6 @@ public class CardRadialShapePattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-       // StopCoroutine("ICardRadialShapePattern");
         StopAllCoroutines();
     }
 }
