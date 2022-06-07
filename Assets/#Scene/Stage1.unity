@@ -5761,8 +5761,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardRadialShapeEffect: {fileID: 296343306547549897, guid: c3884f48c2cbad845a967a828a7f8154, type: 3}
-  waitTime: 2
-  attackCount: 1
 --- !u!114 &744212754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5780,6 +5778,9 @@ MonoBehaviour:
   limitPhaseHp: 98
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
+  cardBossData: {fileID: 0}
+  phase1CardBossData: {fileID: 11400000, guid: 249256ae5daf0544fa90c57ff6eee29d, type: 2}
+  phase2CardBossData: {fileID: 0}
 --- !u!114 &744212755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5793,10 +5794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardObject: {fileID: 4772552133590063714, guid: 52e042b9efc57b84d9a58005cbe1f285, type: 3}
-  spawnCardMaxCount: 30
-  waitTime: 1.5
-  moveTime: 1
-  cardSpawnCycleTime: 0.1
   cardColorChangeTime: 1.25
   cardMoveSpeed: 5
 --- !u!114 &744212756
@@ -5812,9 +5809,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kingCardBulletPrefab: {fileID: 7568476620634755110, guid: 6e37f4788563ec9419df2f494b3ed58e, type: 3}
-  spawnCount: 20
-  spawnCycleTime: 0.5
-  waitTime: 2
   accelerationWaitTime: 0.8
   initialMoveSpeed: 3
   accelerationSpeed: 30
@@ -5831,9 +5825,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boomEffect: {fileID: 1805849273077537179, guid: 5fb3bd49c921c9548bd335ed9547477d, type: 3}
-  spawnCount: 10
-  cycleTime: 1
-  waitTime: 2
 --- !u!61 &744212758
 BoxCollider2D:
   m_ObjectHideFlags: 0

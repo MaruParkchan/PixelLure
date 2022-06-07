@@ -2,30 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardKingCardPattern : MonoBehaviour 
+public class CardKingCardPattern : CardBossPatternBase
 {
-    [Header("킹 카드 스폰 설정")]
     [SerializeField] private GameObject kingCardBulletPrefab;
-    [SerializeField] private int spawnCount; // 킹카드 생성 수
-    [SerializeField] private float spawnCycleTime; // 재 생성 시간
-    [SerializeField] private float waitTime; // 대기 시간
     [Header("킹카드 속도 설정")]
     [SerializeField] private float accelerationWaitTime; // 가속도 대기 시간
-    [SerializeField] private float initialMoveSpeed; // 처음 이동속도
-    [SerializeField] private float accelerationSpeed; // 가속도
+    [SerializeField] private float initialMoveSpeed;     // 처음 이동속도
+    [SerializeField] private float accelerationSpeed;    // 가속도
     #region 좌표 데이터값
     private Vector3[] spawnPoints = new Vector3[56];
     private int[] spawnPointIndexs = new int[56];
     #endregion
 
-    private void Start()
-    {
-        SpawnPointInit();
-    }
-
-    public IEnumerator ICardKingCardPattern()
+    public override IEnumerator Attacking()
     {
         yield return new WaitForSeconds(waitTime);
+
         for (int i = 0; i < spawnPoints.Length; i++) // 중복없는 난수 출력
         {
             spawnPointIndexs[i] = Random.Range(0, spawnPoints.Length);
@@ -38,14 +30,15 @@ public class CardKingCardPattern : MonoBehaviour
                 }
             }
         }
-
         int currentCount = 0;
 
-        while (spawnCount > currentCount)
+        while (cardBoss.cardBossData.p3_attackCount > currentCount)
         {
             GameObject obj = Instantiate(kingCardBulletPrefab);
             obj.transform.position = spawnPoints[spawnPointIndexs[currentCount]];
-            obj.GetComponent<CardKingBullet>().KingCardInit(accelerationWaitTime, initialMoveSpeed, accelerationSpeed);
+            // WaitTime, MoveSpeed, accSpeed
+            obj.GetComponent<CardKingBullet>().KingCardInit(cardBoss.cardBossData.p3_accelerationWaitTime,
+                cardBoss.cardBossData.p3_initialMoveSpeed, cardBoss.cardBossData.p3_accelerationSpeed);
 
             if (spawnPointIndexs[currentCount] >= 0 && spawnPointIndexs[currentCount] <= 16)
                 obj.transform.rotation = Quaternion.Euler(0f, 0f, 180.0f);
@@ -57,10 +50,14 @@ public class CardKingCardPattern : MonoBehaviour
                 obj.transform.rotation = Quaternion.Euler(0f, 0f, 90.0f);
 
             currentCount++;
-            yield return new WaitForSeconds(spawnCycleTime);
+
+            yield return new WaitForSeconds(cardBoss.cardBossData.p3_attackDelayTime);
         }
     }
-
+    protected override void Init()
+    {
+        SpawnPointInit();
+    }
     private void SpawnPointInit()
     {
         #region 위쪽 생성 포지션 0 ~ 16
@@ -131,9 +128,10 @@ public class CardKingCardPattern : MonoBehaviour
         spawnPoints[55] = new Vector3(10.5f, 4.5f, 0f);
         #endregion
     }
-
     public void CoroutineStop()
     {
         StopAllCoroutines();
     }
+
+
 }

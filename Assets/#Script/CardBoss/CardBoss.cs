@@ -11,6 +11,9 @@ public class CardBoss : Boss
     [SerializeField]
     private ParticleSystem auraEffect;
 
+    public CardBossData cardBossData;
+    public CardBossData phase1CardBossData;
+    public CardBossData phase2CardBossData;
     private CardRadialShapePattern cardRadialShapePattern; // 패턴1
     private CardSidePattern cardSidePattern;               // 패턴2
     private CardKingCardPattern cardKingCardPattern;       // 패턴3
@@ -19,12 +22,19 @@ public class CardBoss : Boss
 
     private void Start()
     {
+        //cardBossData = GetComponent<CardBossData>();
         cardRadialShapePattern = GetComponent<CardRadialShapePattern>();
         cardSidePattern = GetComponent<CardSidePattern>();
         cardKingCardPattern = GetComponent<CardKingCardPattern>();
         cardBoomPattern = GetComponent<CardBoomPattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         patternRandomValue = new int[4]; // 선택지 선택후에 랜덤 패턴을 위한 값 크기는 패턴의 수 만큼 조정해야함
+        PhaseChange(phase1CardBossData);
+    }
+
+    private void PhaseChange(CardBossData cardBossData)
+    {
+        this.cardBossData = cardBossData;
     }
 
     public void AuraEffectOn() // 아우리 이펙트 재생
@@ -47,10 +57,10 @@ public class CardBoss : Boss
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-            yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
-            yield return StartCoroutine(cardSidePattern.ISidePattern());
-            yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
-            yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+            yield return StartCoroutine(cardRadialShapePattern.Attacking());
+            yield return StartCoroutine(cardSidePattern.Attacking());
+            yield return StartCoroutine(cardKingCardPattern.Attacking());
+            yield return StartCoroutine(cardBoomPattern.Attacking());
         }
     }
 
@@ -69,13 +79,13 @@ public class CardBoss : Boss
             {
                 RandomPatternValue();
                 if (patternRandomValue[patternIndex] == 0)
-                    yield return StartCoroutine(cardRadialShapePattern.ICardRadialShapePattern());
+                    yield return StartCoroutine(cardRadialShapePattern.Attacking());
                 if (patternRandomValue[patternIndex] == 1)
-                    yield return StartCoroutine(cardSidePattern.ISidePattern());
+                    yield return StartCoroutine(cardSidePattern.Attacking());
                 if (patternRandomValue[patternIndex] == 2)
-                    yield return StartCoroutine(cardKingCardPattern.ICardKingCardPattern());
+                    yield return StartCoroutine(cardKingCardPattern.Attacking());
                 if (patternRandomValue[patternIndex] == 3)
-                    yield return StartCoroutine(cardBoomPattern.ICardBoomPattern());
+                    yield return StartCoroutine(cardBoomPattern.Attacking());
 
                 patternIndex++;
             }

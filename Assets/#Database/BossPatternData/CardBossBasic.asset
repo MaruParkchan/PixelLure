@@ -10,8 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eaa5b8824ca65644b4f2d495b41d97e, type: 3}
-  m_Name: New Card Boss Data
+  m_Name: CardBossBasic
   m_EditorClassIdentifier: 
-  aaa: 2323
-  sss: 333
-  aa: {fileID: 0}
+  p1_attackCount: 3
+  p2_attackCount: 3
+  p2_attackDelayTime: 0.39
+  p2_cardColorChangeTime: 0.8
+  p2_cardMoveSpeed: 3
+  p3_attackCount: 3
+  p3_attackDelayTime: 0.5
+  p3_accelerationWaitTime: 0.8
+  p3_initialMoveSpeed: 3
+  p3_accelerationSpeed: 30
+  p4_attackCount: 3
+  p4_attackDelayTime: 1
