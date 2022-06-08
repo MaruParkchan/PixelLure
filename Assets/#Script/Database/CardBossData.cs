@@ -28,6 +28,11 @@ public class CardBossData : ScriptableObject
     [Header("카드 패턴4")]
     [Range(1, 100)]
     public int p4_attackCount; // 패턴4  공격 횟수
-     [Range(0.01f, 3.00f)]
+    [Range(0.01f, 3.00f)]
     public float p4_attackDelayTime; // 패턴4  공격 딜레이
+
+    public bool isP1;
+    public bool isP2;
+    public bool isP3;
+    public bool isP4;
 }
