@@ -30,11 +30,4 @@ public class DogSmallSoju : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.transform.CompareTag("PlayerBullet"))
-        {
-            Destroy(collision.transform.gameObject);
-        }
-    }
 }

@@ -2849,10 +2849,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1457390965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88d8991222347a419eb946517b78b52, type: 3}
+  m_Script: {fileID: 11500000, guid: 54757ca74fa5f73479e13dc9e47d5ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 1
 --- !u!95 &1457390968
 Animator:
   serializedVersion: 3
@@ -3452,7 +3451,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   playerHitEffectObject: {fileID: 1723090631616734365, guid: 398ffb62541e764448d6d0f51df29fb7, type: 3}
   bulletMoveSpeed: 15
-  playerHp: 0
+  diedIndex: 1
+  isInvincibility: 0
 --- !u!50 &1674676063
 Rigidbody2D:
   serializedVersion: 4
@@ -4454,6 +4454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 2112931718}
   player: {fileID: 1674676062}
+  mainCamera: {fileID: 1506397327}
   hpUIsystem: {fileID: 2063757054}
   blinkObject: {fileID: 1457390965}
   diglogObject: {fileID: 1156162121}

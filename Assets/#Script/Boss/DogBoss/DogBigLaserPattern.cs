@@ -2,26 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DogBigLaserPattern : MonoBehaviour
+public class DogBigLaserPattern : DogBossPatternBase
 {
     [Header("기본 레이저 속성")]
     [SerializeField] private GameObject laserObject;// 레이저 
-    [SerializeField] private float laserSpawnCycleTime; // 재 생성 시간
-    [SerializeField] private int laserSpawnMaxCount; // 레이저 생성수 
     [Header("추가타 레이저 속성")]
     [SerializeField] private GameObject bundleLaserObject; // 추가타 레이저
-    [SerializeField] private float bundleLaserAttackTime; // 추가타 총 공격시간
-                                                          //  [SerializeField] private int bundleLaserSpawnMaxCount; // 추가타 레이저 생성수 
-    [SerializeField] private DogBundleLaser[] dogBundleLasers = new DogBundleLaser[8];
+    private float bundleLaserAttackTime = 2.3f; // 애니메이션 시간과 동일해야함
     List<DogBundleLaser> bundleLaser = new List<DogBundleLaser>();
-    private int bunlaserIndex = 0;
 
-    [SerializeField] private float waitTime;
-    private Animator animator;
     private Vector2 limitPosition;
     private Quaternion euler;
-    [SerializeField]
-    private bool isArousal; // 각성상태인가? ( 추가타 )
 
     private float xPos = 8.3f;
     private float ypos = 4.4f;
@@ -29,46 +20,33 @@ public class DogBigLaserPattern : MonoBehaviour
 
     // -4.4f / 4.4f -- y값 z = 0
 
-    private void Start()
+    protected override void Init()
     {
-        animator = GetComponent<Animator>();
+        
     }
 
-    public IEnumerator ILaserPattern()
+    public override IEnumerator Attacking()
     {
-        int currentCount = 0;
+                int currentCount = 0;
         yield return new WaitForSeconds(waitTime);
-        animator.SetTrigger("Posing");
-        while (laserSpawnMaxCount > currentCount)
+        dogBossAnimator.SetTrigger("Posing");
+        while ( currentCount < dogBoss.dogBossData.p4_AttackCount)
         {
             SpawnLaserInitAndSpawn(laserObject);
-            yield return new WaitForSeconds(laserSpawnCycleTime);
+            yield return new WaitForSeconds(dogBoss.dogBossData.p4_AttackDelayTime);
             currentCount++;
         }
 
-        currentCount = 0;
-
-        if (isArousal) // 각성중인가? 추가타를 하는가?
+        if (dogBoss.dogBossData.p4_IsArousal) // 각성중인가? 추가타를 하는가?
         {
-            animator.SetTrigger("AddAttack");
-            //while (bundleLaserSpawnMaxCount > currentCount)
-            //{
-            //    yield return new WaitForSeconds(bundleLaserSpawnCycleTime);
-            //    SpawnLaserInitAndSpawn(bundleLaserObject);
-            //    currentCount++;
-            //}
-
-            //for(int i = 0; i < dogBundleLasers.Length; i++) // 추가타 공격
-            //{
-            //    dogBundleLasers[i].Attack();
-            //}
-            //bunlaserIndex = 0;
+            dogBossAnimator.SetTrigger("AddAttack");
             yield return new WaitForSeconds(bundleLaserAttackTime);
         }
 
-        animator.SetTrigger("End");
+        dogBossAnimator.SetTrigger("End");
         yield return new WaitForSeconds(waitTime);
     }
+
 
     private void SpawnLaserInitAndSpawn(GameObject laserObject)
     {
@@ -98,13 +76,12 @@ public class DogBigLaserPattern : MonoBehaviour
         {
             clone.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
             bundleLaser.Add(clone.GetComponent<DogBundleLaser>());
-            //dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();
-            //bunlaserIndex += 1;
         }
     }
 
     public void AdditionalHits() // 추가타 공격
     {
+        SpawnLaserInitAndSpawn(bundleLaserObject);
         SpawnLaserInitAndSpawn(bundleLaserObject);
     }
 
@@ -116,21 +93,7 @@ public class DogBigLaserPattern : MonoBehaviour
         }
 
         bundleLaser.Clear();
-        //     bunlaserIndex = 0;
     }
-
-    //private void BundleLaserSpawn(Vector3 pos, Quaternion euler)
-    //{
-    //    GameObject clone = Instantiate(laserObject);
-    //    clone.transform.position = pos;
-    //    clone.transform.rotation = euler;
-
-    //    if(clone.GetComponent<DogBundleLaser>() != null)
-    //    {
-    //        dogBundleLasers[bunlaserIndex] = clone.GetComponent<DogBundleLaser>();
-    //        bunlaserIndex++;
-    //    }
-    //}
 
     public void CoroutineStop()
     {

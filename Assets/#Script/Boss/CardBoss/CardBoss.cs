@@ -57,10 +57,20 @@ public class CardBoss : Boss
         yield return new WaitForSeconds(4.0f);
         while (true)
         {
-            yield return StartCoroutine(cardRadialShapePattern.Attacking());
-            yield return StartCoroutine(cardSidePattern.Attacking());
-            yield return StartCoroutine(cardKingCardPattern.Attacking());
-            yield return StartCoroutine(cardBoomPattern.Attacking());
+            if (cardBossData.isP1 == true)
+                yield return StartCoroutine(cardRadialShapePattern.Attacking());
+            if (cardBossData.isP2 == true)
+                yield return StartCoroutine(cardSidePattern.Attacking());
+            if (cardBossData.isP3 == true)
+                yield return StartCoroutine(cardKingCardPattern.Attacking());
+            if (cardBossData.isP4 == true)
+                yield return StartCoroutine(cardBoomPattern.Attacking());
+
+
+            if (!cardBossData.isP1 && !cardBossData.isP2 && !cardBossData.isP3 && !cardBossData.isP4)
+                cardBossData.isP1 = true;
+
+            yield return null;
         }
     }
 
@@ -72,8 +82,24 @@ public class CardBoss : Boss
         yield return new WaitForSeconds(2.0f);
         ColliderEnableOn();
         IsisInvincibilityOff();
+
+        //여기서 선택조건으로 변경후 페이즈 시작
+        PhaseChange(phase2CardBossData);
+
         while (true) // ** 중첩 while문으로써 뭔가 맘에 안듬 **
         {
+            if (cardBossData.isP1 == true)
+                yield return StartCoroutine(cardRadialShapePattern.Attacking());
+            if (cardBossData.isP2 == true)
+                yield return StartCoroutine(cardSidePattern.Attacking());
+            if (cardBossData.isP3 == true)
+                yield return StartCoroutine(cardKingCardPattern.Attacking());
+            if (cardBossData.isP4 == true)
+                yield return StartCoroutine(cardBoomPattern.Attacking());
+
+            if (!cardBossData.isP1 && !cardBossData.isP2 && !cardBossData.isP3 && !cardBossData.isP4)
+                cardBossData.isP1 = true;
+            /*
             int patternIndex = 0;
             while (patternIndex < 4)
             {
@@ -89,6 +115,8 @@ public class CardBoss : Boss
 
                 patternIndex++;
             }
+            */
+            yield return null;
         }
     }
 
@@ -101,6 +129,15 @@ public class CardBoss : Boss
         AuraEffectClear();
         AuraEffectOn();       
         this.transform.position = Vector3.zero;
+    }
+
+    protected override void CoroutineAllStop()
+    {
+        cardRadialShapePattern.CoroutineStop();
+        cardSidePattern.CoroutineStop();
+        cardKingCardPattern.CoroutineStop();
+        cardBoomPattern.CoroutineStop();
+        StopAllCoroutines();
     }
 
     protected override void ColliderEnableOn()

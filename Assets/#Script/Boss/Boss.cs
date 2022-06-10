@@ -93,13 +93,20 @@ public abstract class Boss : MonoBehaviour
     {
         StopAllCoroutines();
         isChoice = true;
-        isInvincibility = true;
         isAattacked = false;
         gameSystem.PauseAndTalk();
         animator.SetTrigger("Choice");
         IsisInvincibilityOn();
         ColliderEnableOff();
         SelectionEventTime();
+    }
+
+    public void PlayerDiedEvent()
+    {
+        CoroutineAllStop();
+        animator.SetTrigger("Choice");
+        isInvincibility = true;
+        isAattacked = false;
     } 
 
     public void Resume()
@@ -109,6 +116,8 @@ public abstract class Boss : MonoBehaviour
     }
 
     protected abstract void SelectionEventTime(); // 선택지 나올시 제어할 메소드
+
+    protected abstract void CoroutineAllStop();
 
     protected void HpRecharging() // 페이즈2 시작시 체력 재충전
     {

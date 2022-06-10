@@ -1,15 +1,21 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System;
 using TMPro;
 
 public class GameSystem : MonoBehaviour
 {
     [SerializeField] private Boss boss;
     [SerializeField] private Player player;
+    [SerializeField] private GameObject mainCamera;
 
-    private GameObject[] enemyObjects; // 적 오브젝트들 담기
+    private GameObject[] enemyObjects1; // 적 오브젝트들 담기
+    private GameObject[] enemyObjects2; // 적 오브젝트들 담기
     private GameObject[] playerObjects; // 플레이어 오브젝트들담기
+    List<GameObject> bullets; 
 
     [SerializeField] private HpUIsystem hpUIsystem;
     [SerializeField] private GameObject blinkObject;
@@ -33,10 +39,13 @@ public class GameSystem : MonoBehaviour
     private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
     #endregion
 
+    public static Action PlayerDied;
+
     private void Start()
     {
         diglogText.text = "";
         diglogData.TextFistInitUpdate();
+        PlayerDied = () => { PlayerDiedEvent(); };
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
@@ -67,14 +76,35 @@ public class GameSystem : MonoBehaviour
         diglogObject.SetActive(false);
     }
 
+    public void PlayerDiedEvent()
+    {
+        player.PlayerDiedEvent();
+        boss.PlayerDiedEvent();
+        blinkObject.SetActive(true);
+        GameObjectAllFind(); 
+        CameraSetting();
+        StartCoroutine("IPlayerDiedEvent");
+    }
+
+    private void CameraSetting()
+    {
+        mainCamera.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, mainCamera.GetComponent<Transform>().position.z);
+        mainCamera.GetComponent<Camera>().orthographicSize = 1.5f;
+    }
+
     private void GameObjectAllFind() // 플레이어, 적의 총알 오브젝트 다찾아서 삭제시킴
     {
-        enemyObjects = GameObject.FindGameObjectsWithTag("EnemyBullet");
+        enemyObjects1 = GameObject.FindGameObjectsWithTag("BulletPenetrationImpossible");
+        enemyObjects2 = GameObject.FindGameObjectsWithTag("BulletPenetrationPossible");
         playerObjects = GameObject.FindGameObjectsWithTag("PlayerBullet");
 
-        for (int i = 0; i < enemyObjects.Length; i++)
+        for (int i = 0; i < enemyObjects1.Length; i++)
         {
-            Destroy(enemyObjects[i]);
+            Destroy(enemyObjects1[i]);
+        }
+                for (int i = 0; i < enemyObjects2.Length; i++)
+        {
+            Destroy(enemyObjects2[i]);
         }
         for (int i = 0; i < playerObjects.Length; i++)
         {
@@ -82,11 +112,17 @@ public class GameSystem : MonoBehaviour
         }
     } // 오브젝트 다 삭제 (총알)
 
+    private IEnumerator IPlayerDiedEvent()
+    {
+        yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene("Intro");
+    }
+
     private IEnumerator Choice()
     {
         player.Pause();
         blinkObject.SetActive(true);
-        //GameObjectAllFind(); // 애를 비활성화하면 선택시 총알이 안사라짐
+        GameObjectAllFind(); // 애를 비활성화하면 선택시 총알이 안사라짐
         yield return new WaitForSeconds(2.0f);
         diglogObject.SetActive(true);
         StartCoroutine(DiglogUpdate());
@@ -182,7 +218,6 @@ public class GameSystem : MonoBehaviour
         }
         return false;
     }
-
 
     private void SetNextDiglog()
     {

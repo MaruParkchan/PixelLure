@@ -5773,14 +5773,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 100
-  phase2BossHp: 150
-  limitPhaseHp: 98
+  phase1BossHp: 150
+  phase2BossHp: 250
+  limitPhaseHp: 130
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
   cardBossData: {fileID: 0}
   phase1CardBossData: {fileID: 11400000, guid: 249256ae5daf0544fa90c57ff6eee29d, type: 2}
-  phase2CardBossData: {fileID: 0}
+  phase2CardBossData: {fileID: 11400000, guid: 1844efa1f047e6b478ad467ac62bea4e, type: 2}
 --- !u!114 &744212755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5794,8 +5794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardObject: {fileID: 4772552133590063714, guid: 52e042b9efc57b84d9a58005cbe1f285, type: 3}
-  cardColorChangeTime: 1.25
-  cardMoveSpeed: 5
 --- !u!114 &744212756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6889,7 +6887,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674676058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.22, y: -3.1, z: 0}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 1533556520}
@@ -6913,7 +6911,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   playerHitEffectObject: {fileID: 1723090631616734365, guid: 398ffb62541e764448d6d0f51df29fb7, type: 3}
   bulletMoveSpeed: 15
-  playerHp: 0
+  diedIndex: 0
+  isInvincibility: 0
 --- !u!114 &1674676063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7499,10 +7498,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1842556790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88d8991222347a419eb946517b78b52, type: 3}
+  m_Script: {fileID: 11500000, guid: 54757ca74fa5f73479e13dc9e47d5ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 1
 --- !u!95 &1842556795
 Animator:
   serializedVersion: 3
@@ -7650,6 +7648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 744212754}
   player: {fileID: 1674676062}
+  mainCamera: {fileID: 1506397327}
   hpUIsystem: {fileID: 2050683035}
   blinkObject: {fileID: 1842556790}
   diglogObject: {fileID: 291947308}

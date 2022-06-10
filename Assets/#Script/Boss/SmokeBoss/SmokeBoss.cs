@@ -78,6 +78,15 @@ public class SmokeBoss : Boss
         this.transform.position = Vector3.zero;
     }
 
+    protected override void CoroutineAllStop()
+    {
+        smokeMovePattern.CoroutineStop();
+        smokeMiniDestructPattern.CoroutineStop();
+        smokeAshtrayPattern.CoroutineStop();
+        smokeSprayingFirePattern.CoroutineStop();
+        StopAllCoroutines();
+    }
+
     protected override void ColliderEnableOn()
     {
         boxCollider2D.enabled = true;

@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IPause
 {
-    [SerializeField]
-    private MapData mapData;
-    [SerializeField]
-    private PlayerData playerData;
-    [SerializeField]
-    private GameObject bulletPrefab;
-    [SerializeField]
-    private GameObject playerHitEffectObject;
-    [SerializeField]
-    private float bulletMoveSpeed; // 총알 속도 
+    [SerializeField] private MapData mapData;
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private GameObject playerHitEffectObject;
+    [SerializeField] private float bulletMoveSpeed; // 총알 속도 
 
     private bool isHit = false; // 타격 당했는가?
     private bool isPause; // 선택지 활성화중이면 멈춤
     private bool isFireLock; // 총알 발사를 잠궜는지?
-    private bool isInvincibility; // 무적중인가?
+    private bool isDied = false;
+    [SerializeField] private int diedIndex;
+    [SerializeField] private bool isInvincibility; // 무적중인가?
 
-    [SerializeField] private int playerHp;
+    private int playerHp = 3;
     private Animator playerAnimator;
 
     private void Awake()
@@ -30,7 +27,7 @@ public class Player : MonoBehaviour, IPause
 
     private void Update()
     {
-        if (isPause)
+        if (isPause || isDied)
             return;
 
         Movement();
@@ -105,12 +102,33 @@ public class Player : MonoBehaviour, IPause
         isInvincibility = false;
     }
 
+    public void PlayerDiedEvent()
+    {
+        StartCoroutine("IPlayerDiedEvent");
+    }
+
+    private IEnumerator IPlayerDiedEvent()
+    {
+        isDied = true;
+        yield return new WaitForSeconds(0.5f);
+        playerAnimator.SetInteger("DiedIndex", diedIndex);
+        playerAnimator.SetTrigger("Died");
+        //transform.rotation = Quaternion.identity; // 활성화하면 회전 고정
+    }
+
     private IEnumerator Hit()
     {
         isHit = true;
         Instantiate(playerHitEffectObject, transform.position, Quaternion.identity);
         playerHp--;
         PlayerHpUISystem.playerUISystem(); // Action PlayerUI Event
+
+        if(playerHp <= 0)
+        {
+            GameSystem.PlayerDied();
+            yield break;
+        }
+
         playerAnimator.SetTrigger("Hit");
         yield return new WaitForSeconds(2.0f);
         playerAnimator.SetTrigger("BaseState");

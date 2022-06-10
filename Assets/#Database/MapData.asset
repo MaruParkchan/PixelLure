@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fc173caed494844b29fdfd002fcfcd, type: 3}
   m_Name: MapData
   m_EditorClassIdentifier: 
-  limitMin: {x: -7.8, y: -4.8}
-  limitMax: {x: 7.8, y: 4.8}
+  limitMin: {x: -8.7, y: -4.8}
+  limitMax: {x: 8.7, y: 4.8}

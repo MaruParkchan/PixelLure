@@ -3,34 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class DogBigPoundingPattern : MonoBehaviour
+public class DogBigPoundingPattern : DogBossPatternBase
 {
     [SerializeField] private GameObject sojuObject;
 
-    [SerializeField] private int sojuSpawnCount; // »ı¼º ¼ö 
-    [SerializeField] private float spawnCycleTime; // Àç »ı¼º ½Ã°£
-    [SerializeField] private float sojuObjectMoveSpeed; // ¼ÒÁÖ ¿ÀºêÁ§Æ® ½ºÇÇµå
-    [SerializeField] private float sojuCycleWaitTime; // ¼ÒÁÖ ÆĞÅÏ 6°³ ÅÍÁøÈÄ ´ë±â½Ã°£
-    [SerializeField] private int spawnCount; // ÆĞÅÏ È½¼ö 
-    [SerializeField] private float waitTime; // ´ë±â½Ã°£
+    [SerializeField] private int sojuSpawnCount; // ìƒì„± ìˆ˜ 
+    [SerializeField] private float spawnCycleTime; // ì¬ ìƒì„± ì‹œê°„
+    [SerializeField] private float sojuObjectMoveSpeed; // ì†Œì£¼ ì˜¤ë¸Œì íŠ¸ ìŠ¤í”¼ë“œ
+    [SerializeField] private float sojuCycleWaitTime; // ì†Œì£¼ íŒ¨í„´ 6ê°œ í„°ì§„í›„ ëŒ€ê¸°ì‹œê°„
+    [SerializeField] private int spawnCount; // íŒ¨í„´ íšŸìˆ˜ 
 
     private float[] xPosData = new float[8];
-    private int[] randomIndexs; // ³­¼ö ÀúÀå ¹è¿­
+    private int[] randomIndexs; // ë‚œìˆ˜ ì €ì¥ ë°°ì—´
 
-    private Animator animator;
+    private Action pounding;
+
     private List<GameObject> sojuGameObjects = new List<GameObject>();
 
-    private void Start()
+    protected override void Init()
     {
-        animator = GetComponent<Animator>();
         randomIndexs = new int[6];
         XposDataInit();
+        pounding = () => { };
     }
 
-    public IEnumerator ISojuRain()
+    public override IEnumerator Attacking()
     {
-        int currentSojuSpawnCount = 0; // ¼ÒÁÖ »ı¼º ¼ö
-        int currentSpawnCount = 0; // ÆĞÅÏ È½¼ö
+        int currentSojuSpawnCount = 0; // ì†Œì£¼ ìƒì„± ìˆ˜
+        int currentSpawnCount = 0; // íŒ¨í„´ íšŸìˆ˜
 
         yield return new WaitForSeconds(waitTime);
 
@@ -47,10 +47,8 @@ public class DogBigPoundingPattern : MonoBehaviour
             AnimationPounding();
             yield return new WaitForSeconds(sojuCycleWaitTime);
             currentSojuSpawnCount = 0;
-            currentSpawnCount++;            
+            currentSpawnCount++;
         }
-
-        Debug.Log("ÆĞÅÏ Àç½ÃÀÛ");
     }
 
     private void SpawnObject(float xPos)
@@ -63,7 +61,7 @@ public class DogBigPoundingPattern : MonoBehaviour
 
     public void AnimationPounding()
     {
-        animator.SetTrigger("Pounding");
+        dogBossAnimator.SetTrigger("Pounding");
     }
 
     public void SojuCountPlus(GameObject sojuObject)
@@ -78,11 +76,6 @@ public class DogBigPoundingPattern : MonoBehaviour
 
     public void Pounding()
     {
-        //GameObject[] clones = GameObject.FindGameObjectsWithTag("SojuBreak");
-        //for(int i = 0; i < clones.Length; i++)
-        //{
-        //    clones[i].GetComponent<DogSojuBreak>().Break();
-        //}
         for(int i = 0; i < sojuGameObjects.Count; i++)
         {
             sojuGameObjects[i].GetComponent<DogSojuBreak>().Break();
@@ -91,7 +84,7 @@ public class DogBigPoundingPattern : MonoBehaviour
         CameraShake.cameraShake();
     }
 
-    private void RandomNumber() // Áßº¹¾ø´Â ³­¼ö Ãâ·Â
+    private void RandomNumber() // ì¤‘ë³µì—†ëŠ” ë‚œìˆ˜ ì¶œë ¥
     {
         for (int i = 0; i < sojuSpawnCount; i++) 
         {
@@ -107,7 +100,7 @@ public class DogBigPoundingPattern : MonoBehaviour
         }
     }
 
-    private void XposDataInit() // Xpos µ¥ÀÌÅÍ ÃÊ±âÈ­ 
+    private void XposDataInit() // Xpos ë°ì´í„° ì´ˆê¸°í™” 
     {
         xPosData[0] = -7.0f;
         xPosData[1] = -5.0f;
@@ -123,4 +116,5 @@ public class DogBigPoundingPattern : MonoBehaviour
     {
         StopAllCoroutines();
     }
+
 }

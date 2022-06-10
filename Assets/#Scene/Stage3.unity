@@ -187,7 +187,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &94766207
 GameObject:
@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boss: {fileID: 1036927131}
   player: {fileID: 1674676062}
+  mainCamera: {fileID: 1506397327}
   hpUIsystem: {fileID: 119712734}
   blinkObject: {fileID: 511694174}
   diglogObject: {fileID: 1271739556}
@@ -294,7 +295,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &119712736
 MonoBehaviour:
@@ -312,6 +313,67 @@ MonoBehaviour:
   - {fileID: 212815429}
   - {fileID: 933513847}
   - {fileID: 1702168917}
+--- !u!1001 &145608743
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.1957674
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.03857565
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258506, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258509, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 410587752538258511, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
+      propertyPath: m_Name
+      value: SojuCupEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c5e8085105ea1848a1f27d052316b82, type: 3}
 --- !u!1 &212815429
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +511,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398982157
 GameObject:
@@ -633,10 +695,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 511694174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a88d8991222347a419eb946517b78b52, type: 3}
+  m_Script: {fileID: 11500000, guid: 54757ca74fa5f73479e13dc9e47d5ca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 1
 --- !u!95 &511694177
 Animator:
   serializedVersion: 3
@@ -913,7 +974,7 @@ Transform:
   m_Children:
   - {fileID: 2085766767}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &933513847
 GameObject:
@@ -1099,7 +1160,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1036927129
 Animator:
@@ -1132,10 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b4368cac6fe6d349a1bd3d0d80b217f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 2
   bubblePrefab: {fileID: 6463999511313626465, guid: 991c8ef03130c3744adf22a5d25c84b1, type: 3}
-  spawnMaxCount: 5
-  spawnCycleTime: 1
 --- !u!114 &1036927131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1150,8 +1208,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   phase1BossHp: 200
   phase2BossHp: 400
-  limitPhaseHp: 195
+  limitPhaseHp: 170
   isBulkUp: 0
+  dogBossData: {fileID: 0}
+  phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
+  phase2DogBossData: {fileID: 0}
 --- !u!114 &1036927132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1164,11 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cafc9193c925054d86e38bac95df004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dogSmallSojuCirclePrefab: {fileID: 7435214155742854203, guid: 28289a3516df862458f1369500734b28, type: 3}
-  rotateSpeed: 50
-  rotateTime: 10
-  fadeTime: 2
-  waitTime: 2
+  dogSmallSojuCirclePrefab: {fileID: 7435214155742854203, guid: 31d2305e1764b514e876de20426f419a, type: 3}
 --- !u!114 &1036927133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,12 +1239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sojuObject: {fileID: 7297576343483500400, guid: ed672bf93eea26241be1325390d92047, type: 3}
-  spawnCycle: 0.5
-  spawnCount: 8
-  rotateSpeed: 240
-  moveSpeed: 15
-  attackTime: 1
-  waitTime: 2
 --- !u!114 &1036927134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,13 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserObject: {fileID: 7671195122368422742, guid: 2f5dbde3e51b9004d9df98967cd1eaf1, type: 3}
-  laserSpawnCycleTime: 0.5
-  laserSpawnMaxCount: 10
   bundleLaserObject: {fileID: 6730238510955855929, guid: 36aa756e334eaef459c538478e2b697c, type: 3}
-  bundleLaserAttackTime: 2.5
-  dogBundleLasers: []
-  waitTime: 2
-  isArousal: 1
 --- !u!114 &1036927135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1226,7 +1271,6 @@ MonoBehaviour:
   sojuObjectMoveSpeed: 5
   sojuCycleWaitTime: 1
   spawnCount: 3
-  waitTime: 2
 --- !u!58 &1036927136
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1360,7 +1404,7 @@ RectTransform:
   - {fileID: 511694175}
   - {fileID: 94766208}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1832,7 +1876,7 @@ Transform:
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1674676062
 MonoBehaviour:
@@ -1851,7 +1895,8 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   playerHitEffectObject: {fileID: 1723090631616734365, guid: 398ffb62541e764448d6d0f51df29fb7, type: 3}
   bulletMoveSpeed: 15
-  playerHp: 0
+  diedIndex: 2
+  isInvincibility: 0
 --- !u!50 &1674676063
 Rigidbody2D:
   serializedVersion: 4
@@ -2220,7 +2265,7 @@ Transform:
   m_Children:
   - {fileID: 2039631256}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1974732698
 GameObject:

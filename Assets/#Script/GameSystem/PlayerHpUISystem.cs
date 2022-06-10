@@ -17,7 +17,6 @@ public class PlayerHpUISystem : MonoBehaviour
 
     public void PlayerHpDecline() // 플레이어 Hp 감소
     {
-        Debug.Log("ㅁ");
         if (playerHpIndexCount == 0)
             return;
 
