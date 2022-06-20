@@ -15,7 +15,7 @@ public class GameSystem : MonoBehaviour
     private GameObject[] enemyObjects1; // 적 오브젝트들 담기
     private GameObject[] enemyObjects2; // 적 오브젝트들 담기
     private GameObject[] playerObjects; // 플레이어 오브젝트들담기
-    List<GameObject> bullets; 
+    List<GameObject> bullets;
 
     [SerializeField] private HpUIsystem hpUIsystem;
     [SerializeField] private GameObject blinkObject;
@@ -34,18 +34,22 @@ public class GameSystem : MonoBehaviour
     private string diglog = ""; // 대화창출력할 string
     private int diglogIndex = 0; // 대화창 인덱스
     private float typingSpeed = 0.11f;
-    private bool isFirst = true; 
+    private bool isFirst = true;
     private bool isTyping = false; // 타이핑중인지
-    private bool isAccept = false; // 왼쪽, 오른쪽 선택값 
+    // [HideInInspector]
+    // public bool isAccept = false; // 왼쪽, 오른쪽 선택값 
     #endregion
 
     public static Action PlayerDied;
+    public static Action BossDied;
+    public static bool isAccept;
 
     private void Start()
     {
         diglogText.text = "";
         diglogData.TextFistInitUpdate();
         PlayerDied = () => { PlayerDiedEvent(); };
+        BossDied = () => { BossDiedEvent(); };
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
@@ -81,9 +85,18 @@ public class GameSystem : MonoBehaviour
         player.PlayerDiedEvent();
         boss.PlayerDiedEvent();
         blinkObject.SetActive(true);
-        GameObjectAllFind(); 
+        GameObjectAllFind();
         CameraSetting();
         StartCoroutine("IPlayerDiedEvent");
+    }
+
+    public void BossDiedEvent()
+    {
+        blinkObject.SetActive(true);
+        GameObjectAllFind();
+        player.BossDiedEvent();
+        boss.BossDiedEvent();
+        StartCoroutine("IBossDiedEvent");
     }
 
     private void CameraSetting()
@@ -102,7 +115,7 @@ public class GameSystem : MonoBehaviour
         {
             Destroy(enemyObjects1[i]);
         }
-                for (int i = 0; i < enemyObjects2.Length; i++)
+        for (int i = 0; i < enemyObjects2.Length; i++)
         {
             Destroy(enemyObjects2[i]);
         }
@@ -115,6 +128,12 @@ public class GameSystem : MonoBehaviour
     private IEnumerator IPlayerDiedEvent()
     {
         yield return new WaitForSeconds(2.5f);
+        SceneManager.LoadScene("Intro");
+    }
+
+    private IEnumerator IBossDiedEvent()
+    {
+        yield return new WaitForSeconds(5.0f);
         SceneManager.LoadScene("Intro");
     }
 
@@ -137,7 +156,7 @@ public class GameSystem : MonoBehaviour
 
     private bool FirstBossDiglogUpdate()
     {
-        if( isFirst == true) // 최초 대사 시작
+        if (isFirst == true) // 최초 대사 시작
         {
             diglogIndex = 0; // 텍스트 데이터 0으로 초기화
             StartCoroutine("TypingText");
@@ -146,7 +165,7 @@ public class GameSystem : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            if(isTyping == true)
+            if (isTyping == true)
             {
                 isTyping = false;
 
@@ -158,7 +177,7 @@ public class GameSystem : MonoBehaviour
             }
 
 
-            if(diglogDatas.Length - 1 > diglogIndex)
+            if (diglogDatas.Length - 1 > diglogIndex)
             {
                 SetNextDiglog();
             }
@@ -212,6 +231,8 @@ public class GameSystem : MonoBehaviour
             }
             else
             {
+                if (isAccept == false)
+                    player.PlayerDebuffs();
                 ResumeGame();
                 return true;
             }
@@ -232,7 +253,7 @@ public class GameSystem : MonoBehaviour
         diglogText.text = "";
         diglog = diglogDatas[diglogIndex];
         isTyping = true;
-        while(index < diglog.Length)
+        while (index < diglog.Length)
         {
             diglogText.text += diglog[index];
             index++;
@@ -253,19 +274,20 @@ public class GameSystem : MonoBehaviour
     public void TextDataSetUpdate(string[] textDatas) // 선택한것에 따라 텍스트 데이터 변경하기 
     {
         diglogDatas = new string[textDatas.Length]; // 받아온 string의 배열 크기만큼 바꾸기
-        
-        for(int i = 0; i < textDatas.Length; i++) // 텍스트데이터 넣기 
+
+        for (int i = 0; i < textDatas.Length; i++) // 텍스트데이터 넣기 
         {
             diglogDatas[i] = textDatas[i];
         }
     }
 
-    public void ChoiceSelect(bool isAccept) // Yes or No 선택했으면 받아오기 
+    public void ChoiceSelect(bool accept) // Yes or No 선택했으면 받아오기 
     {
-        this.isAccept = isAccept;
+        isAccept = accept;
         if (isAccept == true)
         {
             rightChoiceObject.SetActive(false); // Yes이기때문에 왼쪽 남기고 오른쪽 삭제
+
         }
         else
         {
@@ -274,6 +296,6 @@ public class GameSystem : MonoBehaviour
 
         diglogData.TextDataUpdate(isAccept);
         PlayerFreezeAndLastTalk();
-       // StartCoroutine(TextUpdate());
+        // StartCoroutine(TextUpdate());
     }
 }

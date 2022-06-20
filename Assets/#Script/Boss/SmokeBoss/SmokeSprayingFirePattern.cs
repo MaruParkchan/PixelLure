@@ -2,43 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeSprayingFirePattern : MonoBehaviour
+public class SmokeSprayingFirePattern : SmokeBossPatternBase
 {
     [SerializeField] private MapData smokeBossMapData;
     [SerializeField] private GameObject SprayingFirePrefab;
-    [SerializeField] private int fireCount; // °ø°Ý È½¼ö
-    [SerializeField] private float attackCycleTime;
-    [SerializeField] private float waitTime;
-    private Animator animator;
-    private SmokeBoss smokeBoss;
 
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-        smokeBoss = GetComponent<SmokeBoss>();
-    }
-
-    public IEnumerator SprayingFire()
+    public override IEnumerator Attacking()
     {
         int currentCount = 0;
         yield return new WaitForSeconds(waitTime);
-        Debug.Log("B");
-        while (fireCount > currentCount)
+        while (smokeBoss.smokeBossData.p4_AttackCount > currentCount)
         {
-           // smokeBoss.HideorAppear();
+            // smokeBoss.HideorAppear();
             Appear();
-            yield return new WaitForSeconds(attackCycleTime);
+            yield return new WaitForSeconds(smokeBoss.smokeBossData.p4_RespawnCycleTime);
             currentCount++;
         }
     }
 
     private void Appear()
     {
-        transform.position = new Vector3(Random.Range(smokeBossMapData.LimitMin.x, smokeBossMapData.LimitMax.x), 
+        transform.position = new Vector3(Random.Range(smokeBossMapData.LimitMin.x, smokeBossMapData.LimitMax.x),
                                          Random.Range(smokeBossMapData.LimitMin.y, smokeBossMapData.LimitMax.y));
 
         smokeBoss.HideorAppear();
-        animator.SetTrigger("Ready");
+        smokeBossAnimator.SetTrigger("Ready");
     }
 
     public void EngrgyBoom()
@@ -46,7 +34,7 @@ public class SmokeSprayingFirePattern : MonoBehaviour
         GameObject clone = Instantiate(SprayingFirePrefab);
         clone.transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y + 0.5f);
         smokeBoss.HideorAppear();
-        animator.SetTrigger("Hide");
+        smokeBossAnimator.SetTrigger("Hide");
     }
 
     public void CoroutineStop()
@@ -55,4 +43,8 @@ public class SmokeSprayingFirePattern : MonoBehaviour
         StopAllCoroutines();
     }
 
+    protected override void Init()
+    {
+
+    }
 }

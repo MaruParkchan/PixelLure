@@ -744,7 +744,7 @@ ParticleSystem:
     m_TextureBilinearFiltering: 0
     randomDirectionAmount: 0
     sphericalDirectionAmount: 0
-    randomPositionAmount: 0.6
+    randomPositionAmount: 0.3
     radius:
       value: 0.01
       mode: 0
@@ -975,7 +975,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 60
+        scalar: 75
         minScalar: 30
         maxCurve:
           serializedVersion: 2

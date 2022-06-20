@@ -14,19 +14,21 @@ public abstract class Boss : MonoBehaviour
     protected int limitPhaseHp; // 일정 HP 이하로 떨어지면 페이즈2 및 선택지 나올 체력값
 
     protected bool isInvincibility = false;
-    private float hitDelayCycleTime= 0.1f; // 피격시 몇초간 무적
+    private float hitDelayCycleTime = 0.1f; // 피격시 몇초간 무적
     protected int[] patternRandomValue;
 
     private bool isBossDied = false; public bool IsBossDied { get { return isBossDied; } } // 죽었는가?
     private bool isAattacked = false; // 공격당했는가?
     private bool isChoice = false; // 선택시간일때;
-    private bool isDecision = false; // 선택하였는가?
+    protected bool isPhaseCompled = false; // 페이즈가 바뀌었는가?
     protected Animator animator;
     protected GameSystem gameSystem;
+    protected AudioSource bossAudioSource;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        bossAudioSource = GetComponent<AudioSource>();
         gameSystem = GameObject.FindWithTag("GameSystem").GetComponent<GameSystem>();
         currentBossHp = phase1BossHp;
         StartCoroutine("Phase1");
@@ -67,7 +69,7 @@ public abstract class Boss : MonoBehaviour
 
         currentBossHp -= damage;
 
-        if (isDecision == false && isChoice == false)
+        if (isPhaseCompled == false && isChoice == false)
         {
             if (limitPhaseHp >= currentBossHp)
             {
@@ -75,10 +77,10 @@ public abstract class Boss : MonoBehaviour
                 return;
             }
         }
-
-        if (isDecision == true && isChoice == true && currentBossHp <= 0)
+        else if (isPhaseCompled == true && isChoice == true && currentBossHp <= 0)
         {
             isBossDied = true;
+            GameSystem.BossDied();
             return;
         }
 
@@ -105,9 +107,12 @@ public abstract class Boss : MonoBehaviour
     {
         CoroutineAllStop();
         animator.SetTrigger("Choice");
+        bossAudioSource.Stop();
         isInvincibility = true;
         isAattacked = false;
-    } 
+    }
+
+    public abstract void BossDiedEvent();
 
     public void Resume()
     {

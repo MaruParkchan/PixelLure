@@ -22,15 +22,16 @@ public class DogBigLaserPattern : DogBossPatternBase
 
     protected override void Init()
     {
-        
+
     }
 
     public override IEnumerator Attacking()
     {
-                int currentCount = 0;
+        CameraRotate();
+        int currentCount = 0;
         yield return new WaitForSeconds(waitTime);
         dogBossAnimator.SetTrigger("Posing");
-        while ( currentCount < dogBoss.dogBossData.p4_AttackCount)
+        while (currentCount < dogBoss.dogBossData.p4_AttackCount)
         {
             SpawnLaserInitAndSpawn(laserObject);
             yield return new WaitForSeconds(dogBoss.dogBossData.p4_AttackDelayTime);

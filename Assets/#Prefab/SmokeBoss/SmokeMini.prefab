@@ -146,4 +146,4 @@ MonoBehaviour:
   moveSpeed: 3
   smokeEffect: {fileID: 3983046023638738548, guid: 37c4245bfb9cd424fbd5cf715a847a77, type: 3}
   bombDistance: 0.5
-  bombTimer: 4
+  bombTimer: 2

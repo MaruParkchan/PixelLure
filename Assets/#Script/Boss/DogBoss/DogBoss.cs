@@ -27,6 +27,9 @@ public class DogBoss : Boss
     #endregion
     private CircleCollider2D circleCollider2D;
 
+    [SerializeField] private AudioClip miniDogSoundClip;
+    [SerializeField] private AudioClip bigDogSoundClip;
+
 
     private void Start()
     {
@@ -38,8 +41,10 @@ public class DogBoss : Boss
         circleCollider2D = GetComponent<CircleCollider2D>();
         BigBossCircleColliderPositionAndSizeData();
         CircleColliderInit(smallDogBossCircleColliderOffsetY, smallDogBossCircleColliderRadius);
-        PhaseChange(phase1DogBossData);
+
         patternRandomValue = new int[3]; // 선택지 선택후에 랜덤 패턴을 위한 값 크기는 패턴의 수 만큼 조정해야함       
+        PhaseChange(phase1DogBossData);
+        AudioClipChange(miniDogSoundClip);
     }
 
     private void PhaseChange(DogBossData dogBossData)
@@ -76,6 +81,7 @@ public class DogBoss : Boss
 
             if (!dogBossData.isP1 && !dogBossData.isP2)
                 dogBossData.isP1 = true;
+
             yield return null;
         }
     }
@@ -83,8 +89,11 @@ public class DogBoss : Boss
     protected override IEnumerator Phase2()
     {
         animator.SetTrigger("BulkUp");
-        CircleColliderInit(bigDogBossCirCleColliderOffsetY, bigDogBossCirCleColliderRadius); ;
+        CircleColliderInit(bigDogBossCirCleColliderOffsetY, bigDogBossCirCleColliderRadius);
+        if (GameSystem.isAccept)
+            PhaseChange(phase2DogBossData);
         yield return new WaitForSeconds(4.4f);
+        AudioClipChange(bigDogSoundClip);
         ColliderEnableOn();
         IsisInvincibilityOff();
         while (true)
@@ -105,11 +114,13 @@ public class DogBoss : Boss
                 yield return StartCoroutine(dogBigTracePattern.Attacking());
             if (dogBossData.isP4 == true)
                 yield return StartCoroutine(dogBigLaserPattern.Attacking());
+            if (dogBossData.isP5 == true)
+                yield return StartCoroutine(dogBigPoundingPattern.Attacking());
 
-            if (!dogBossData.isP3 && !dogBossData.isP4)
+            if (!dogBossData.isP3 && !dogBossData.isP4 && !dogBossData.isP5)
                 dogBossData.isP3 = true;
+
             yield return null;
-            // yield return StartCoroutine(dogBigPoundingPattern.Attacking());
 
         }
     }
@@ -127,6 +138,12 @@ public class DogBoss : Boss
         StopAllCoroutines();
     }
 
+    public override void BossDiedEvent()
+    {
+        CoroutineAllStop();
+        animator.SetTrigger("Die");
+    }
+
     protected override void ColliderEnableOn()
     {
         circleCollider2D.enabled = true;
@@ -135,5 +152,11 @@ public class DogBoss : Boss
     protected override void ColliderEnableOff()
     {
         circleCollider2D.enabled = false;
+    }
+
+    private void AudioClipChange(AudioClip clip)
+    {
+        bossAudioSource.clip = clip;
+        bossAudioSource.Play();
     }
 }

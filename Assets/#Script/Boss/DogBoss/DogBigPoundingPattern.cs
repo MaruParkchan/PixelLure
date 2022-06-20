@@ -5,15 +5,11 @@ using System;
 
 public class DogBigPoundingPattern : DogBossPatternBase
 {
-    [SerializeField] private GameObject sojuObject;
-
-    [SerializeField] private int sojuSpawnCount; // 생성 수 
-    [SerializeField] private float spawnCycleTime; // 재 생성 시간
-    [SerializeField] private float sojuObjectMoveSpeed; // 소주 오브젝트 스피드
-    [SerializeField] private float sojuCycleWaitTime; // 소주 패턴 6개 터진후 대기시간
-    [SerializeField] private int spawnCount; // 패턴 횟수 
+    [SerializeField] private GameObject eazySojuObject;
+    [SerializeField] private GameObject hardSojuObject;
 
     private float[] xPosData = new float[8];
+    [SerializeField]
     private int[] randomIndexs; // 난수 저장 배열
 
     private Action pounding;
@@ -22,7 +18,7 @@ public class DogBigPoundingPattern : DogBossPatternBase
 
     protected override void Init()
     {
-        randomIndexs = new int[6];
+        randomIndexs = new int[8];
         XposDataInit();
         pounding = () => { };
     }
@@ -32,29 +28,34 @@ public class DogBigPoundingPattern : DogBossPatternBase
         int currentSojuSpawnCount = 0; // 소주 생성 수
         int currentSpawnCount = 0; // 패턴 횟수
 
+        CameraRotate();
+
         yield return new WaitForSeconds(waitTime);
 
-        while (spawnCount > currentSpawnCount)
+        while (dogBoss.dogBossData.p5_PatternCount > currentSpawnCount)
         {
             RandomNumber();
-            while (sojuSpawnCount > currentSojuSpawnCount)
+            while (dogBoss.dogBossData.p5_AttackCount > currentSojuSpawnCount)
             {
-                SpawnObject(xPosData[randomIndexs[currentSojuSpawnCount]]);
+                if (GameSystem.isAccept)
+                    SpawnObject(hardSojuObject, xPosData[randomIndexs[currentSojuSpawnCount]]);
+                else
+                    SpawnObject(eazySojuObject, xPosData[randomIndexs[currentSojuSpawnCount]]);
                 currentSojuSpawnCount++;
-                yield return new WaitForSeconds(spawnCycleTime);
+                yield return new WaitForSeconds(dogBoss.dogBossData.p5_AttackDelayTime);
             }
 
             AnimationPounding();
-            yield return new WaitForSeconds(sojuCycleWaitTime);
+            yield return new WaitForSeconds(dogBoss.dogBossData.p5_WaitTime);
             currentSojuSpawnCount = 0;
             currentSpawnCount++;
         }
     }
 
-    private void SpawnObject(float xPos)
+    private void SpawnObject(GameObject sojuObject, float xPos)
     {
         GameObject clone = Instantiate(sojuObject);
-        clone.GetComponent<DogSojuBreak>().Init(sojuObjectMoveSpeed);
+        clone.GetComponent<DogSojuBreak>().Init(dogBoss.dogBossData.p5_SojuMoveSpeed);
         clone.transform.position = new Vector3(xPos, 6.0f, 0);
         SojuCountPlus(clone);
     }
@@ -76,7 +77,7 @@ public class DogBigPoundingPattern : DogBossPatternBase
 
     public void Pounding()
     {
-        for(int i = 0; i < sojuGameObjects.Count; i++)
+        for (int i = 0; i < sojuGameObjects.Count; i++)
         {
             sojuGameObjects[i].GetComponent<DogSojuBreak>().Break();
         }
@@ -86,9 +87,9 @@ public class DogBigPoundingPattern : DogBossPatternBase
 
     private void RandomNumber() // 중복없는 난수 출력
     {
-        for (int i = 0; i < sojuSpawnCount; i++) 
+        for (int i = 0; i < dogBoss.dogBossData.p5_AttackCount; i++)
         {
-            randomIndexs[i] = UnityEngine.Random.Range(0, sojuSpawnCount);
+            randomIndexs[i] = UnityEngine.Random.Range(0, dogBoss.dogBossData.p5_AttackCount);
             for (int j = 0; j < i; j++)
             {
                 if (randomIndexs[i] == randomIndexs[j])
@@ -106,10 +107,10 @@ public class DogBigPoundingPattern : DogBossPatternBase
         xPosData[1] = -5.0f;
         xPosData[2] = -3.0f;
         xPosData[3] = -1.0f;
-        xPosData[4] =  1.0f;
-        xPosData[5] =  3.0f;
-        xPosData[6] =  5.0f;
-        xPosData[7] =  7.0f;
+        xPosData[4] = 1.0f;
+        xPosData[5] = 3.0f;
+        xPosData[6] = 5.0f;
+        xPosData[7] = 7.0f;
     }
 
     public void CoroutineStop()

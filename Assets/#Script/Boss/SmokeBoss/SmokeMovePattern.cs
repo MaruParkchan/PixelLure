@@ -2,45 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeMovePattern : MonoBehaviour
+public class SmokeMovePattern : SmokeBossPatternBase
 {
     [SerializeField] private GameObject touchObject;
-    [SerializeField] private float waitTime; // ´ë±â½Ã°£ 
-    [SerializeField] private int cycleCount; // n¹ø ¹Ýº¹ È½¼ö
-    [SerializeField] private float moveTime; // ÇØ´ç ÁöÁ¡±îÁö µµÂø½Ã°£
-    [SerializeField] private int touchCount; // ¶óÀÌÅÍ»Ñ¸®´Â ¼ö
 
-    private SmokeBoss smokeBoss;
-    private Animator animator;
-
-    #region À§Ä¡ º¤ÅÍ°ª
+    #region Position Vector Values
     [SerializeField] private Transform[] movePositions;
     private Vector2[] startPoints = new Vector2[30];
     private Vector2[] endPoints = new Vector2[30];
     #endregion
 
-    private void Start()
-    {
-        smokeBoss = GetComponent<SmokeBoss>();
-        animator = GetComponent<Animator>();
-        PositionInit(); // ½ºÅ¸Æ®, µµÂøÁöÁ¡ ÃÊ±âÈ­
-    }
-
-    public IEnumerator MovePattern()
+    public override IEnumerator Attacking()
     {
         int currentCount = 0;
         int pointIndex = 0;
 
         yield return new WaitForSeconds(waitTime);
-        animator.SetTrigger("Appear");
-        while (cycleCount >= currentCount)
+        smokeBossAnimator.SetTrigger("Appear");
+        while (smokeBoss.smokeBossData.p1_AttackCount >= currentCount)
         {
             pointIndex = Random.Range(0, 30);
             transform.position = startPoints[pointIndex];
             yield return StartCoroutine(SmoothMovement(endPoints[pointIndex]));
+            yield return new WaitForSeconds(smokeBoss.smokeBossData.p1_DropDelayTime);
             currentCount++;
         }
-        animator.SetTrigger("Hide");
+        smokeBossAnimator.SetTrigger("Hide");
     }
 
     private IEnumerator SmoothMovement(Vector2 endPosition)
@@ -48,10 +35,10 @@ public class SmokeMovePattern : MonoBehaviour
         Vector2 startPosition = transform.position;
         float percent = 0;
         StartCoroutine("TouchDrop");
-        while (percent < moveTime) // startPosition ¿¡¼­ EndPosition±îÁö moveTimeµ¿¾È ÀÌµ¿
+        while (percent < smokeBoss.smokeBossData.p1_MoveTime) // startPosition ì—ì„œ EndPositionê¹Œì§€ moveTimeë™ì•ˆ ì´ë™
         {
             percent += Time.deltaTime;
-            transform.position = Vector2.Lerp(startPosition, endPosition, percent / moveTime);
+            transform.position = Vector2.Lerp(startPosition, endPosition, percent / smokeBoss.smokeBossData.p1_MoveTime);
             yield return null;
         }
         StopCoroutine("TouchDrop");
@@ -59,10 +46,10 @@ public class SmokeMovePattern : MonoBehaviour
 
     private IEnumerator TouchDrop()
     {
-        int currentCount = 0; // ÇöÀç »Ñ¸° ¶óÀÌÅÍ ¼ö      
-        while(currentCount <= touchCount + 1)
+        int currentCount = 0; // í˜„ìž¬ ë¿Œë¦° ë¼ì´í„° ìˆ˜      
+        while (currentCount <= smokeBoss.smokeBossData.p1_TouchDropCount + 1)
         {
-            yield return new WaitForSeconds(moveTime / (touchCount + 1)); // ÀÌµ¿ ½Ã°£ / »Ñ¸®´Â ¼ö ³ª´²°í ´ë±â½Ã°£À» °®Ãç¾ß¸¸ Ã³À½µîÀåÇÒ¶§ ¹Ù·Î ¾È»Ñ¸°´Ù
+            yield return new WaitForSeconds(smokeBoss.smokeBossData.p1_MoveTime / (smokeBoss.smokeBossData.p1_TouchDropCount + 1)); // ì´ë™ ì‹œê°„ / ë¿Œë¦¬ëŠ” ìˆ˜ ë‚˜ëˆ ê³  ëŒ€ê¸°ì‹œê°„ì„ ê°–ì¶°ì•¼ë§Œ ì²˜ìŒë“±ìž¥í• ë•Œ ë°”ë¡œ ì•ˆë¿Œë¦°ë‹¤
             GameObject clone = Instantiate(touchObject);
             clone.transform.position = this.transform.position;
             currentCount++;
@@ -77,17 +64,17 @@ public class SmokeMovePattern : MonoBehaviour
 
     private void PositionInit()
     {
-        #region ½ÃÀÛÁöÁ¡
-        startPoints[0]  = movePositions[0].position;
-        startPoints[1]  = movePositions[1].position;
-        startPoints[2]  = movePositions[2].position;
-        startPoints[3]  = movePositions[3].position;
-        startPoints[4]  = movePositions[4].position;
-        startPoints[5]  = movePositions[5].position;
-        startPoints[6]  = movePositions[6].position;
-        startPoints[7]  = movePositions[7].position;
-        startPoints[8]  = movePositions[8].position;
-        startPoints[9]  = movePositions[9].position;
+        #region ì‹œìž‘ì§€ì 
+        startPoints[0] = movePositions[0].position;
+        startPoints[1] = movePositions[1].position;
+        startPoints[2] = movePositions[2].position;
+        startPoints[3] = movePositions[3].position;
+        startPoints[4] = movePositions[4].position;
+        startPoints[5] = movePositions[5].position;
+        startPoints[6] = movePositions[6].position;
+        startPoints[7] = movePositions[7].position;
+        startPoints[8] = movePositions[8].position;
+        startPoints[9] = movePositions[9].position;
         startPoints[10] = movePositions[10].position;
         startPoints[11] = movePositions[11].position;
         startPoints[12] = movePositions[12].position;
@@ -108,9 +95,9 @@ public class SmokeMovePattern : MonoBehaviour
         startPoints[27] = movePositions[27].position;
         startPoints[28] = movePositions[28].position;
         startPoints[29] = movePositions[29].position;
-        #endregion ½ÃÀÛÁöÁ¡
+        #endregion ì‹œìž‘ì§€ì 
 
-        #region µµÂøÁöÁ¡
+        #region ë„ì°©ì§€ì 
         endPoints[0] = movePositions[15].position;
         endPoints[1] = movePositions[24].position;
         endPoints[2] = movePositions[23].position;
@@ -141,6 +128,12 @@ public class SmokeMovePattern : MonoBehaviour
         endPoints[27] = movePositions[13].position;
         endPoints[28] = movePositions[12].position;
         endPoints[29] = movePositions[11].position;
-        #endregion µµÂøÁöÁ¡
+        #endregion ë„ì°©ì§€ì 
     }
+
+    protected override void Init()
+    {
+        PositionInit();
+    }
+
 }

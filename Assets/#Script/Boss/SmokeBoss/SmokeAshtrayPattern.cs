@@ -2,35 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeAshtrayPattern : MonoBehaviour
+public class SmokeAshtrayPattern : SmokeBossPatternBase
 {
     [SerializeField] private GameObject dangerWarningLine;
-    [SerializeField] private int spawnCount; // 총 생성 수 
-    [SerializeField] private float recycleTime; // 재 생성 시간
-    [SerializeField] private float waitTime;
 
     private Vector3[] spawnPoints = new Vector3[3];
 
-    private void Start()
+    protected override void Init()
     {
         SpawnInit();
     }
 
-    public IEnumerator DrapPattern() // Main System
+    public override IEnumerator Attacking()
     {
         int currentCount = 0;
         int pointIndex = 0;
         yield return new WaitForSeconds(waitTime);
 
-        while (currentCount < spawnCount)
+        while (currentCount < smokeBoss.smokeBossData.p3_SpawnCount)
         {
             pointIndex = Random.Range(0, spawnPoints.Length);
             SpawnObject(dangerWarningLine, spawnPoints[pointIndex]);
-            yield return new WaitForSeconds(recycleTime);
+            yield return new WaitForSeconds(smokeBoss.smokeBossData.p3_RespawnCycleTime);
             currentCount++;
-
         }
-    }
+   }
 
     private void SpawnInit() // 위치 3곳 지정
     {
@@ -47,7 +43,7 @@ public class SmokeAshtrayPattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-        //StopCoroutine("ICardKingCardPattern");
         StopAllCoroutines();
     }
 }
+

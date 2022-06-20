@@ -2,36 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmokeMiniDestructPattern : MonoBehaviour
+public class SmokeMiniDestructPattern : SmokeBossPatternBase
 {
     [SerializeField] private GameObject miniSmokeGameObject;
-    [Header("재생성 시간")]
-    [SerializeField] private float reCycleTime;
-    [Header("생성 갯수")]
-    [SerializeField] private int spawnCount; // 몇번까지 생성할것인가?
-    [SerializeField] private float waitTime;
     [Header("위치 데이터 값")]
     [SerializeField] MapData mapData;
 
     private Vector3[] spawnPoints = new Vector3[4];
 
-    public IEnumerator SpawnSmokeMini() // Main System
+    public override IEnumerator Attacking()
     {
-        int currentCount = 0;
+                int currentCount = 0;
         int spawnPointIndex;
 
         yield return new WaitForSeconds(waitTime);
 
-        while (currentCount <= spawnCount)
+        while (currentCount < smokeBoss.smokeBossData.p2_SpawnCount)
         {
             SpawnPointsInit(); // 스폰위치 랜덤값
             spawnPointIndex = Random.Range(0, spawnPoints.Length); // 랜덤위치 선정
             SpawnMiniSmokeObject(spawnPoints[spawnPointIndex]); // 생성 
             currentCount++;
-            yield return new WaitForSeconds(reCycleTime);
+            yield return new WaitForSeconds(smokeBoss.smokeBossData.p2_RespawnCycleTime);
         }
     }
-
     private void SpawnMiniSmokeObject(Vector3 pos) // 미니 담배 생성 
     {
         GameObject clone = Instantiate(miniSmokeGameObject);
@@ -55,7 +49,12 @@ public class SmokeMiniDestructPattern : MonoBehaviour
 
     public void CoroutineStop()
     {
-        //StopCoroutine("ICardKingCardPattern");
         StopAllCoroutines();
     }
+
+    protected override void Init()
+    {
+        
+    }
+
 }

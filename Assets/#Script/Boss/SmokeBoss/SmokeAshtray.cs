@@ -15,7 +15,7 @@ public class SmokeAshtray : MonoBehaviour
 
     private IEnumerator DropAshtray()
     {
-        yield return SmoothMovement(new Vector2(transform.position.x, -yLimitValue));
+        yield return SmoothMovement(new Vector2(transform.position.x, -yLimitValue - 7.0f));
         CameraShake.cameraShake();
     }
 

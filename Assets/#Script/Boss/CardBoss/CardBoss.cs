@@ -5,30 +5,28 @@ using UnityEngine;
 public class CardBoss : Boss
 {
     [SerializeField]
-    private MapData cardBossMapData; // º¸½º ³ªÅ¸³ª´Â ÁÂÇ¥ µ¥ÀÌÅÍ 
+    private MapData cardBossMapData; // ë³´ìŠ¤ ë‚˜íƒ€ë‚˜ëŠ” ì¢Œí‘œ ë°ì´í„° 
     public MapData CardBossMapData => cardBossMapData;
     [Header("AuraEffect")]
-    [SerializeField]
-    private ParticleSystem auraEffect;
+    [SerializeField] private ParticleSystem auraEffect;
 
     public CardBossData cardBossData;
     public CardBossData phase1CardBossData;
     public CardBossData phase2CardBossData;
-    private CardRadialShapePattern cardRadialShapePattern; // ÆĞÅÏ1
-    private CardSidePattern cardSidePattern;               // ÆĞÅÏ2
-    private CardKingCardPattern cardKingCardPattern;       // ÆĞÅÏ3
-    private CardBoomPattern cardBoomPattern;               // ÆĞÅÏ4
+    private CardRadialShapePattern cardRadialShapePattern; // íŒ¨í„´1
+    private CardSidePattern cardSidePattern;               // íŒ¨í„´2
+    private CardKingCardPattern cardKingCardPattern;       // íŒ¨í„´3
+    private CardBoomPattern cardBoomPattern;               // íŒ¨í„´4
     private BoxCollider2D boxCollider2D;
 
     private void Start()
     {
-        //cardBossData = GetComponent<CardBossData>();
         cardRadialShapePattern = GetComponent<CardRadialShapePattern>();
         cardSidePattern = GetComponent<CardSidePattern>();
         cardKingCardPattern = GetComponent<CardKingCardPattern>();
         cardBoomPattern = GetComponent<CardBoomPattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
-        patternRandomValue = new int[4]; // ¼±ÅÃÁö ¼±ÅÃÈÄ¿¡ ·£´ı ÆĞÅÏÀ» À§ÇÑ °ª Å©±â´Â ÆĞÅÏÀÇ ¼ö ¸¸Å­ Á¶Á¤ÇØ¾ßÇÔ
+        patternRandomValue = new int[4]; // ì„ íƒì§€ ì„ íƒí›„ì— ëœë¤ íŒ¨í„´ì„ ìœ„í•œ ê°’ í¬ê¸°ëŠ” íŒ¨í„´ì˜ ìˆ˜ ë§Œí¼ ì¡°ì •í•´ì•¼í•¨
         PhaseChange(phase1CardBossData);
     }
 
@@ -37,12 +35,12 @@ public class CardBoss : Boss
         this.cardBossData = cardBossData;
     }
 
-    public void AuraEffectOn() // ¾Æ¿ì¸® ÀÌÆåÆ® Àç»ı
+    public void AuraEffectOn() // ì•„ìš°ë¦¬ ì´í™íŠ¸ ì¬ìƒ
     {
         auraEffect.Play();
     }
 
-    public void AuraEffectOff() // ¾Æ¿ì¸® ÀÌÆåÆ® Á¤Áö
+    public void AuraEffectOff() // ì•„ìš°ë¦¬ ì´í™íŠ¸ ì •ì§€
     {
         auraEffect.Stop();
     }
@@ -76,17 +74,19 @@ public class CardBoss : Boss
 
     protected override IEnumerator Phase2()
     {
-        // Àç½ÃÀÛµÇ´Â ÆĞÅÏÀÇ °ªµéÀ» ¿©±â¼­ ºÎ¿©ÇÏ°í ½ÃÀÛÇØ¾ßÇÒµí 
+        // ì¬ì‹œì‘ë˜ëŠ” íŒ¨í„´ì˜ ê°’ë“¤ì„ ì—¬ê¸°ì„œ ë¶€ì—¬í•˜ê³  ì‹œì‘í•´ì•¼í• ë“¯ 
         animator.SetTrigger("Hide");
         HpRecharging();
+        isPhaseCompled = true;
+        if (GameSystem.isAccept)  //ì—¬ê¸°ì„œ ì„ íƒì¡°ê±´ìœ¼ë¡œ ë³€ê²½í›„ í˜ì´ì¦ˆ ì‹œì‘
+            PhaseChange(phase2CardBossData);
         yield return new WaitForSeconds(2.0f);
         ColliderEnableOn();
         IsisInvincibilityOff();
 
-        //¿©±â¼­ ¼±ÅÃÁ¶°ÇÀ¸·Î º¯°æÈÄ ÆäÀÌÁî ½ÃÀÛ
-        PhaseChange(phase2CardBossData);
+        //ì—¬ê¸°ì„œ ì„ íƒì¡°ê±´ìœ¼ë¡œ ë³€ê²½í›„ í˜ì´ì¦ˆ ì‹œì‘
 
-        while (true) // ** ÁßÃ¸ while¹®À¸·Î½á ¹º°¡ ¸¾¿¡ ¾Èµë **
+        while (true) // ** ì¤‘ì²© whileë¬¸ìœ¼ë¡œì¨ ë­”ê°€ ë§˜ì— ì•ˆë“¬ **
         {
             if (cardBossData.isP1 == true)
                 yield return StartCoroutine(cardRadialShapePattern.Attacking());
@@ -99,6 +99,7 @@ public class CardBoss : Boss
 
             if (!cardBossData.isP1 && !cardBossData.isP2 && !cardBossData.isP3 && !cardBossData.isP4)
                 cardBossData.isP1 = true;
+
             /*
             int patternIndex = 0;
             while (patternIndex < 4)
@@ -127,7 +128,7 @@ public class CardBoss : Boss
         cardKingCardPattern.CoroutineStop();
         cardBoomPattern.CoroutineStop();
         AuraEffectClear();
-        AuraEffectOn();       
+        AuraEffectOn();
         this.transform.position = Vector3.zero;
     }
 
@@ -138,6 +139,24 @@ public class CardBoss : Boss
         cardKingCardPattern.CoroutineStop();
         cardBoomPattern.CoroutineStop();
         StopAllCoroutines();
+    }
+
+    public override void BossDiedEvent()
+    {
+        CoroutineAllStop();
+        AuraEffectOff();
+        this.transform.position = Vector3.zero;
+        animator.SetTrigger("Die");
+        bossAudioSource.Stop();
+
+        if(GameSystem.isAccept == true)
+        {
+            PlayerPrefs.SetInt("Stage1_RedChain", 1);
+        }
+        else if(GameSystem.isAccept == false)
+        {
+            PlayerPrefs.SetInt("Stage1_BlueChain", 1);
+        }
     }
 
     protected override void ColliderEnableOn()

@@ -5,10 +5,7 @@ using UnityEngine;
 public class CardKingCardPattern : CardBossPatternBase
 {
     [SerializeField] private GameObject kingCardBulletPrefab;
-    [Header("킹카드 속도 설정")]
-    [SerializeField] private float accelerationWaitTime; // 가속도 대기 시간
-    [SerializeField] private float initialMoveSpeed;     // 처음 이동속도
-    [SerializeField] private float accelerationSpeed;    // 가속도
+
     #region 좌표 데이터값
     private Vector3[] spawnPoints = new Vector3[56];
     private int[] spawnPointIndexs = new int[56];

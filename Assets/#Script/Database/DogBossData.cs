@@ -25,8 +25,11 @@ public class DogBossData : ScriptableObject
     [Range(0.01f, 2.00f)] public float p4_AttackDelayTime; // 패턴4  공격 딜레이
     public bool p4_IsArousal;
     [Header("책상 내려치기 패턴5")]
-    [Range(1,10)] public int p5_AttackCount;
-    [Range(0.01f, 2.00f)] public int p5_AttackDelayTime;
+    [Range(1, 8)] public int p5_AttackCount; // 생성 수 
+    [Range(0.01f, 1.50f)] public float p5_AttackDelayTime; // 소주 재 생성 시간
+    [Range(0.5f, 1.50f)]public float p5_SojuMoveSpeed; // 소주 오브젝트 스피드
+    public float p5_WaitTime; // 소주 패턴 6개 터진후 대기시간
+    public int p5_PatternCount; // 패턴 횟수 
     //[Range()]
   //  [Header("소주병 터치기 패턴5")]
   //  [Range(1, 100)] public int p5_AttackCount; // 패턴4  공격 횟수
@@ -36,4 +39,5 @@ public class DogBossData : ScriptableObject
     public bool isP2;
     public bool isP3;
     public bool isP4;
+    public bool isP5;
 }

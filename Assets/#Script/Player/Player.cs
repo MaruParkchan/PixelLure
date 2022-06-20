@@ -5,24 +5,28 @@ using UnityEngine;
 public class Player : MonoBehaviour, IPause
 {
     [SerializeField] private MapData mapData;
-    [SerializeField] private PlayerData playerData;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject playerHitEffectObject;
+    [SerializeField] private float playerMoveSpeed;
     [SerializeField] private float bulletMoveSpeed; // 총알 속도 
 
     private bool isHit = false; // 타격 당했는가?
     private bool isPause; // 선택지 활성화중이면 멈춤
     private bool isFireLock; // 총알 발사를 잠궜는지?
     private bool isDied = false;
-    [SerializeField] private int diedIndex;
+    [Range(0,2)] [SerializeField] private int diedIndex; // 0 카드 , 1 담배 , 2 개보스
     [SerializeField] private bool isInvincibility; // 무적중인가?
 
     private int playerHp = 3;
     private Animator playerAnimator;
 
+    private AudioSource playerAudioSource;
+    [SerializeField] private AudioClip diedSoundClip;
+
     private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
+        playerAudioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -40,12 +44,27 @@ public class Player : MonoBehaviour, IPause
         }
     }
 
+    public void PlayerDebuffs()
+    {
+        if(diedIndex == 0)
+        {
+            PlayerSizeUp();
+        }
+        Instantiate(playerHitEffectObject, transform.position, Quaternion.identity);
+    }
+
+    private void PlayerSizeUp()
+    {
+       //transform.localScale = new Vector3(transform.localScale.x * 2.5f, transform.localScale.y * 1.5f, 0);
+       transform.localScale = new Vector3(2.5f, 2.5f, 0);
+    }
+
     private void Movement()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        transform.position += new Vector3(x, y, 0) * playerData.MoveSpeed * Time.deltaTime;
+        transform.position += new Vector3(x, y, 0) * playerMoveSpeed * Time.deltaTime;
     }
 
     private void Rotate()
@@ -53,7 +72,6 @@ public class Player : MonoBehaviour, IPause
         Vector3 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector2 direction = new Vector2(mousePosition.x - this.transform.position.x, mousePosition.y - this.transform.position.y);
-
         transform.up = direction;
     }
 
@@ -110,10 +128,16 @@ public class Player : MonoBehaviour, IPause
     private IEnumerator IPlayerDiedEvent()
     {
         isDied = true;
+        AudioClipChange(diedSoundClip);
         yield return new WaitForSeconds(0.5f);
         playerAnimator.SetInteger("DiedIndex", diedIndex);
         playerAnimator.SetTrigger("Died");
         //transform.rotation = Quaternion.identity; // 활성화하면 회전 고정
+    }
+
+    public void BossDiedEvent()
+    {
+        isPause = true;
     }
 
     private IEnumerator Hit()
@@ -169,4 +193,11 @@ public class Player : MonoBehaviour, IPause
             TakeDamage();
         }
     }
+
+    private void AudioClipChange(AudioClip clip)
+    {
+        playerAudioSource.clip = clip;
+        playerAudioSource.Play();
+    }
+
 }

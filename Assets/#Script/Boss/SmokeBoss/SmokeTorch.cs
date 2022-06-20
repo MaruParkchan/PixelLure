@@ -5,16 +5,23 @@ using UnityEngine;
 public class SmokeTorch : MonoBehaviour
 {
     [SerializeField] private GameObject effectObject;
-    [SerializeField] private float destroyTime; // 터지는 시간
+
 
     private void Start()
     {
-        Destroy(this.gameObject, destroyTime);
+        // if (GameSystem.isAccept)
+        //     StartCoroutine(TorchBoom(Random.Range(0.4f, 1.5f)));
+        // else
+        //     StartCoroutine(TorchBoom(1.0f));
+         StartCoroutine(TorchBoom(Random.Range(0.5f, 1.2f)));
     }
 
-    private void OnDestroy()
+
+    private IEnumerator TorchBoom(float timer)
     {
+        yield return new WaitForSeconds(timer);
         GameObject clone = Instantiate(effectObject);
         clone.transform.position = this.transform.position;
+        Destroy(this.gameObject);
     }
 }

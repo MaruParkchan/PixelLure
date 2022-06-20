@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SmokeBoss : Boss
 {
+    public SmokeBossData smokeBossData;
+    public SmokeBossData phase1SmokeBossData;
+    public SmokeBossData phase2SmokeBossData;
     [SerializeField]
     private GameObject smokeEffect;
     private SmokeMovePattern smokeMovePattern;
@@ -20,6 +23,7 @@ public class SmokeBoss : Boss
         smokeSprayingFirePattern = GetComponent<SmokeSprayingFirePattern>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         patternRandomValue = new int[4]; // 선택지 선택후에 랜덤 패턴을 위한 값 크기는 패턴의 수 만큼 조정해야함
+        PhaseChange(phase1SmokeBossData);
     }
 
     public void HideorAppear() // 숨거나 나타날때 이펙트 생성
@@ -28,6 +32,12 @@ public class SmokeBoss : Boss
         clone.transform.position = transform.position + new Vector3(-0.11f,0,0);
     }
 
+    private void PhaseChange(SmokeBossData smokeBossData)
+    {
+        this.smokeBossData = smokeBossData;
+    }
+
+
     protected override IEnumerator Phase1()
     {
         yield return new WaitForSeconds(3.0f);
@@ -35,10 +45,10 @@ public class SmokeBoss : Boss
         animator.SetTrigger("Hide");
         while (true)
         {
-            yield return StartCoroutine(smokeMovePattern.MovePattern());
-            yield return StartCoroutine(smokeMiniDestructPattern.SpawnSmokeMini());
-            yield return StartCoroutine(smokeAshtrayPattern.DrapPattern());
-            yield return StartCoroutine(smokeSprayingFirePattern.SprayingFire());
+            yield return StartCoroutine(smokeMovePattern.Attacking());
+            yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
+            yield return StartCoroutine(smokeAshtrayPattern.Attacking());
+            yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }
     }
 
@@ -49,24 +59,32 @@ public class SmokeBoss : Boss
         yield return new WaitForSeconds(3.0f);
         ColliderEnableOn();
         IsisInvincibilityOff();
+
         while (true)
         {
-            RandomPatternValue();
-            int patternIndex = 0;
-            while (patternIndex < 4)
-            {
-                if (patternRandomValue[patternIndex] == 0)
-                    yield return StartCoroutine(smokeMovePattern.MovePattern());
-                if (patternRandomValue[patternIndex] == 1)
-                    yield return StartCoroutine(smokeMiniDestructPattern.SpawnSmokeMini());
-                if (patternRandomValue[patternIndex] == 2)
-                    yield return StartCoroutine(smokeAshtrayPattern.DrapPattern());
-                if (patternRandomValue[patternIndex] == 3)
-                    yield return StartCoroutine(smokeSprayingFirePattern.SprayingFire());
-
-                patternIndex++;
-            }
+            yield return StartCoroutine(smokeMovePattern.Attacking());
+            yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
+            yield return StartCoroutine(smokeAshtrayPattern.Attacking());
+            yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }
+        // while (true)
+        // {
+        //     RandomPatternValue();
+        //     int patternIndex = 0;
+        //     while (patternIndex < 4)
+        //     {
+        //         if (patternRandomValue[patternIndex] == 0)
+        //             yield return StartCoroutine(smokeMovePattern.MovePattern());
+        //         if (patternRandomValue[patternIndex] == 1)
+        //             yield return StartCoroutine(smokeMiniDestructPattern.SpawnSmokeMini());
+        //         if (patternRandomValue[patternIndex] == 2)
+        //             yield return StartCoroutine(smokeAshtrayPattern.DrapPattern());
+        //         if (patternRandomValue[patternIndex] == 3)
+        //             yield return StartCoroutine(smokeSprayingFirePattern.SprayingFire());
+
+        //         patternIndex++;
+        //     }
+        // }
     }
 
     protected override void SelectionEventTime()
@@ -85,6 +103,23 @@ public class SmokeBoss : Boss
         smokeAshtrayPattern.CoroutineStop();
         smokeSprayingFirePattern.CoroutineStop();
         StopAllCoroutines();
+    }
+
+    public override void BossDiedEvent()
+    {
+        CoroutineAllStop();
+        this.transform.position = Vector3.zero;
+        animator.SetTrigger("Die");
+        bossAudioSource.Stop();
+
+        if(GameSystem.isAccept == true)
+        {
+            PlayerPrefs.SetInt("Stage2_RedChain", 1);
+        }
+        else if(GameSystem.isAccept == false)
+        {
+            PlayerPrefs.SetInt("Stage2_BlueChain", 1);
+        }
     }
 
     protected override void ColliderEnableOn()

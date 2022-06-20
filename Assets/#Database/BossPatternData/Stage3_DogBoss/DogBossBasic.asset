@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b621e76cf8097949b916ae6eef9a77f, type: 3}
+  m_Name: DogBossBasic
+  m_EditorClassIdentifier: 
+  p1_AttackCount: 8
+  p1_AttackDelayTime: 0.7
+  p2_RotateSpeed: -55
+  p2_RotateTime: 10
+  p2_FadeTime: 1.5
+  p3_AttackCount: 20
+  p3_AttackDelayTime: 0.3
+  p3_RotateSpeed: 300
+  p3_TargetTraceSpeed: 10
+  p3_AttackWaitTime: 1
+  p4_AttackCount: 8
+  p4_AttackDelayTime: 0.6
+  p4_IsArousal: 1
+  p5_AttackCount: 5
+  p5_AttackDelayTime: 0.35
+  p5_SojuMoveSpeed: 4.5
+  p5_WaitTime: 2
+  p5_PatternCount: 20
+  isP1: 1
+  isP2: 1
+  isP3: 0
+  isP4: 0
+  isP5: 1

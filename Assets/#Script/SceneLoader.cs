@@ -28,7 +28,6 @@ public class SceneLoader : MonoBehaviour
         while (!asyncOper.isDone)
         {
             yield return null;
-        //    Debug.Log(asyncOper.progress);
         }
     }
 

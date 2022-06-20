@@ -8,6 +8,7 @@ public class DogBigTracePattern : DogBossPatternBase
 
     public override IEnumerator Attacking()
     {
+        CameraRotate();
         int currentCount = 0;
         dogBossAnimator.SetTrigger("Shake");
         yield return new WaitForSeconds(waitTime);
