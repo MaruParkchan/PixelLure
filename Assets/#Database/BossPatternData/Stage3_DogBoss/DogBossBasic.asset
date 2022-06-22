@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1_AttackCount: 8
   p1_AttackDelayTime: 0.7
-  p2_RotateSpeed: -55
+  p2_RotateSpeed: 55
   p2_RotateTime: 10
   p2_FadeTime: 1.5
   p3_AttackCount: 20
@@ -22,16 +22,16 @@ MonoBehaviour:
   p3_RotateSpeed: 300
   p3_TargetTraceSpeed: 10
   p3_AttackWaitTime: 1
-  p4_AttackCount: 8
+  p4_AttackCount: 15
   p4_AttackDelayTime: 0.6
   p4_IsArousal: 1
   p5_AttackCount: 5
   p5_AttackDelayTime: 0.35
   p5_SojuMoveSpeed: 4.5
   p5_WaitTime: 2
-  p5_PatternCount: 20
+  p5_PatternCount: 4
   isP1: 1
   isP2: 1
-  isP3: 0
-  isP4: 0
+  isP3: 1
+  isP4: 1
   isP5: 1

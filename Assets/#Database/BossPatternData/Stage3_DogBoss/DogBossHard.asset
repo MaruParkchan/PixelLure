@@ -14,24 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p1_AttackCount: 8
   p1_AttackDelayTime: 0.7
-  p2_RotateSpeed: 55
-  p2_RotateTime: 10
-  p2_FadeTime: 1
-  p3_AttackCount: 38
-  p3_AttackDelayTime: 0.17
-  p3_RotateSpeed: 161
-  p3_TargetTraceSpeed: 11
+  p2_RotateSpeed: 65
+  p2_RotateTime: 12
+  p2_FadeTime: 1.5
+  p3_AttackCount: 25
+  p3_AttackDelayTime: 0.2
+  p3_RotateSpeed: 300
+  p3_TargetTraceSpeed: 12
   p3_AttackWaitTime: 1.2
-  p4_AttackCount: 8
-  p4_AttackDelayTime: 0.61
+  p4_AttackCount: 20
+  p4_AttackDelayTime: 0.5
   p4_IsArousal: 1
   p5_AttackCount: 8
   p5_AttackDelayTime: 0.2
   p5_SojuMoveSpeed: 4
-  p5_WaitTime: 1
+  p5_WaitTime: 1.5
   p5_PatternCount: 10
-  isP1: 0
-  isP2: 0
-  isP3: 0
-  isP4: 0
+  isP1: 1
+  isP2: 1
+  isP3: 1
+  isP4: 1
   isP5: 1

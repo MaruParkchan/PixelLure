@@ -10,8 +10,11 @@ public class DogSmallSojuCircle : MonoBehaviour
     private float rotateTime; // 패턴 회전 시간 
     private float fadeTime; // 페이드 걸리는 시간
 
+    private BoxCollider2D[] boxColliders2D = new BoxCollider2D[2];
+
     void Start()
     {
+        boxColliders2D = GetComponents<BoxCollider2D>();
         dogSmallSojus = GetComponentsInChildren<DogSmallSoju>();
         transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360.0f));
         StartCoroutine("FadeEffectCycle");
@@ -29,6 +32,9 @@ public class DogSmallSojuCircle : MonoBehaviour
         {
             StartCoroutine(dogSmallSojus[i].FadeEffect(0, 1, fadeTime));
         } // 페이드 인
+
+        for (int i = 0; i < boxColliders2D.Length; i++)
+            boxColliders2D[i].enabled = true;
 
         yield return new WaitForSeconds(rotateTime); // 소주병 돌아가는 시간 < 끝나면 페이드 아웃
 

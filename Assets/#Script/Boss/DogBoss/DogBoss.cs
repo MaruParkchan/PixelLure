@@ -44,7 +44,7 @@ public class DogBoss : Boss
 
         patternRandomValue = new int[3]; // 선택지 선택후에 랜덤 패턴을 위한 값 크기는 패턴의 수 만큼 조정해야함       
         PhaseChange(phase1DogBossData);
-        AudioClipChange(miniDogSoundClip);
+        AudioClipChangeAndPlay(miniDogSoundClip);
     }
 
     private void PhaseChange(DogBossData dogBossData)
@@ -93,7 +93,7 @@ public class DogBoss : Boss
         if (GameSystem.isAccept)
             PhaseChange(phase2DogBossData);
         yield return new WaitForSeconds(4.4f);
-        AudioClipChange(bigDogSoundClip);
+        AudioClipChangeAndPlay(bigDogSoundClip);
         ColliderEnableOn();
         IsisInvincibilityOff();
         while (true)
@@ -154,9 +154,19 @@ public class DogBoss : Boss
         circleCollider2D.enabled = false;
     }
 
-    private void AudioClipChange(AudioClip clip)
+    public void AudioClipChangeAndPlay(AudioClip clip)
     {
         bossAudioSource.clip = clip;
         bossAudioSource.Play();
+    }
+
+    public void AudioOneShot(AudioClip clip)
+    {
+        bossAudioSource.PlayOneShot(clip);
+    }
+    
+    public void AudioStop()
+    {
+        bossAudioSource.Stop();
     }
 }

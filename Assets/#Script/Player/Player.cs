@@ -7,7 +7,6 @@ public class Player : MonoBehaviour, IPause
     [SerializeField] private MapData mapData;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private GameObject playerHitEffectObject;
-    [SerializeField] private float playerMoveSpeed;
     [SerializeField] private float bulletMoveSpeed; // 총알 속도 
 
     private bool isHit = false; // 타격 당했는가?
@@ -18,6 +17,9 @@ public class Player : MonoBehaviour, IPause
     [SerializeField] private bool isInvincibility; // 무적중인가?
 
     private int playerHp = 3;
+    private float playerMoveSpeed = 7.0f;
+    [SerializeField][Range(0.01f, 1.00f)] private float fireRate = 0.15f;
+    private float nextFire = 0.0f;
     private Animator playerAnimator;
 
     private AudioSource playerAudioSource;
@@ -38,8 +40,14 @@ public class Player : MonoBehaviour, IPause
         LimitPosition();
         Rotate();
 
-        if (Input.GetMouseButtonDown(0) && isFireLock == false)
+        // if (Input.GetMouseButtonDown(0) && isFireLock == false)
+        // {
+        //     Fire();
+        // }
+
+        if (Input.GetMouseButton(0) && Time.time > nextFire && isFireLock == false)
         {
+            nextFire = Time.time + fireRate;
             Fire();
         }
     }

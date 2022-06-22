@@ -5774,9 +5774,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 10
-  phase2BossHp: 10
-  limitPhaseHp: 8
+  phase1BossHp: 150
+  phase2BossHp: 200
+  limitPhaseHp: 20
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
   cardBossData: {fileID: 11400000, guid: 249256ae5daf0544fa90c57ff6eee29d, type: 2}
@@ -7129,12 +7129,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: bc73cac8ccf208342838288e495c24b9, type: 2}
-  playerData: {fileID: 11400000, guid: f08b0b6cc2f3c2c4c929e931cd361215, type: 2}
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   playerHitEffectObject: {fileID: 1723090631616734365, guid: 398ffb62541e764448d6d0f51df29fb7, type: 3}
   bulletMoveSpeed: 15
   diedIndex: 0
   isInvincibility: 0
+  fireRate: 0.15
   diedSoundClip: {fileID: 8300000, guid: 22115c17a03d64b44a4a0809b160c751, type: 3}
 --- !u!114 &1674676063
 MonoBehaviour:

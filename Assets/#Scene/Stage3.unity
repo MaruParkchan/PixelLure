@@ -1147,8 +1147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase1BossHp: 200
-  phase2BossHp: 400
-  limitPhaseHp: 198
+  phase2BossHp: 350
+  limitPhaseHp: 20
   isBulkUp: 0
   dogBossData: {fileID: 0}
   phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
@@ -1927,7 +1927,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapData: {fileID: 11400000, guid: bc73cac8ccf208342838288e495c24b9, type: 2}
-  playerData: {fileID: 11400000, guid: f08b0b6cc2f3c2c4c929e931cd361215, type: 2}
   bulletPrefab: {fileID: 5355970990740469588, guid: 7aadab97096ada040bf0d3abc0b863f9, type: 3}
   playerHitEffectObject: {fileID: 1723090631616734365, guid: 398ffb62541e764448d6d0f51df29fb7, type: 3}
   bulletMoveSpeed: 15

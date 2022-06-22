@@ -38,7 +38,7 @@ public class DogBigLaserPattern : DogBossPatternBase
             currentCount++;
         }
 
-        if (dogBoss.dogBossData.p4_IsArousal) // 각성중인가? 추가타를 하는가?
+        if (GameSystem.isAccept) // 각성중인가? 추가타를 하는가?
         {
             dogBossAnimator.SetTrigger("AddAttack");
             yield return new WaitForSeconds(bundleLaserAttackTime);
