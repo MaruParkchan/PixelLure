@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IPause
+public class Player : MonoBehaviour
 {
     [SerializeField] private MapData mapData;
     [SerializeField] private GameObject bulletPrefab;

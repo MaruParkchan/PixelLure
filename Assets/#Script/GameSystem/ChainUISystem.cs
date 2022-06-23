@@ -65,7 +65,8 @@ public class ChainUISystem : MonoBehaviour
             clone.SetActive(false);
     }
 
-    public void AllResetChainData()
+    [ContextMenu("ResetAllData")] 
+     public void AllResetChainData()
     {
         PlayerPrefs.DeleteKey("Stage1_RedChain");
         PlayerPrefs.DeleteKey("Stage1_BlueChain");
