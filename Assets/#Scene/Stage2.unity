@@ -4782,6 +4782,7 @@ GameObject:
   - component: {fileID: 2112931719}
   - component: {fileID: 2112931718}
   - component: {fileID: 2112931722}
+  - component: {fileID: 2112931727}
   - component: {fileID: 2112931723}
   - component: {fileID: 2112931724}
   - component: {fileID: 2112931725}
@@ -5078,6 +5079,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2112931727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112931717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d11fb47f5e39b4ab2261b410cf6e69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smokeBossMapData: {fileID: 11400000, guid: 0f687c5cb23ccd74baef95db9a6fdfff, type: 2}
+  touchObject: {fileID: 1503900196692920369, guid: 769104cf93013f848b126f5cdb22fe4c, type: 3}
+  attackCount: 10
+  moveTime: 0.15
+  cycleTime: 0.15
 --- !u!61 &2112931729
 BoxCollider2D:
   m_ObjectHideFlags: 0
