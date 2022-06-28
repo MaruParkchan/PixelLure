@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac7a8eaf40c10f14aa2855cf4f46c16d, type: 3}
   m_Name: SmokeBossBasic
   m_EditorClassIdentifier: 
-  p1_AttackCount: 20
-  p1_MoveTime: 0.4
-  p1_TouchDropCount: 8
+  p1_AttackCount: 5
+  p1_MoveTime: 0.2
+  p1_TouchDropCount: 6
   p1_DropDelayTime: 0.7
   p2_SpawnCount: 50
   p2_RespawnCycleTime: 0.2

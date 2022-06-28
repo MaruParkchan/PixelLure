@@ -10,6 +10,7 @@ public class SmokeBoss : Boss
     [SerializeField]
     private GameObject smokeEffect;
     private SmokeMovePattern smokeMovePattern;
+    private SmokeRandomMovePattern smokeRandomMovePattern;
     private SmokeMiniDestructPattern smokeMiniDestructPattern;
     private SmokeAshtrayPattern smokeAshtrayPattern;
     private SmokeSprayingFirePattern smokeSprayingFirePattern;
@@ -18,6 +19,7 @@ public class SmokeBoss : Boss
     private void Start()
     {
         smokeMovePattern = GetComponent<SmokeMovePattern>();
+        smokeRandomMovePattern = GetComponent<SmokeRandomMovePattern>();
         smokeMiniDestructPattern = GetComponent<SmokeMiniDestructPattern>();
         smokeAshtrayPattern = GetComponent<SmokeAshtrayPattern>();
         smokeSprayingFirePattern = GetComponent<SmokeSprayingFirePattern>();
@@ -45,14 +47,15 @@ public class SmokeBoss : Boss
         animator.SetTrigger("Hide");
         while (true)
         {
-            if (smokeBossData.isP1 == true)
-            yield return StartCoroutine(smokeMovePattern.Attacking());
-            if (smokeBossData.isP2 == true)
-            yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
-            if (smokeBossData.isP3 == true)
-            yield return StartCoroutine(smokeAshtrayPattern.Attacking());
-            if (smokeBossData.isP4 == true)
-            yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
+            //yield return StartCoroutine(smokeRandomMovePattern.Attacking());
+           //yield return StartCoroutine(smokeMovePattern.Attacking());
+             yield return StartCoroutine(smokeAshtrayPattern.Attacking());
+            yield return null;
+            // if (smokeBossData.isP2 == true)
+            // yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
+            // if (smokeBossData.isP3 == true)
+            // if (smokeBossData.isP4 == true)
+            // yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }
     }
 

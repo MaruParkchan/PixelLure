@@ -5,7 +5,7 @@ using UnityEngine;
 public class SmokeAshtrayPattern : SmokeBossPatternBase
 {
     [SerializeField] private GameObject dangerWarningLine;
-
+    [SerializeField] private GameObject dangerWarningLine_2;
     private Vector3[] spawnPoints = new Vector3[3];
 
     protected override void Init()
@@ -18,6 +18,8 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
         int currentCount = 0;
         int pointIndex = 0;
         yield return new WaitForSeconds(waitTime);
+       // if (GameSystem.isAccept)
+            StartCoroutine(AddAttacking());
 
         while (currentCount < smokeBoss.smokeBossData.p3_SpawnCount)
         {
@@ -26,7 +28,8 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
             yield return new WaitForSeconds(smokeBoss.smokeBossData.p3_RespawnCycleTime);
             currentCount++;
         }
-   }
+        CoroutineStop();
+    }
 
     private void SpawnInit() // 위치 3곳 지정
     {
@@ -39,6 +42,22 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
     {
         GameObject clone = Instantiate(obj);
         clone.transform.position = spawnPoint;
+    }
+
+    private void SpawnObject(GameObject obj)
+    {
+        GameObject clone = Instantiate(obj);
+        clone.transform.position = new Vector3(0, GameObject.FindWithTag("Player").transform.position.y, 0);
+    }
+
+    private IEnumerator AddAttacking()
+    {
+        while (true)
+        {
+            float timer = Random.Range(0.5f, 1.5f);
+            yield return new WaitForSeconds(timer);
+            SpawnObject(dangerWarningLine_2);
+        }
     }
 
     public void CoroutineStop()
