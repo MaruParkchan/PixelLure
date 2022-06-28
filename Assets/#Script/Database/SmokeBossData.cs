@@ -20,8 +20,9 @@ public class SmokeBossData : ScriptableObject
     [Range(0.01f, 2.00f)] public float p3_RespawnCycleTime; // 재떨이 재 생성시간
 
     [Header("불꽃 터트리기 패턴4")]
-    [Range(1, 20)] public int p4_AttackCount;  // 재떨이 스폰 수
-    [Range(0.01f, 2.00f)] public float p4_RespawnCycleTime; // 재떨이 재 생성시간
+    [Range(1, 20)] public int p4_AttackCount;  // 불꽃 스폰 수
+    [Range(1, 10)] public int p4_FireBulletCount; // 한번에 불꽃 생성 수 
+    [Range(0.01f, 2.00f)] public float p4_RespawnCycleTime; //  재 공격시간
 
 
     public bool isP1;

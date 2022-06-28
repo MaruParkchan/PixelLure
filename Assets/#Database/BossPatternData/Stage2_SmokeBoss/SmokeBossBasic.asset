@@ -21,8 +21,9 @@ MonoBehaviour:
   p3_SpawnCount: 15
   p3_RespawnCycleTime: 0.8
   p4_AttackCount: 15
+  p4_FireBulletCount: 6
   p4_RespawnCycleTime: 1.7
   isP1: 0
   isP2: 0
-  isP3: 1
-  isP4: 0
+  isP3: 0
+  isP4: 1

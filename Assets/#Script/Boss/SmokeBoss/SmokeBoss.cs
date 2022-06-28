@@ -31,7 +31,7 @@ public class SmokeBoss : Boss
     public void HideorAppear() // 숨거나 나타날때 이펙트 생성
     {
         GameObject clone = Instantiate(smokeEffect);
-        clone.transform.position = transform.position + new Vector3(-0.11f,0,0);
+        clone.transform.position = transform.position + new Vector3(-0.11f, 0, 0);
     }
 
     private void PhaseChange(SmokeBossData smokeBossData)
@@ -48,14 +48,15 @@ public class SmokeBoss : Boss
         while (true)
         {
             //yield return StartCoroutine(smokeRandomMovePattern.Attacking());
-           //yield return StartCoroutine(smokeMovePattern.Attacking());
-             yield return StartCoroutine(smokeAshtrayPattern.Attacking());
             yield return null;
-            // if (smokeBossData.isP2 == true)
-            // yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
-            // if (smokeBossData.isP3 == true)
-            // if (smokeBossData.isP4 == true)
-            // yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
+            if (smokeBossData.isP1 == true)
+                yield return StartCoroutine(smokeMovePattern.Attacking());
+            if (smokeBossData.isP2 == true)
+                yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
+            if (smokeBossData.isP3 == true)
+                yield return StartCoroutine(smokeAshtrayPattern.Attacking());
+            if (smokeBossData.isP4 == true)
+                yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }
     }
 
@@ -70,13 +71,13 @@ public class SmokeBoss : Boss
         while (true)
         {
             if (smokeBossData.isP1 == true)
-            yield return StartCoroutine(smokeMovePattern.Attacking());
+                yield return StartCoroutine(smokeMovePattern.Attacking());
             if (smokeBossData.isP2 == true)
-            yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
+                yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
             if (smokeBossData.isP3 == true)
-            yield return StartCoroutine(smokeAshtrayPattern.Attacking());
+                yield return StartCoroutine(smokeAshtrayPattern.Attacking());
             if (smokeBossData.isP4 == true)
-            yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
+                yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }
         // while (true)
         // {
@@ -99,7 +100,7 @@ public class SmokeBoss : Boss
     }
 
     protected override void SelectionEventTime()
-    {     
+    {
         smokeMovePattern.CoroutineStop();
         smokeMiniDestructPattern.CoroutineStop();
         smokeAshtrayPattern.CoroutineStop();
@@ -123,11 +124,11 @@ public class SmokeBoss : Boss
         animator.SetTrigger("Die");
         bossAudioSource.Stop();
 
-        if(GameSystem.isAccept == true)
+        if (GameSystem.isAccept == true)
         {
             PlayerPrefs.SetInt("Stage2_RedChain", 1);
         }
-        else if(GameSystem.isAccept == false)
+        else if (GameSystem.isAccept == false)
         {
             PlayerPrefs.SetInt("Stage2_BlueChain", 1);
         }
