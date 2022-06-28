@@ -47,13 +47,13 @@ public class SmokeBoss : Boss
         animator.SetTrigger("Hide");
         while (true)
         {
-            yield return StartCoroutine(smokeRandomMovePattern.Attacking());
-            yield return StartCoroutine(smokeMovePattern.Attacking());
+            //yield return StartCoroutine(smokeRandomMovePattern.Attacking());
+           //yield return StartCoroutine(smokeMovePattern.Attacking());
+             yield return StartCoroutine(smokeAshtrayPattern.Attacking());
             yield return null;
             // if (smokeBossData.isP2 == true)
             // yield return StartCoroutine(smokeMiniDestructPattern.Attacking());
             // if (smokeBossData.isP3 == true)
-            // yield return StartCoroutine(smokeAshtrayPattern.Attacking());
             // if (smokeBossData.isP4 == true)
             // yield return StartCoroutine(smokeSprayingFirePattern.Attacking());
         }

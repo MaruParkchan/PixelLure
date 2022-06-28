@@ -13,7 +13,7 @@ public class GameCommonSystem : MonoBehaviour
   
     private void Awake()
     {
-        soundState = () => GetSoundOn();
+        soundState = () => { GetSoundOn(); };
     }
 
     public bool GetSoundOn()

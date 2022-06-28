@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class GameAudioSourceControl : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioSource[] audioSources;
+    private void Start()
     {
-        
+        Setting();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Setting()
     {
-        
+        if (PlayerPrefs.GetInt("Sound") == 1)
+        {
+            for (int i = 0; i < audioSources.Length; i++)
+                audioSources[i].mute = true;
+        }
+        else
+        {
+            for (int i = 0; i < audioSources.Length; i++)
+                audioSources[i].mute = false;
+        }
     }
 }
