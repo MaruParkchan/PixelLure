@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7207093666065264445}
   - component: {fileID: 7207093666065264444}
   - component: {fileID: -3683523120661547009}
+  - component: {fileID: -8781524192971458998}
   m_Layer: 0
   m_Name: FireBullet
   m_TagString: Untagged
@@ -4820,3 +4821,16 @@ MonoBehaviour:
   minMoveSpeedValue: 5
   maxMoveSpeedValue: 7
   bombEffect: {fileID: 6150687079416908265, guid: 424ba543d8d8d6e4b824ed53679c968e, type: 3}
+--- !u!114 &-8781524192971458998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207093666065264447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b0298edc4f268f41b939a4a8137ea37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mapDataDestroyArea: {fileID: 11400000, guid: 91119728c2bdb86479ffbdb74118f35b, type: 2}

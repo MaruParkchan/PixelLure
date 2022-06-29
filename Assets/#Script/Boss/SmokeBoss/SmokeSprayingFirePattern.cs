@@ -6,6 +6,7 @@ public class SmokeSprayingFirePattern : SmokeBossPatternBase
 {
     [SerializeField] private MapData smokeBossMapData;
     [SerializeField] private GameObject SprayingFirePrefab;
+    private float respawnCycleTime = 1.4f;
 
     public override IEnumerator Attacking()
     {
@@ -15,7 +16,7 @@ public class SmokeSprayingFirePattern : SmokeBossPatternBase
         {
             // smokeBoss.HideorAppear();
             Appear();
-            yield return new WaitForSeconds(smokeBoss.smokeBossData.p4_RespawnCycleTime);
+            yield return new WaitForSeconds(respawnCycleTime);
             currentCount++;
         }
     }
@@ -31,8 +32,16 @@ public class SmokeSprayingFirePattern : SmokeBossPatternBase
 
     public void EngrgyBoom()
     {
-        float eulerXvalue = 360.0f / smokeBoss.smokeBossData.p4_FireBulletCount;
-        for (int i = 0; i < smokeBoss.smokeBossData.p4_FireBulletCount; i++)
+        int fireBulletCount;
+
+        if(GameSystem.isAccept)
+            fireBulletCount = Random.Range(smokeBoss.smokeBossData.p4_FireBulletMinCount, smokeBoss.smokeBossData.p4_FireBulletMaxCount);
+        else 
+            fireBulletCount = 6;
+
+        float eulerXvalue = 360.0f / fireBulletCount;
+        
+        for (int i = 0; i < fireBulletCount; i++)
         {
             GameObject clone = Instantiate(SprayingFirePrefab);
             clone.transform.position = new Vector3(transform.position.x - 0.01f, transform.position.y + 0.5f);

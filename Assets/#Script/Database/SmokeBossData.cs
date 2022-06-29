@@ -21,10 +21,8 @@ public class SmokeBossData : ScriptableObject
 
     [Header("불꽃 터트리기 패턴4")]
     [Range(1, 20)] public int p4_AttackCount;  // 불꽃 스폰 수
-    [Range(1, 10)] public int p4_FireBulletCount; // 한번에 불꽃 생성 수 
-    [Range(0.01f, 2.00f)] public float p4_RespawnCycleTime; //  재 공격시간
-
-
+    [Range(7, 9)] public int p4_FireBulletMinCount; // 최소 불꽃 생성 수
+    [Range(9, 13)] public int p4_FireBulletMaxCount; // 최대 불꽃 생성 수
     public bool isP1;
     public bool isP2;
     public bool isP3;

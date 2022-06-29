@@ -101,7 +101,7 @@ public class GameSystem : MonoBehaviour
 
     private void CameraSetting()
     {
-        mainCamera.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, mainCamera.GetComponent<Transform>().position.z);
+        mainCamera.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -10.0f);
         mainCamera.GetComponent<Camera>().orthographicSize = 1.5f;
     }
 
