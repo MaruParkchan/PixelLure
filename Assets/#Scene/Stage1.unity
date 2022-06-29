@@ -5821,9 +5821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 150
-  phase2BossHp: 200
-  limitPhaseHp: 20
+  phase1BossHp: 2
+  phase2BossHp: 2
+  limitPhaseHp: 1
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
   cardBossData: {fileID: 11400000, guid: 249256ae5daf0544fa90c57ff6eee29d, type: 2}

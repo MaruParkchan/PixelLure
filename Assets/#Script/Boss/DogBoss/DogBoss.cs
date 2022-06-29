@@ -142,6 +142,15 @@ public class DogBoss : Boss
     {
         CoroutineAllStop();
         animator.SetTrigger("Die");
+        AudioStop();
+        if(GameSystem.isAccept == true)
+        {
+            PlayerPrefs.SetInt("Stage3_RedChain", 1);
+        }
+        else if(GameSystem.isAccept == false)
+        {
+            PlayerPrefs.SetInt("Stage3_BlueChain", 1);
+        }
     }
 
     protected override void ColliderEnableOn()

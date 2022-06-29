@@ -15,11 +15,6 @@ public class GameSoundSystem : MonoBehaviour
         SoundSetting();
     }
 
-    private void Update()
-    {
-        Debug.Log(PlayerPrefs.GetInt("Sound"));
-    }
-
     public void SoundOn()
     {
         isSoundOn = true;

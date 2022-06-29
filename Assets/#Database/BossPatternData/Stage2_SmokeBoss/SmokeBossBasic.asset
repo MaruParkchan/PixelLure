@@ -18,12 +18,12 @@ MonoBehaviour:
   p1_DropDelayTime: 0.7
   p2_SpawnCount: 50
   p2_RespawnCycleTime: 0.2
-  p3_SpawnCount: 5
+  p3_SpawnCount: 10
   p3_RespawnCycleTime: 1
   p4_AttackCount: 11
   p4_FireBulletMinCount: 6
   p4_FireBulletMaxCount: 13
-  isP1: 1
+  isP1: 0
   isP2: 0
-  isP3: 1
-  isP4: 0
+  isP3: 0
+  isP4: 1

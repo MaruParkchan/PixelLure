@@ -345,7 +345,7 @@ MonoBehaviour:
   audioSources:
   - {fileID: 1674676065}
   - {fileID: 1036927138}
-  - {fileID: 0}
+  - {fileID: 511694180}
 --- !u!4 &195568172
 Transform:
   m_ObjectHideFlags: 0
@@ -1290,9 +1290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 200
-  phase2BossHp: 350
-  limitPhaseHp: 20
+  phase1BossHp: 5
+  phase2BossHp: 5
+  limitPhaseHp: 3
   isBulkUp: 0
   dogBossData: {fileID: 0}
   phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}

@@ -79,6 +79,7 @@ public abstract class Boss : MonoBehaviour
         }
         else if (isPhaseCompled == true && isChoice == true && currentBossHp <= 0)
         {
+            Debug.Log("Á×À½");
             isBossDied = true;
             GameSystem.BossDied();
             return;
@@ -117,6 +118,7 @@ public abstract class Boss : MonoBehaviour
     public void Resume()
     {
         HpRecharging();
+        isPhaseCompled = true;
         StartCoroutine("Phase2");
     }
 

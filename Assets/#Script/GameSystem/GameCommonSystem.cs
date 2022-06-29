@@ -1,39 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
+using UnityEngine.SceneManagement;
 
 public class GameCommonSystem : MonoBehaviour
 {
-    
-
-    private bool isSoundOn = true;
-
-    public static Action soundState;
-  
-    private void Awake()
+    public void ExitGame()
     {
-        soundState = () => { GetSoundOn(); };
-    }
-
-    public bool GetSoundOn()
-    {
-        return isSoundOn;
-    }
-
-
-    public void SoundOn()
-    {
-        isSoundOn = true;
-    }
-
-    public void SoundOff()
-    {
-        isSoundOn = false;
-    }
-
-    public void SoundOnOff(bool isSwitch)
-    {
-        isSoundOn = !isSwitch;
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit(); // 어플리케이션 종료
+        #endif
     }
 }

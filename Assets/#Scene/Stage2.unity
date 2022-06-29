@@ -3608,7 +3608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674676058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: -3.63, z: 0}
+  m_LocalPosition: {x: 0, y: -3.3, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5114,6 +5114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dangerWarningLine: {fileID: 945114963695976220, guid: 0924032a0a36c8749939c9f9a950eb5b, type: 3}
   dangerWarningLine_2: {fileID: 900794387403942339, guid: c2f1535591a71b4478def36253f634a7, type: 3}
+  minTimeValue: 1
+  maxTimeValue: 2
 --- !u!114 &2112931725
 MonoBehaviour:
   m_ObjectHideFlags: 0

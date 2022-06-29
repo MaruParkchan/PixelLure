@@ -8,6 +8,9 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
     [SerializeField] private GameObject dangerWarningLine_2;
     private Vector3[] spawnPoints = new Vector3[3];
 
+    [SerializeField] private float minTimeValue = 1.0f;
+    [SerializeField] private float maxTimeValue = 2.0f;
+
     protected override void Init()
     {
         SpawnInit();
@@ -54,7 +57,7 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
     {
         while (true)
         {
-            float timer = Random.Range(0.5f, 1.5f);
+            float timer = Random.Range(minTimeValue, maxTimeValue);
             yield return new WaitForSeconds(timer);
             SpawnObject(dangerWarningLine_2);
         }

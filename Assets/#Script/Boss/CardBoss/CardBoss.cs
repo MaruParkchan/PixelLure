@@ -77,7 +77,6 @@ public class CardBoss : Boss
         // 재시작되는 패턴의 값들을 여기서 부여하고 시작해야할듯 
         animator.SetTrigger("Hide");
         HpRecharging();
-        isPhaseCompled = true;
         if (GameSystem.isAccept)  //여기서 선택조건으로 변경후 페이즈 시작
             PhaseChange(phase2CardBossData);
         yield return new WaitForSeconds(2.0f);
