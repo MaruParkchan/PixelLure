@@ -87,6 +87,7 @@ public class GameSystem : MonoBehaviour
         blinkObject.SetActive(true);
         GameObjectAllFind();
         CameraSetting();
+        PlayerPrefs.SetInt("DiedCount", PlayerPrefs.GetInt("DiedCount") + 1);
         StartCoroutine("IPlayerDiedEvent");
     }
 

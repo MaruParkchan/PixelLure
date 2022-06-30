@@ -5821,9 +5821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a2193e41f9cbff4bbeb34c3ec2db992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 2
-  phase2BossHp: 2
-  limitPhaseHp: 1
+  phase1BossHp: 150
+  phase2BossHp: 250
+  limitPhaseHp: 5
   cardBossMapData: {fileID: 11400000, guid: 5e92b5eda2c69a74684ef76e5cdab3d3, type: 2}
   auraEffect: {fileID: 888552508}
   cardBossData: {fileID: 11400000, guid: 249256ae5daf0544fa90c57ff6eee29d, type: 2}
@@ -6535,6 +6535,7 @@ GameObject:
   - component: {fileID: 1506397328}
   - component: {fileID: 1506397332}
   - component: {fileID: 1506397331}
+  - component: {fileID: 1506397333}
   m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6684,6 +6685,20 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 100
+--- !u!114 &1506397333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506397327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ece4927dd9143a4083cf961b8929488, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 0.5
+  duration: 0.5
 --- !u!1 &1533556519
 GameObject:
   m_ObjectHideFlags: 0

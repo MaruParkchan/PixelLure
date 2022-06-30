@@ -16,7 +16,7 @@ MonoBehaviour:
   p1_MoveTime: 1
   p1_TouchDropCount: 7
   p1_DropDelayTime: 0.5
-  p2_SpawnCount: 40
+  p2_SpawnCount: 50
   p2_RespawnCycleTime: 0.15
   p3_SpawnCount: 11
   p3_RespawnCycleTime: 1.2

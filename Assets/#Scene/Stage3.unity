@@ -1290,9 +1290,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 5
-  phase2BossHp: 5
-  limitPhaseHp: 3
+  phase1BossHp: 250
+  phase2BossHp: 300
+  limitPhaseHp: 5
   isBulkUp: 0
   dogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
   phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
@@ -2052,7 +2052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674676058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.3, y: 0.38, z: 0}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

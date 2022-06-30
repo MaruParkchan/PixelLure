@@ -3608,7 +3608,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1674676058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3.3, z: 0}
+  m_LocalPosition: {x: 0, y: -3.5, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4951,9 +4951,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ccc903971880b147ab006659986cc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 100
-  phase2BossHp: 2
-  limitPhaseHp: 98
+  phase1BossHp: 50
+  phase2BossHp: 70
+  limitPhaseHp: 5
   smokeBossData: {fileID: 11400000, guid: f8f7d48f5fa91144f867bff303c26522, type: 2}
   phase1SmokeBossData: {fileID: 11400000, guid: f8f7d48f5fa91144f867bff303c26522, type: 2}
   phase2SmokeBossData: {fileID: 11400000, guid: deb88f1342680ad49a3eb8f7b3ba808a, type: 2}

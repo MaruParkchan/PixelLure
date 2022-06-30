@@ -9,11 +9,10 @@ public class SmokeTorch : MonoBehaviour
 
     private void Start()
     {
-        // if (GameSystem.isAccept)
-        //     StartCoroutine(TorchBoom(Random.Range(0.4f, 1.5f)));
-        // else
-        //     StartCoroutine(TorchBoom(1.0f));
-         StartCoroutine(TorchBoom(Random.Range(0.5f, 1.2f)));
+        if (GameSystem.isAccept)
+            StartCoroutine(TorchBoom(Random.Range(0.5f, 1.3f)));
+        else
+            StartCoroutine(TorchBoom(1.0f));
     }
 
 
