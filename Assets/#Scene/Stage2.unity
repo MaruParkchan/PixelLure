@@ -4952,11 +4952,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phase1BossHp: 100
-  phase2BossHp: 200
-  limitPhaseHp: 95
+  phase2BossHp: 2
+  limitPhaseHp: 98
   smokeBossData: {fileID: 11400000, guid: f8f7d48f5fa91144f867bff303c26522, type: 2}
   phase1SmokeBossData: {fileID: 11400000, guid: f8f7d48f5fa91144f867bff303c26522, type: 2}
-  phase2SmokeBossData: {fileID: 0}
+  phase2SmokeBossData: {fileID: 11400000, guid: deb88f1342680ad49a3eb8f7b3ba808a, type: 2}
   smokeEffect: {fileID: 9018379218307054334, guid: e56faea5150b7824ba499f4abed16697, type: 3}
 --- !u!95 &2112931719
 Animator:

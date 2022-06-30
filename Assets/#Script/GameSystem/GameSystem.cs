@@ -101,8 +101,7 @@ public class GameSystem : MonoBehaviour
 
     private void CameraSetting()
     {
-        mainCamera.GetComponent<Transform>().position = new Vector3(player.transform.position.x, player.transform.position.y, -10.0f);
-        mainCamera.GetComponent<Camera>().orthographicSize = 1.5f;
+        CameraShake.cameraPlayerFoucs();
     }
 
     private void GameObjectAllFind() // 플레이어, 적의 총알 오브젝트 다찾아서 삭제시킴

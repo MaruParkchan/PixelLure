@@ -64,7 +64,10 @@ public class SmokeBoss : Boss
     {
         HideorAppear();
         animator.SetTrigger("Hide");
+        if (GameSystem.isAccept)
+            PhaseChange(phase2SmokeBossData);
         yield return new WaitForSeconds(3.0f);
+        transform.position = new Vector3(0, 15.0f, 0);
         ColliderEnableOn();
         IsisInvincibilityOff();
 

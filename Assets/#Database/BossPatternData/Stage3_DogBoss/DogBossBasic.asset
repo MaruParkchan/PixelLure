@@ -24,7 +24,6 @@ MonoBehaviour:
   p3_AttackWaitTime: 1
   p4_AttackCount: 15
   p4_AttackDelayTime: 0.6
-  p4_IsArousal: 1
   p5_AttackCount: 5
   p5_AttackDelayTime: 0.35
   p5_SojuMoveSpeed: 4.5

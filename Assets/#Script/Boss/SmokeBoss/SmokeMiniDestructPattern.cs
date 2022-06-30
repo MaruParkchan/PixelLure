@@ -12,7 +12,7 @@ public class SmokeMiniDestructPattern : SmokeBossPatternBase
 
     public override IEnumerator Attacking()
     {
-                int currentCount = 0;
+        int currentCount = 0;
         int spawnPointIndex;
 
         yield return new WaitForSeconds(waitTime);

@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac7a8eaf40c10f14aa2855cf4f46c16d, type: 3}
-  m_Name: SmokeBossBasic
+  m_Name: SmokeBossHard
   m_EditorClassIdentifier: 
-  p1_AttackCount: 5
-  p1_MoveTime: 1.5
+  p1_AttackCount: 8
+  p1_MoveTime: 1
   p1_TouchDropCount: 7
-  p1_DropDelayTime: 0.6
-  p2_SpawnCount: 20
-  p2_RespawnCycleTime: 0.2
-  p3_SpawnCount: 5
-  p3_RespawnCycleTime: 1.4
-  p4_AttackCount: 5
+  p1_DropDelayTime: 0.5
+  p2_SpawnCount: 40
+  p2_RespawnCycleTime: 0.15
+  p3_SpawnCount: 11
+  p3_RespawnCycleTime: 1.2
+  p4_AttackCount: 11
   p4_FireBulletMinCount: 6
   p4_FireBulletMaxCount: 13
   isP1: 1

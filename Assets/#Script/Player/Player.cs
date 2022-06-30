@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     private bool isHit = false; // 타격 당했는가?
     private bool isPause; // 선택지 활성화중이면 멈춤
     private bool isFireLock; // 총알 발사를 잠궜는지?
+    private bool isFireRangeLimit; // 총알 사거리 제한하는가?
     private bool isDied = false;
-    [Range(0,2)] [SerializeField] private int diedIndex; // 0 카드 , 1 담배 , 2 개보스
+    [Range(0, 2)][SerializeField] private int diedIndex; // 0 카드 , 1 담배 , 2 개보스
     [SerializeField] private bool isInvincibility; // 무적중인가?
 
     private int playerHp = 3;
@@ -54,17 +55,27 @@ public class Player : MonoBehaviour
 
     public void PlayerDebuffs()
     {
-        if(diedIndex == 0)
+        switch (diedIndex)
         {
-            PlayerSizeUp();
+            case 0:
+                PlayerSizeUp();
+                break;
+            case 1:
+                PlayerFireRangeLimit();
+                break;
         }
         Instantiate(playerHitEffectObject, transform.position, Quaternion.identity);
     }
 
-    private void PlayerSizeUp()
+    private void PlayerSizeUp() // CardBoss Dubuff
     {
-       //transform.localScale = new Vector3(transform.localScale.x * 2.5f, transform.localScale.y * 1.5f, 0);
-       transform.localScale = new Vector3(2.5f, 2.5f, 0);
+        //transform.localScale = new Vector3(transform.localScale.x * 2.5f, transform.localScale.y * 1.5f, 0);
+        transform.localScale = new Vector3(2.5f, 2.5f, 0);
+    }
+
+    private void PlayerFireRangeLimit()
+    {
+        isFireRangeLimit = true;
     }
 
     private void Movement()
@@ -92,7 +103,7 @@ public class Player : MonoBehaviour
     private void Fire()
     {
         GameObject clone = Instantiate(bulletPrefab);
-        clone.GetComponent<PlayerBullet>().BulletMovement(Vector2.up, bulletMoveSpeed);
+        clone.GetComponent<PlayerBullet>().BulletMovement(Vector2.up, bulletMoveSpeed, isFireRangeLimit);
         clone.transform.position = transform.position;
         clone.transform.rotation = transform.rotation;
     }
@@ -146,6 +157,7 @@ public class Player : MonoBehaviour
     public void BossDiedEvent()
     {
         isPause = true;
+        isInvincibility = true;
     }
 
     private IEnumerator Hit()
@@ -155,7 +167,7 @@ public class Player : MonoBehaviour
         playerHp--;
         PlayerHpUISystem.playerUISystem(); // Action PlayerUI Event
 
-        if(playerHp <= 0)
+        if (playerHp <= 0)
         {
             GameSystem.PlayerDied();
             yield break;
@@ -177,18 +189,18 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision) // 관통 , 비관통 , 파티클 구분 해야함 
     {
-        if(collision.transform.CompareTag("BulletPenetrationPossible")) // 관통가능 
+        if (collision.transform.CompareTag("BulletPenetrationPossible")) // 관통가능 
         {
             TakeDamage();
         }
 
-        if(collision.transform.CompareTag("BulletPenetrationImpossible")) // 관통 불가능 
+        if (collision.transform.CompareTag("BulletPenetrationImpossible")) // 관통 불가능 
         {
             Destroy(collision.gameObject);
             TakeDamage();
         }
 
-        if(collision.transform.CompareTag("Boss"))
+        if (collision.transform.CompareTag("Boss"))
         {
             TakeDamage();
         }
@@ -196,7 +208,7 @@ public class Player : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
-        if(other.transform.CompareTag("BulletPenetrationImpossible"))
+        if (other.transform.CompareTag("BulletPenetrationImpossible"))
         {
             TakeDamage();
         }

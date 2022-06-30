@@ -8,8 +8,8 @@ public class SmokeAshtrayPattern : SmokeBossPatternBase
     [SerializeField] private GameObject dangerWarningLine_2;
     private Vector3[] spawnPoints = new Vector3[3];
 
-    [SerializeField] private float minTimeValue = 1.0f;
-    [SerializeField] private float maxTimeValue = 2.0f;
+    [SerializeField] private float minTimeValue = 0.8f;
+    [SerializeField] private float maxTimeValue = 1.5f;
 
     protected override void Init()
     {

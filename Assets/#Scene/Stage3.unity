@@ -1294,7 +1294,7 @@ MonoBehaviour:
   phase2BossHp: 5
   limitPhaseHp: 3
   isBulkUp: 0
-  dogBossData: {fileID: 0}
+  dogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
   phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
   phase2DogBossData: {fileID: 11400000, guid: de08714f40bede548984cf281924465e, type: 2}
   miniDogSoundClip: {fileID: 8300000, guid: 65e912a2b7807a44d912ff014fe0d33b, type: 3}

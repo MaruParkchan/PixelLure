@@ -12,11 +12,13 @@ public class CameraShake : MonoBehaviour
     private bool isShaking = false;
 
     public static Action cameraShake;
+    public static Action cameraPlayerFoucs;
 
     private void Awake()
     {
         originPos = transform.localPosition;
         cameraShake = () => { Shake(); };
+        cameraPlayerFoucs = () => { CameraPlayerFoucs(); };
     }
 
     public void Shake()
@@ -41,5 +43,13 @@ public class CameraShake : MonoBehaviour
         timer = 0;
         isShaking = false;
         yield return null;
+    }
+
+    public void CameraPlayerFoucs()
+    {
+        StopAllCoroutines();
+         Transform playerPos = GameObject.FindWithTag("Player").GetComponent<Transform>();
+         transform.position  = new Vector3(playerPos.position.x, playerPos.position.y, -10.0f);
+         transform.GetComponent<Camera>().orthographicSize = 1.5f;
     }
 }
