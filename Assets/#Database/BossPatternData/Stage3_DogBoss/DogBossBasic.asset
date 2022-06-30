@@ -16,7 +16,7 @@ MonoBehaviour:
   p1_AttackDelayTime: 0.7
   p2_RotateSpeed: 55
   p2_RotateTime: 10
-  p2_FadeTime: 1.5
+  p2_FadeTime: 1
   p3_AttackCount: 20
   p3_AttackDelayTime: 0.3
   p3_RotateSpeed: 300

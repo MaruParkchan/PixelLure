@@ -149,6 +149,7 @@ public class CardBoss : Boss
         this.transform.position = Vector3.zero;
         animator.SetTrigger("Die");
         bossAudioSource.Stop();
+        BossDiedEffect();
 
         if (GameSystem.isAccept == true)
         {

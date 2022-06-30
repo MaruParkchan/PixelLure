@@ -143,6 +143,7 @@ public class DogBoss : Boss
         CoroutineAllStop();
         animator.SetTrigger("Die");
         AudioStop();
+        BossDiedEffect();
         if(GameSystem.isAccept == true)
         {
             PlayerPrefs.SetInt("Stage3_RedChain", 1);

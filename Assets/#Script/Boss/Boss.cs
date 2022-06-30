@@ -6,13 +6,10 @@ public abstract class Boss : MonoBehaviour
 {
 
     protected int currentBossHp; public int CurrentBossHp { get { return currentBossHp; } }
-    [SerializeField]
-    protected int phase1BossHp; public int Phase1BossHp { get { return phase1BossHp; } }
-    [SerializeField]
-    protected int phase2BossHp; public int Phase2BossHp { get { return phase2BossHp; } }
-    [SerializeField]
-    protected int limitPhaseHp; // 일정 HP 이하로 떨어지면 페이즈2 및 선택지 나올 체력값
-
+    [SerializeField] protected int phase1BossHp; public int Phase1BossHp { get { return phase1BossHp; } }
+    [SerializeField] protected int phase2BossHp; public int Phase2BossHp { get { return phase2BossHp; } }
+    [SerializeField] protected int limitPhaseHp; // 일정 HP 이하로 떨어지면 페이즈2 및 선택지 나올 체력값
+    [SerializeField] private GameObject bossDieEffect;
     protected bool isInvincibility = false;
     private float hitDelayCycleTime = 0.1f; // 피격시 몇초간 무적
     protected int[] patternRandomValue;
@@ -79,7 +76,6 @@ public abstract class Boss : MonoBehaviour
         }
         else if (isPhaseCompled == true && isChoice == true && currentBossHp <= 0)
         {
-            Debug.Log("죽음");
             isBossDied = true;
             GameSystem.BossDied();
             return;
@@ -145,5 +141,10 @@ public abstract class Boss : MonoBehaviour
                 }
             }
         }
+    }
+
+    protected void BossDiedEffect()
+    {
+        Instantiate(bossDieEffect, transform.position, Quaternion.identity);
     }
 }

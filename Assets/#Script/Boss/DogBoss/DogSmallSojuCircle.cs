@@ -32,7 +32,7 @@ public class DogSmallSojuCircle : MonoBehaviour
         {
             StartCoroutine(dogSmallSojus[i].FadeEffect(0, 1, fadeTime));
         } // 페이드 인
-
+        yield return new WaitForSeconds(fadeTime);
         for (int i = 0; i < boxColliders2D.Length; i++)
             boxColliders2D[i].enabled = true;
 

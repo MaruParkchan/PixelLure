@@ -1290,8 +1290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d65529d60351264d840c0eb232c0852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phase1BossHp: 250
-  phase2BossHp: 300
+  phase1BossHp: 150
+  phase2BossHp: 250
   limitPhaseHp: 5
   isBulkUp: 0
   dogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
