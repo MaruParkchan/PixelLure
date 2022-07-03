@@ -147,4 +147,5 @@ public class SmokeBoss : Boss
     {
         boxCollider2D.enabled = false;
     }
+
 }

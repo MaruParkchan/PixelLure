@@ -50,6 +50,7 @@ public class GameSystem : MonoBehaviour
         diglogData.TextFistInitUpdate();
         PlayerDied = () => { PlayerDiedEvent(); };
         BossDied = () => { BossDiedEvent(); };
+        CursorVisible();
     }
 
     public void PauseAndTalk() // 첫번째 - 선택하기 위한 모든 정지
@@ -297,5 +298,11 @@ public class GameSystem : MonoBehaviour
         diglogData.TextDataUpdate(isAccept);
         PlayerFreezeAndLastTalk();
         // StartCoroutine(TextUpdate());
+    }
+
+    public void CursorVisible()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 }

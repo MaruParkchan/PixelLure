@@ -80,7 +80,6 @@ public class CardBoss : Boss
         if (GameSystem.isAccept)  //여기서 선택조건으로 변경후 페이즈 시작
             PhaseChange(phase2CardBossData);
 
-        
         yield return new WaitForSeconds(2.0f);
         ColliderEnableOn();
         IsisInvincibilityOff();
@@ -149,8 +148,7 @@ public class CardBoss : Boss
         this.transform.position = Vector3.zero;
         animator.SetTrigger("Die");
         bossAudioSource.Stop();
-        BossDiedEffect();
-
+        
         if (GameSystem.isAccept == true)
         {
             PlayerPrefs.SetInt("Stage1_RedChain", 1);

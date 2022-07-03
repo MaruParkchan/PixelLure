@@ -1293,6 +1293,7 @@ MonoBehaviour:
   phase1BossHp: 150
   phase2BossHp: 250
   limitPhaseHp: 5
+  bossHitEffect: {fileID: 1652144799626272548, guid: c82f46f85f8679847b42bb394cc1fcc9, type: 3}
   isBulkUp: 0
   dogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}
   phase1DogBossData: {fileID: 11400000, guid: 77b4496a767d2b448adaaca2c28dbe29, type: 2}

@@ -5,6 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class GameCommonSystem : MonoBehaviour
 {
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    public void CursorVisible()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     public void ExitGame()
     {
         #if UNITY_EDITOR
