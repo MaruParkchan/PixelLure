@@ -18,9 +18,12 @@ public class IntroSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI cursorLockText;
     [SerializeField] private TextMeshProUGUI creditText;
     [SerializeField] private TextMeshProUGUI howToText;
+    [SerializeField] private TextMeshProUGUI howToMoveText;
+    [SerializeField] private TextMeshProUGUI howToAttackText;
 
     private void Start()
     {
+        //IsCursorLock();
         CursorLockInit();
         ButtnLanageChange();
     }
@@ -39,9 +42,11 @@ public class IntroSystem : MonoBehaviour
             case false:
                 cursorButton.image.sprite = cursorLockOffSprite;
                 CursorLockSwitch(CursorLockMode.None);
+                
                 break;
         }
     }
+
     public void CursorLockInit()
     {
         switch (Cursor.lockState)
@@ -55,7 +60,26 @@ public class IntroSystem : MonoBehaviour
                 cursorButton.image.sprite = cursorLockOffSprite;
                 break;
         }
+
+        switch (isCursorLock)
+        {
+            case true:
+                cursorButton.image.sprite = cursorLockOnSprite;
+                CursorLockSwitch(CursorLockMode.Confined);
+                break;
+
+            case false:
+                cursorButton.image.sprite = cursorLockOffSprite;
+                CursorLockSwitch(CursorLockMode.None);
+                break;
+        }
     }
+
+    private void CursorDataImport()
+    {
+        //PlayerPrefs.setini
+    }
+
     public void CursorLockSwitch(CursorLockMode cursorState)
     {
         Cursor.lockState = cursorState;
@@ -71,6 +95,8 @@ public class IntroSystem : MonoBehaviour
             cursorLockText.text = "CursorLock";
             creditText.text = "Credit";
             howToText.text = "HowTo";
+            howToMoveText.text = "Move";
+            howToAttackText.text = "Attack";
             break;
 
             case 1:
@@ -79,6 +105,8 @@ public class IntroSystem : MonoBehaviour
             cursorLockText.text = "마우스잠금";
             creditText.text = "정보";
             howToText.text = "게임방법";
+            howToMoveText.text = "이동";
+            howToAttackText.text = "공격";
             break;
         }
     }
